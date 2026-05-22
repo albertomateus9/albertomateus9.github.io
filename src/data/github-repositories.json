@@ -1,5 +1,88 @@
 [
   {
+    "name": "albertomateus9.github.io",
+    "description": "Portfólio Laboratório Vivo de Alberto Mateus: Telecom, Visão Computacional e Educação Tecnológica.",
+    "htmlUrl": "https://github.com/albertomateus9/albertomateus9.github.io",
+    "homepage": "https://albertomateus9.github.io/",
+    "topics": [
+      "educacao-tecnologica",
+      "github-pages",
+      "portfolio",
+      "portugues-brasil",
+      "react",
+      "telecomunicacoes",
+      "typescript",
+      "visao-computacional"
+    ],
+    "language": "TypeScript",
+    "stars": 0,
+    "forks": 0,
+    "archived": false,
+    "fork": false,
+    "updatedAt": "2026-05-22T19:22:02Z"
+  },
+  {
+    "name": "boas-praticas-isp",
+    "description": "Framework consultivo para maturidade operacional, governança e infraestrutura de provedores de internet.",
+    "htmlUrl": "https://github.com/albertomateus9/boas-praticas-isp",
+    "homepage": "https://albertomateus9.github.io/boas-praticas-isp/",
+    "topics": [
+      "bgp",
+      "github-pages",
+      "isp",
+      "mpls",
+      "portugues-brasil",
+      "redes",
+      "telecomunicacoes"
+    ],
+    "language": "HTML",
+    "stars": 0,
+    "forks": 0,
+    "archived": false,
+    "fork": false,
+    "updatedAt": "2026-05-22T19:22:00Z"
+  },
+  {
+    "name": "campuswatch-snmp",
+    "description": "Observabilidade SNMP para infraestrutura de campus, com leitura de ativos, métricas e dashboard demonstrável.",
+    "htmlUrl": "https://github.com/albertomateus9/campuswatch-snmp",
+    "homepage": "https://albertomateus9.github.io/campuswatch-snmp/",
+    "topics": [
+      "github-pages",
+      "monitoramento",
+      "portugues-brasil",
+      "redes",
+      "snmp",
+      "zabbix"
+    ],
+    "language": "HTML",
+    "stars": 0,
+    "forks": 0,
+    "archived": false,
+    "fork": false,
+    "updatedAt": "2026-05-22T19:21:59Z"
+  },
+  {
+    "name": "edumetrics-hub",
+    "description": "Analítica educacional para engajamento, revisão por pares e acompanhamento com dashboard demonstrável.",
+    "htmlUrl": "https://github.com/albertomateus9/edumetrics-hub",
+    "homepage": "https://albertomateus9.github.io/edumetrics-hub/",
+    "topics": [
+      "dados",
+      "dashboard",
+      "educacao-tecnologica",
+      "github-pages",
+      "learning-analytics",
+      "portugues-brasil"
+    ],
+    "language": "HTML",
+    "stars": 0,
+    "forks": 0,
+    "archived": false,
+    "fork": false,
+    "updatedAt": "2026-05-22T19:21:59Z"
+  },
+  {
     "name": "eetepa-vilhena-alves",
     "description": "Portal estatico premium demonstrativo da EETEPA Vilhena Alves com vitrine de cursos tecnicos.",
     "htmlUrl": "https://github.com/albertomateus9/eetepa-vilhena-alves",
@@ -22,7 +105,33 @@
     "forks": 0,
     "archived": false,
     "fork": false,
-    "updatedAt": "2026-05-22T04:05:49Z"
+    "updatedAt": "2026-05-22T14:16:41Z"
+  },
+  {
+    "name": "minihacka-2026-p3-redes-07-portal-escolar",
+    "description": "Site da MiniHacka 2026-1 P3 Redes - minihacka-2026-p3-redes-07-portal-escolar",
+    "htmlUrl": "https://github.com/albertomateus9/minihacka-2026-p3-redes-07-portal-escolar",
+    "homepage": "",
+    "topics": [],
+    "language": "CSS",
+    "stars": 0,
+    "forks": 0,
+    "archived": false,
+    "fork": false,
+    "updatedAt": "2026-05-22T14:14:29Z"
+  },
+  {
+    "name": "minihacka-2026-p3-redes-02-financas",
+    "description": "Site da MiniHacka 2026-1 P3 Redes - minihacka-2026-p3-redes-02-financas",
+    "htmlUrl": "https://github.com/albertomateus9/minihacka-2026-p3-redes-02-financas",
+    "homepage": "",
+    "topics": [],
+    "language": "JavaScript",
+    "stars": 0,
+    "forks": 0,
+    "archived": false,
+    "fork": false,
+    "updatedAt": "2026-05-22T14:09:58Z"
   },
   {
     "name": "equipe-orion",
@@ -101,32 +210,6 @@
     "archived": false,
     "fork": false,
     "updatedAt": "2026-05-21T22:26:47Z"
-  },
-  {
-    "name": "minihacka-2026-p3-redes-02-financas",
-    "description": "Site da MiniHacka 2026-1 P3 Redes - minihacka-2026-p3-redes-02-financas",
-    "htmlUrl": "https://github.com/albertomateus9/minihacka-2026-p3-redes-02-financas",
-    "homepage": "",
-    "topics": [],
-    "language": "CSS",
-    "stars": 0,
-    "forks": 0,
-    "archived": false,
-    "fork": false,
-    "updatedAt": "2026-05-21T15:43:20Z"
-  },
-  {
-    "name": "minihacka-2026-p3-redes-07-portal-escolar",
-    "description": "Site da MiniHacka 2026-1 P3 Redes - minihacka-2026-p3-redes-07-portal-escolar",
-    "htmlUrl": "https://github.com/albertomateus9/minihacka-2026-p3-redes-07-portal-escolar",
-    "homepage": "",
-    "topics": [],
-    "language": "CSS",
-    "stars": 0,
-    "forks": 0,
-    "archived": false,
-    "fork": false,
-    "updatedAt": "2026-05-21T15:42:41Z"
   },
   {
     "name": "minihacka-2026-p3-redes-06-festa-junina",
@@ -913,27 +996,6 @@
     "updatedAt": "2026-05-11T20:04:06Z"
   },
   {
-    "name": "boas-praticas-isp",
-    "description": "Framework consultivo de maturidade operacional, governanca e infraestrutura para provedores de internet.",
-    "htmlUrl": "https://github.com/albertomateus9/boas-praticas-isp",
-    "homepage": "",
-    "topics": [
-      "bgp",
-      "github-pages",
-      "isp",
-      "mpls",
-      "portugues-brasil",
-      "redes",
-      "telecomunicacoes"
-    ],
-    "language": "HTML",
-    "stars": 0,
-    "forks": 0,
-    "archived": false,
-    "fork": false,
-    "updatedAt": "2026-05-11T19:42:40Z"
-  },
-  {
     "name": "evalcore-system",
     "description": "Conceito de avaliacao por comparacao pareada para hackathons, bancas e ranqueamento de projetos.",
     "htmlUrl": "https://github.com/albertomateus9/evalcore-system",
@@ -952,26 +1014,6 @@
     "archived": false,
     "fork": false,
     "updatedAt": "2026-05-11T19:42:33Z"
-  },
-  {
-    "name": "edumetrics-hub",
-    "description": "Conceito de analitica educacional para revisao por pares, engajamento e sinais de retencao.",
-    "htmlUrl": "https://github.com/albertomateus9/edumetrics-hub",
-    "homepage": "",
-    "topics": [
-      "dados",
-      "dashboard",
-      "educacao-tecnologica",
-      "github-pages",
-      "learning-analytics",
-      "portugues-brasil"
-    ],
-    "language": "HTML",
-    "stars": 0,
-    "forks": 0,
-    "archived": false,
-    "fork": false,
-    "updatedAt": "2026-05-11T19:42:26Z"
   },
   {
     "name": "certiflow-api",
@@ -1012,26 +1054,6 @@
     "archived": false,
     "fork": false,
     "updatedAt": "2026-05-11T19:42:10Z"
-  },
-  {
-    "name": "campuswatch-snmp",
-    "description": "Conceito de monitoramento SNMP para infraestrutura escolar e campus, com dashboard estatico de demonstracao.",
-    "htmlUrl": "https://github.com/albertomateus9/campuswatch-snmp",
-    "homepage": "",
-    "topics": [
-      "github-pages",
-      "monitoramento",
-      "portugues-brasil",
-      "redes",
-      "snmp",
-      "zabbix"
-    ],
-    "language": "HTML",
-    "stars": 0,
-    "forks": 0,
-    "archived": false,
-    "fork": false,
-    "updatedAt": "2026-05-11T19:42:01Z"
   },
   {
     "name": "netmaster-cli-api",

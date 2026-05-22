@@ -70,7 +70,23 @@ describe('catalog helpers', () => {
         family: 'premium',
         demoOnly: true,
         language: 'TypeScript',
+        signal: 'educacao',
         status: 'ativos',
+      }),
+    ).toHaveLength(1);
+  });
+
+  it('filters by curated or repository signal', () => {
+    const enriched = repos.map((repo) => enrichRepository(repo, curation));
+
+    expect(
+      filterRepositories(enriched, {
+        query: '',
+        family: 'todas',
+        demoOnly: false,
+        language: '',
+        signal: 'javascript',
+        status: 'todos',
       }),
     ).toHaveLength(1);
   });

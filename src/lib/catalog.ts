@@ -74,13 +74,19 @@ export function filterRepositories(
     const matchesFamily = filters.family === 'todas' || repo.family === filters.family;
     const matchesDemo = !filters.demoOnly || Boolean(repo.demo);
     const matchesLanguage = !filters.language || repo.language === filters.language;
+    const matchesSignal =
+      !filters.signal ||
+      [...repo.labels, ...repo.topics]
+        .join(' ')
+        .toLocaleLowerCase()
+        .includes(filters.signal.toLocaleLowerCase());
     const matchesStatus =
       filters.status === 'todos' ||
       (filters.status === 'ativos' && !repo.archived && !repo.fork) ||
       (filters.status === 'arquivados' && repo.archived) ||
       (filters.status === 'forks' && repo.fork);
 
-    return matchesQuery && matchesFamily && matchesDemo && matchesLanguage && matchesStatus;
+    return matchesQuery && matchesFamily && matchesDemo && matchesLanguage && matchesSignal && matchesStatus;
   });
 }
 

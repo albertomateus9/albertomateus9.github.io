@@ -49,5 +49,25 @@ export interface CatalogFilters {
   family: RepositoryFamily | 'todas';
   demoOnly: boolean;
   language: string;
+  signal: string;
   status: 'todos' | 'ativos' | 'arquivados' | 'forks';
+}
+
+export interface PortfolioCaseStudy {
+  repository: string;
+  title: Record<Locale, string>;
+  summary: Record<Locale, string>;
+  problem: Record<Locale, string>;
+  architecture: Record<Locale, string>;
+  stack: string[];
+  result: Record<Locale, string>;
+  next: Record<Locale, string>;
+  visual: 'webcraft' | 'network' | 'vision';
+}
+
+export interface TechnologyRadarBand {
+  title: Record<Locale, string>;
+  body: Record<Locale, string>;
+  items: string[];
+  tone: 'use' | 'signal' | 'next';
 }
