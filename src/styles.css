@@ -169,7 +169,7 @@ main {
 .hero {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(24rem, 0.94fr) minmax(22rem, 0.8fr) 18rem;
+  grid-template-columns: minmax(29rem, 1fr) minmax(18rem, 0.54fr) 18rem;
   gap: clamp(1rem, 2.3vw, 2.8rem);
   align-items: end;
   min-height: max(43rem, calc(100svh - 150px));
@@ -283,12 +283,14 @@ h2 {
 
 .portrait-stage {
   position: relative;
-  align-self: stretch;
-  min-height: min(68svh, 820px);
+  align-self: center;
+  justify-self: center;
+  inline-size: min(100%, 18rem);
+  aspect-ratio: 4 / 5;
+  min-height: 0;
   margin: 0;
   isolation: isolate;
-  border-left: 1px solid var(--line);
-  border-right: 1px solid var(--line);
+  border: 1px solid var(--line);
   overflow: hidden;
   background:
     linear-gradient(180deg, rgba(237, 241, 232, 0.98), rgba(237, 241, 232, 0.93)),
@@ -1022,7 +1024,7 @@ footer p {
   }
 
   .hero {
-    grid-template-columns: minmax(20rem, 0.9fr) minmax(20rem, 0.85fr);
+    grid-template-columns: minmax(20rem, 1fr) minmax(15rem, 0.62fr);
   }
 
   .hero-rail {
@@ -1111,12 +1113,16 @@ footer p {
   }
 
   .portrait-stage {
-    height: 17rem;
-    min-height: 0;
+    justify-self: start;
+    inline-size: min(100%, 12rem);
   }
 
   .portrait-stage img {
-    object-position: center 34%;
+    object-position: center 28%;
+  }
+
+  .portrait-stage figcaption {
+    display: none;
   }
 
   .hero-rail {
