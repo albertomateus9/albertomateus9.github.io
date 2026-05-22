@@ -11,9 +11,9 @@ describe('hero portrait treatment', () => {
     expect(stylesheet).toContain('justify-self: center;');
   });
 
-  it('renders the vector portrait instead of the former studio background', () => {
-    expect(app).toContain('/assets/alberto-mateus-portrait-vector.svg');
-    expect(app).not.toContain('/assets/alberto-mateus-portrait-cutout.webp');
+  it('renders the real portrait cutout instead of the former studio background', () => {
+    expect(app).toContain('/assets/alberto-mateus-portrait-real-cutout.webp');
+    expect(app).not.toContain('/assets/alberto-mateus-portrait-vector.svg');
     expect(app).not.toContain('/assets/alberto-mateus-portrait-mobile.webp');
   });
 });
