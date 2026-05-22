@@ -293,21 +293,24 @@ h2 {
   border: 1px solid var(--line);
   overflow: hidden;
   background:
-    linear-gradient(180deg, rgba(237, 241, 232, 0.98), rgba(237, 241, 232, 0.93)),
-    var(--paper);
+    linear-gradient(135deg, rgba(141, 216, 220, 0.15), transparent 42%),
+    linear-gradient(180deg, rgba(237, 241, 232, 0.08), rgba(6, 17, 15, 0.72)),
+    var(--bg-soft);
   box-shadow: var(--shadow);
 }
 
-.portrait-stage picture,
 .portrait-stage img {
   width: 100%;
   height: 100%;
 }
 
 .portrait-stage img {
-  object-fit: cover;
+  object-fit: contain;
   object-position: center bottom;
-  filter: saturate(0.96) contrast(1.02);
+  filter:
+    saturate(1.03)
+    contrast(1.04)
+    drop-shadow(0 1.2rem 2rem rgba(0, 0, 0, 0.42));
 }
 
 .portrait-stage::before,
@@ -321,8 +324,8 @@ h2 {
 .portrait-stage::before {
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(6, 17, 15, 0.02), transparent 34%, rgba(6, 17, 15, 0.22)),
-    linear-gradient(90deg, rgba(6, 17, 15, 0.2), transparent 18%, transparent 82%, rgba(6, 17, 15, 0.18));
+    linear-gradient(180deg, rgba(141, 216, 220, 0.11), transparent 24%, rgba(6, 17, 15, 0.32)),
+    linear-gradient(90deg, rgba(6, 17, 15, 0.28), transparent 18%, transparent 82%, rgba(6, 17, 15, 0.2));
 }
 
 .portrait-stage::after {
@@ -338,9 +341,8 @@ h2 {
   inset: 0;
   z-index: 1;
   background:
-    linear-gradient(90deg, rgba(6, 17, 15, 0.14) 1px, transparent 1px) 0 0 / 6.25rem 6.25rem,
-    linear-gradient(rgba(6, 17, 15, 0.11) 1px, transparent 1px) 0 0 / 6.25rem 6.25rem;
-  mix-blend-mode: multiply;
+    linear-gradient(90deg, rgba(141, 216, 220, 0.16) 1px, transparent 1px) 0 0 / 4.4rem 4.4rem,
+    linear-gradient(rgba(141, 216, 220, 0.13) 1px, transparent 1px) 0 0 / 4.4rem 4.4rem;
 }
 
 .portrait-vectors {
@@ -350,7 +352,7 @@ h2 {
   width: 100%;
   height: 100%;
   fill: none;
-  stroke: rgba(18, 92, 96, 0.52);
+  stroke: rgba(141, 216, 220, 0.66);
   stroke-width: 2;
   pointer-events: none;
 }

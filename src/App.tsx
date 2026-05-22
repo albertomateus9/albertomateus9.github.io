@@ -306,19 +306,12 @@ function PortraitStage() {
   return (
     <figure className="portrait-stage">
       <span className="portrait-grid" aria-hidden="true" />
-      <picture>
-        <source
-          srcSet="/assets/alberto-mateus-portrait-mobile.webp"
-          media="(max-width: 680px)"
-          type="image/webp"
-        />
-        <img
-          src="/assets/alberto-mateus-portrait.webp"
-          alt="Retrato profissional de Alberto Mateus."
-          width="880"
-          height="1173"
-        />
-      </picture>
+      <img
+        src="/assets/alberto-mateus-portrait-cutout.webp"
+        alt="Retrato profissional de Alberto Mateus."
+        width="1023"
+        height="1537"
+      />
       <svg className="portrait-vectors" viewBox="0 0 540 720" aria-hidden="true">
         <path d="M24 102h82l48 51h88l54 71h148" />
         <path d="M18 572h121l41-52h104l47-62h185" />
