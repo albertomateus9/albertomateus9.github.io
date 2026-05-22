@@ -307,10 +307,10 @@ function PortraitStage() {
     <figure className="portrait-stage">
       <span className="portrait-grid" aria-hidden="true" />
       <img
-        src="/assets/alberto-mateus-portrait-cutout.webp"
-        alt="Retrato profissional de Alberto Mateus."
-        width="1023"
-        height="1537"
+        src="/assets/alberto-mateus-portrait-vector.svg"
+        alt="Retrato vetorial de Alberto Mateus."
+        width="460"
+        height="691"
       />
       <svg className="portrait-vectors" viewBox="0 0 540 720" aria-hidden="true">
         <path d="M24 102h82l48 51h88l54 71h148" />
