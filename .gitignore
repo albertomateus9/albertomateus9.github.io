@@ -6,3 +6,7 @@ dist/
 coverage/
 playwright-report/
 test-results/
+*.log
+output/
+*.pdf
+.playwright-cli/

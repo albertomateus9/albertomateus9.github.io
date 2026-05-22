@@ -1,14 +1,18 @@
 import {
+  Archive,
   ArrowRight,
   BookOpen,
   Boxes,
   BrainCircuit,
+  Briefcase,
   CircleDot,
   Code2,
   ExternalLink,
   Github,
   Globe2,
   GraduationCap,
+  Home as HomeIcon,
+  LayoutGrid,
   Linkedin,
   Mail,
   MapPin,
@@ -40,20 +44,22 @@ const emailUrl = 'mailto:albertomateus9@yahoo.com';
 const copy = {
   pt: {
     nav: [
-      ['Sobre', '#sobre'],
-      ['Casos', '#casos'],
+      ['Início', '#sobre'],
       ['Projetos', '#projetos'],
       ['Pesquisa', '#pesquisa'],
-      ['Aulas', '#aulas'],
+      ['Educação', '#aulas'],
       ['Trajetória', '#trajetoria'],
+      ['Contato', '#contato'],
     ],
     catalog: 'Catálogo',
     language: 'English',
     heroTitle: (
       <>
-        Engenharia, visão
+        Alberto Mateus
         <br />
-        e ensino <em>em operação.</em>
+        <span className="hero-midtext">Engenharia, visão e ensino</span>
+        <br />
+        <span className="hero-highlight">em operação<span className="red-dot">.</span></span>
       </>
     ),
     heroBody:
@@ -170,20 +176,22 @@ const copy = {
   },
   en: {
     nav: [
-      ['About', '#sobre'],
-      ['Cases', '#casos'],
+      ['Home', '#sobre'],
       ['Projects', '#projetos'],
       ['Research', '#pesquisa'],
-      ['Classes', '#aulas'],
+      ['Education', '#aulas'],
       ['Trajectory', '#trajetoria'],
+      ['Contact', '#contato'],
     ],
     catalog: 'Catalog',
     language: 'Português',
     heroTitle: (
       <>
-        Engineering, vision,
+        Alberto Mateus
         <br />
-        and teaching <em>in operation.</em>
+        <span className="hero-midtext">Engineering, vision, and teaching</span>
+        <br />
+        <span className="hero-highlight">in operation<span className="red-dot">.</span></span>
       </>
     ),
     heroBody:
@@ -359,23 +367,57 @@ function TextLink({
   );
 }
 
-function LanguageToggle({ locale, onToggle }: { locale: Locale; onToggle: () => void }) {
+function LanguageSelector({ locale, onChange }: { locale: Locale; onChange: (l: Locale) => void }) {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <button className="language-toggle" type="button" onClick={onToggle}>
-      <Globe2 aria-hidden="true" />
-      {copy[locale].language}
-    </button>
+    <div className="language-dropdown" onMouseLeave={() => setIsOpen(false)}>
+      <button 
+        className="language-toggle" 
+        type="button" 
+        onClick={() => setIsOpen(!isOpen)}
+        aria-expanded={isOpen}
+      >
+        <Globe2 aria-hidden="true" />
+        <span>{locale === 'pt' ? 'PT-BR' : 'EN'}</span>
+        <span className="dropdown-arrow">▼</span>
+      </button>
+      {isOpen && (
+        <div className="language-menu">
+          <button 
+            type="button" 
+            className={locale === 'pt' ? 'active' : ''} 
+            onClick={() => { onChange('pt'); setIsOpen(false); }}
+          >
+            PT-BR
+          </button>
+          <button 
+            type="button" 
+            className={locale === 'en' ? 'active' : ''} 
+            onClick={() => { onChange('en'); setIsOpen(false); }}
+          >
+            EN
+          </button>
+        </div>
+      )}
+    </div>
   );
 }
 
-function SiteHeader({ locale, onToggle }: { locale: Locale; onToggle: () => void }) {
+function SiteHeader({ locale, setLocale }: { locale: Locale; setLocale: (l: Locale) => void }) {
   const content = copy[locale];
 
   return (
     <header className="site-header">
       <a className="brand" href="#" aria-label="Alberto Mateus">
-        <span>AM</span>
-        Alberto Mateus
+        <svg className="brand-hexagon" viewBox="0 0 100 100" aria-hidden="true">
+          <polygon points="50,5 93,30 93,80 50,105 7,80 7,30" />
+          <text x="50" y="65" textAnchor="middle">AM</text>
+        </svg>
+        <div className="brand-text">
+          <span className="brand-name">Alberto Mateus</span>
+          <span className="brand-subtitle">{locale === 'pt' ? 'Engenharia que conecta • Visão que transforma • Ensino que inspira' : 'Engineering that connects • Vision that transforms • Teaching that inspires'}</span>
+        </div>
       </a>
       <nav aria-label="Principal">
         {content.nav.map(([item, href]) => (
@@ -385,14 +427,15 @@ function SiteHeader({ locale, onToggle }: { locale: Locale; onToggle: () => void
         ))}
       </nav>
       <a className="catalog-link" href="#catalogo">
+        <LayoutGrid className="grid-icon" aria-hidden="true" />
         {content.catalog}
       </a>
-      <LanguageToggle locale={locale} onToggle={onToggle} />
+      <LanguageSelector locale={locale} onChange={setLocale} />
     </header>
   );
 }
 
-function PortraitStage() {
+function PortraitStage({ locale }: { locale: Locale }) {
   return (
     <figure className="portrait-stage">
       <span className="portrait-grid" aria-hidden="true" />
@@ -402,18 +445,48 @@ function PortraitStage() {
         width="847"
         height="974"
       />
-      <svg className="portrait-vectors" viewBox="0 0 540 720" aria-hidden="true">
-        <path d="M24 102h82l48 51h88l54 71h148" />
-        <path d="M18 572h121l41-52h104l47-62h185" />
-        <path d="M421 51v93l55 55v179l-70 70v187" />
-        <circle cx="24" cy="102" r="6" />
-        <circle cx="154" cy="153" r="6" />
-        <circle cx="296" cy="224" r="6" />
-        <circle cx="476" cy="199" r="6" />
-        <rect x="36" y="211" width="132" height="183" />
-        <rect x="358" y="148" width="119" height="164" />
-      </svg>
-      <figcaption>Visão, redes e sala de aula em uma mesma engenharia.</figcaption>
+      {/* HUD Camera Frame & Focus Brackets */}
+      <div className="hud-camera-frame" aria-hidden="true">
+        <span className="corner tl" />
+        <span className="corner tr" />
+        <span className="corner bl" />
+        <span className="corner br" />
+        
+        {/* Blinking REC indicator and Camera info */}
+        <div className="hud-camera-top">
+          <div className="hud-rec">
+            <span className="rec-dot" />
+            <span>REC</span>
+          </div>
+          <div className="hud-cam-settings">
+            <span>F2.8</span>
+            <span>ISO 400</span>
+            <span>1/60s</span>
+          </div>
+        </div>
+
+        {/* Calibration Ticks on the left side */}
+        <div className="hud-calibration-ticks">
+          {[...Array(9)].map((_, i) => (
+            <span key={i} className={`tick ${i === 4 ? 'major' : ''}`} />
+          ))}
+        </div>
+
+        {/* HUD Data overlays */}
+        <div className="hud-camera-bottom">
+          <span className="hud-tag green">SYS: ACTIVE</span>
+          <span className="hud-tag cyan">CALIB_2026_OK</span>
+        </div>
+
+        {/* Vertical text labels */}
+        <div className="hud-vertical-label left">
+          <span>ROTEAMENTO // GPON // METRO_ANEL</span>
+        </div>
+        <div className="hud-vertical-label right">
+          <span>FIBRA ÓPTICA // ENLACES_REAIS</span>
+        </div>
+      </div>
+      <figcaption>{locale === 'pt' ? 'Visão, redes e sala de aula em uma mesma engenharia.' : 'Vision, networks, and classroom in a single engineering.'}</figcaption>
     </figure>
   );
 }
@@ -438,62 +511,199 @@ function RepositoryActions({ repo, locale }: { repo: PortfolioRepository; locale
 }
 
 function HeroConsole({ locale }: { locale: Locale }) {
-  const railRepos = repositories.filter((repo) => repo.featured).slice(0, 4);
   const content = copy[locale];
-
+  
   return (
-    <aside className="hero-console" aria-label={content.rail}>
-      <div className="signal-stack">
-        {content.heroSignals.map(([title, body]) => (
-          <article key={title}>
-            <CircleDot aria-hidden="true" />
-            <h2>{title}</h2>
-            <p>{body}</p>
-          </article>
-        ))}
-      </div>
-      <div className="hero-rail">
-        <h2>{content.rail}</h2>
-        {railRepos.map((repo) => (
-          <TextLink href={repo.htmlUrl} className="rail-row" key={repo.name}>
-            <span>{repo.name}</span>
-            <small>{familyNames[locale][repo.family]}</small>
-          </TextLink>
-        ))}
-        <a className="rail-catalog" href="#catalogo">
-          {content.openCatalog}
-          <ArrowRight aria-hidden="true" />
-        </a>
-      </div>
+    <aside className="hero-hud-panels" aria-label="HUD Panels">
+      {/* PANEL 1: REDE */}
+      <section className="hud-panel rede-panel">
+        <header className="hud-panel-header">
+          <span className="panel-dot status-active" />
+          <h3 className="panel-title">REDE // TOPOLOGIA METROPOLITANA</h3>
+          <span className="panel-id">[ID: 102.GPON]</span>
+        </header>
+        <div className="hud-panel-body">
+          <svg viewBox="0 0 300 100" className="hud-svg">
+            {/* Connections */}
+            <line x1="40" y1="50" x2="100" y2="25" stroke="var(--green)" strokeWidth="1" strokeDasharray="3 3" />
+            <line x1="40" y1="50" x2="100" y2="75" stroke="var(--green)" strokeWidth="1" />
+            <line x1="100" y1="25" x2="180" y2="25" stroke="var(--cyan)" strokeWidth="1.5" />
+            <line x1="100" y1="75" x2="180" y2="75" stroke="var(--green)" strokeWidth="1" />
+            <line x1="180" y1="25" x2="250" y2="50" stroke="var(--green)" strokeWidth="1" />
+            <line x1="180" y1="75" x2="250" y2="50" stroke="var(--cyan)" strokeWidth="1" strokeDasharray="2 2" />
+            <line x1="100" y1="25" x2="100" y2="75" stroke="var(--line)" strokeWidth="1" />
+            <line x1="180" y1="25" x2="180" y2="75" stroke="var(--line)" strokeWidth="1" />
+            
+            {/* Nodes */}
+            <circle cx="40" cy="50" r="6" fill="var(--bg)" stroke="var(--coral)" strokeWidth="2" />
+            <circle cx="100" cy="25" r="5" fill="var(--green)" />
+            <circle cx="100" cy="75" r="5" fill="var(--green)" />
+            <circle cx="180" cy="25" r="5" fill="var(--cyan)" />
+            <circle cx="180" cy="75" r="5" fill="var(--green)" />
+            <circle cx="250" cy="50" r="6" fill="var(--bg)" stroke="var(--green)" strokeWidth="2" />
+            
+            {/* Pulsing overlay */}
+            <circle cx="40" cy="50" r="10" fill="none" stroke="var(--coral)" strokeWidth="1" className="hud-pulse" />
+            <circle cx="250" cy="50" r="10" fill="none" stroke="var(--green)" strokeWidth="1" className="hud-pulse-delay" />
+
+            {/* Labels */}
+            <text x="40" y="38" fontSize="8" fill="var(--coral)" textAnchor="middle" fontFamily="monospace">GW_01</text>
+            <text x="100" y="16" fontSize="7" fill="var(--paper-muted)" textAnchor="middle" fontFamily="monospace">192.168.10.1</text>
+            <text x="180" y="16" fontSize="7" fill="var(--paper-muted)" textAnchor="middle" fontFamily="monospace">10.0.0.5</text>
+            <text x="250" y="38" fontSize="8" fill="var(--green)" textAnchor="middle" fontFamily="monospace">SW_CORE</text>
+
+            <path d="M 5 5 L 15 5 L 5 15 Z" fill="var(--green)" opacity="0.3" />
+            <path d="M 295 5 L 285 5 L 295 15 Z" fill="var(--green)" opacity="0.3" />
+          </svg>
+        </div>
+        <footer className="hud-panel-footer">
+          <span>TX: 940 Mbps // RX: 880 Mbps</span>
+          <span>SYS_STATUS: NOMINAL</span>
+        </footer>
+      </section>
+
+      {/* PANEL 2: VISÃO */}
+      <section className="hud-panel visao-panel">
+        <header className="hud-panel-header">
+          <span className="panel-dot status-active" />
+          <h3 className="panel-title">VISÃO // RECONHECIMENTO DE ESTRUTURA</h3>
+          <span className="panel-id">[IA: FACE_MESH]</span>
+        </header>
+        <div className="hud-panel-body">
+          <svg viewBox="0 0 300 100" className="hud-svg">
+            {/* Grid background */}
+            <line x1="0" y1="50" x2="300" y2="50" stroke="rgba(141, 216, 220, 0.1)" strokeWidth="1" />
+            <line x1="150" y1="0" x2="150" y2="100" stroke="rgba(141, 216, 220, 0.1)" strokeWidth="1" />
+            
+            {/* Wireframe Face mesh representation */}
+            <g transform="translate(110, 10)">
+              <polygon points="40,5 60,15 70,35 65,65 40,80 15,65 10,35 20,15" fill="none" stroke="rgba(141, 216, 220, 0.3)" strokeWidth="1" />
+              <polygon points="25,30 35,30 30,25" fill="none" stroke="var(--cyan)" strokeWidth="1" />
+              <polygon points="45,30 55,30 50,25" fill="none" stroke="var(--cyan)" strokeWidth="1" />
+              <line x1="30" y1="30" x2="50" y2="30" stroke="var(--line)" strokeWidth="0.5" />
+              <line x1="40" y1="20" x2="40" y2="50" stroke="var(--cyan)" strokeWidth="1" />
+              <line x1="35" y1="50" x2="45" y2="50" stroke="var(--cyan)" strokeWidth="1" />
+              <polygon points="30,60 40,57 50,60 40,65" fill="none" stroke="var(--coral)" strokeWidth="1" />
+              <circle cx="40" cy="5" r="2" fill="var(--cyan)" />
+              <circle cx="60" cy="15" r="2" fill="var(--cyan)" />
+              <circle cx="70" cy="35" r="2" fill="var(--cyan)" />
+              <circle cx="65" cy="65" r="2" fill="var(--cyan)" />
+              <circle cx="40" cy="80" r="2" fill="var(--cyan)" />
+              <circle cx="15" cy="65" r="2" fill="var(--cyan)" />
+              <circle cx="10" cy="35" r="2" fill="var(--cyan)" />
+              <circle cx="20" cy="15" r="2" fill="var(--cyan)" />
+              
+              <line x1="30" y1="25" x2="40" y2="5" stroke="rgba(141, 216, 220, 0.2)" strokeWidth="0.5" />
+              <line x1="50" y1="25" x2="40" y2="5" stroke="rgba(141, 216, 220, 0.2)" strokeWidth="0.5" />
+              <line x1="30" y1="30" x2="10" y2="35" stroke="rgba(141, 216, 220, 0.2)" strokeWidth="0.5" />
+              <line x1="55" y1="30" x2="70" y2="35" stroke="rgba(141, 216, 220, 0.2)" strokeWidth="0.5" />
+              <line x1="35" y1="50" x2="15" y2="65" stroke="rgba(141, 216, 220, 0.2)" strokeWidth="0.5" />
+              <line x1="45" y1="50" x2="65" y2="65" stroke="rgba(141, 216, 220, 0.2)" strokeWidth="0.5" />
+              <line x1="40" y1="80" x2="40" y2="65" stroke="rgba(141, 216, 220, 0.2)" strokeWidth="0.5" />
+            </g>
+
+            {/* Target overlay */}
+            <circle cx="150" cy="45" r="38" fill="none" stroke="var(--cyan)" strokeWidth="1" strokeDasharray="5 5" className="hud-rotate" />
+            <path d="M 105 45 L 115 45 M 185 45 L 195 45 M 150 5 L 150 15 M 150 75 L 150 85" stroke="var(--cyan)" strokeWidth="1" />
+            
+            {/* Telemetry data */}
+            <text x="10" y="25" fontSize="7" fill="var(--cyan)" fontFamily="monospace">CONFIDENCE: 98.4%</text>
+            <text x="10" y="40" fontSize="7" fill="var(--paper-muted)" fontFamily="monospace">FPS: 60 // LAT: 4.2ms</text>
+            <text x="10" y="55" fontSize="7" fill="var(--paper-muted)" fontFamily="monospace">MODEL: YOLOV8-TINY</text>
+
+            <text x="290" y="25" fontSize="7" fill="var(--coral)" textAnchor="end" fontFamily="monospace">TARGET LOCKED</text>
+            <text x="290" y="40" fontSize="7" fill="var(--paper-muted)" textAnchor="end" fontFamily="monospace">X: 142.08</text>
+            <text x="290" y="55" fontSize="7" fill="var(--paper-muted)" textAnchor="end" fontFamily="monospace">Y: 88.51</text>
+          </svg>
+        </div>
+        <footer className="hud-panel-footer">
+          <span>PIPELINE: ACTIVE</span>
+          <span>COMPUTE: EDGE_DEVICE</span>
+        </footer>
+      </section>
+
+      {/* PANEL 3: ENSINO */}
+      <section className="hud-panel ensino-panel">
+        <header className="hud-panel-header">
+          <span className="panel-dot status-active" />
+          <h3 className="panel-title">ENSINO // METODOLOGIA STEAM & MAKER</h3>
+          <span className="panel-id">[LAB: EETEPA]</span>
+        </header>
+        <div className="hud-panel-body">
+          <svg viewBox="0 0 300 100" className="hud-svg">
+            {/* Teacher Node */}
+            <circle cx="50" cy="50" r="14" fill="var(--bg)" stroke="var(--green)" strokeWidth="2" />
+            <text x="50" y="54" fontSize="10" fill="var(--green)" textAnchor="middle" fontFamily="monospace" fontWeight="bold">PROF</text>
+
+            {/* Wireless transmission waves */}
+            <path d="M 75 40 Q 90 50 75 60" fill="none" stroke="var(--green)" strokeWidth="1.5" strokeDasharray="3 3" />
+            <path d="M 85 30 Q 105 50 85 70" fill="none" stroke="var(--green)" strokeWidth="1" />
+            
+            {/* Central classroom hub */}
+            <rect x="120" y="30" width="60" height="40" fill="var(--bg)" stroke="var(--cyan)" strokeWidth="1.5" rx="3" />
+            <text x="150" y="48" fontSize="8" fill="var(--cyan)" textAnchor="middle" fontFamily="monospace" fontWeight="bold">STEAM</text>
+            <text x="150" y="58" fontSize="7" fill="var(--paper-muted)" textAnchor="middle" fontFamily="monospace">LABORATÓRIO</text>
+
+            {/* Transmission to students */}
+            <path d="M 195 40 Q 210 50 195 60" fill="none" stroke="var(--green)" strokeWidth="1.5" strokeDasharray="3 3" />
+            
+            {/* Students Nodes */}
+            <circle cx="240" cy="28" r="8" fill="var(--bg)" stroke="var(--green)" strokeWidth="1" />
+            <circle cx="260" cy="50" r="8" fill="var(--bg)" stroke="var(--green)" strokeWidth="1" />
+            <circle cx="240" cy="72" r="8" fill="var(--bg)" stroke="var(--green)" strokeWidth="1" />
+            
+            <text x="240" y="31" fontSize="7" fill="var(--paper)" textAnchor="middle" fontFamily="monospace">S1</text>
+            <text x="260" y="53" fontSize="7" fill="var(--paper)" textAnchor="middle" fontFamily="monospace">S2</text>
+            <text x="240" y="75" fontSize="7" fill="var(--paper)" textAnchor="middle" fontFamily="monospace">S3</text>
+
+            {/* Connecting lines */}
+            <line x1="180" y1="50" x2="220" y2="50" stroke="var(--green)" strokeWidth="1" />
+            <line x1="180" y1="50" x2="232" y2="28" stroke="var(--green)" strokeWidth="1" />
+            <line x1="180" y1="50" x2="232" y2="72" stroke="var(--green)" strokeWidth="1" />
+          </svg>
+        </div>
+        <footer className="hud-panel-footer">
+          <span>PROJETOS CURRICULARES: 24+</span>
+          <span>AÇÃO: AUTORIA_ESTUDANTE</span>
+        </footer>
+      </section>
     </aside>
   );
 }
 
 function CaseVisual({ visual }: { visual: PortfolioCaseStudy['visual'] }) {
+  const src = {
+    webcraft: '/assets/webcraft-preview.png',
+    network: '/assets/campuswatch-preview.png',
+    vision: '/assets/edge-cv-preview.png',
+  }[visual];
+
   return (
     <div className={`case-visual case-visual-${visual}`} aria-hidden="true">
+      {src && <img src={src} alt="" className="case-screenshot" />}
+      <div className="hud-overlay">
+        <span className="corner-tl" />
+        <span className="corner-tr" />
+        <span className="corner-bl" />
+        <span className="corner-br" />
+      </div>
       {visual === 'webcraft' ? (
         <>
-          <code>&lt;main&gt;</code>
-          <b>missao_web()</b>
-          <span />
-          <em>preview</em>
+          <code className="hud-label-code">&lt;main&gt;</code>
+          <b className="hud-label-title">missao_web()</b>
+          <em className="hud-label-status">preview</em>
         </>
       ) : null}
       {visual === 'network' ? (
         <>
-          <b>SNMP</b>
-          <i />
-          <span />
-          <em>alerta</em>
+          <b className="hud-label-title">SNMP</b>
+          <em className="hud-label-status">alerta</em>
         </>
       ) : null}
       {visual === 'vision' ? (
         <>
-          <b>frame</b>
-          <i />
-          <span />
-          <em>latência</em>
+          <b className="hud-label-title">frame</b>
+          <em className="hud-label-status">latência</em>
         </>
       ) : null}
     </div>
@@ -519,33 +729,50 @@ function CaseStudyCard({
       <div className="case-copy">
         <h3>{study.title[locale]}</h3>
         <p className="case-summary">{study.summary[locale]}</p>
-        <dl>
-          <div>
-            <dt>{labels.problem}</dt>
-            <dd>{study.problem[locale]}</dd>
-          </div>
-          <div>
-            <dt>{labels.architecture}</dt>
-            <dd>{study.architecture[locale]}</dd>
-          </div>
-          {primary ? (
-            <>
-              <div>
-                <dt>{labels.result}</dt>
-                <dd>{study.result[locale]}</dd>
+        
+        {primary ? (
+          <div className="case-grid">
+            <div className="grid-item">
+              <span className="grid-label">{labels.problem}</span>
+              <p className="grid-content">{study.problem[locale]}</p>
+            </div>
+            <div className="grid-item">
+              <span className="grid-label">{labels.architecture}</span>
+              <p className="grid-content">{study.architecture[locale]}</p>
+            </div>
+            <div className="grid-item">
+              <span className="grid-label">{labels.stack}</span>
+              <div className="case-badges">
+                {study.stack.map((item) => (
+                  <span className="tech-badge" key={item}>{item}</span>
+                ))}
               </div>
-              <div>
-                <dt>{labels.next}</dt>
-                <dd>{study.next[locale]}</dd>
-              </div>
-            </>
-          ) : null}
-        </dl>
-        <div className="case-stack" aria-label={labels.stack}>
-          {study.stack.map((item) => (
-            <span key={item}>{item}</span>
-          ))}
-        </div>
+            </div>
+            <div className="grid-item">
+              <span className="grid-label">{labels.result}</span>
+              <p className="grid-content">{study.result[locale]}</p>
+            </div>
+          </div>
+        ) : (
+          <dl>
+            <div>
+              <dt>{labels.problem}</dt>
+              <dd>{study.problem[locale]}</dd>
+            </div>
+            <div>
+              <dt>{locale === 'pt' ? 'Solução' : 'Solution'}</dt>
+              <dd>{study.architecture[locale]}</dd>
+            </div>
+            <div>
+              <dt>{locale === 'pt' ? 'Tecnologias' : 'Technologies'}</dt>
+              <dd className="case-badges">
+                {study.stack.map((item) => (
+                  <span className="tech-badge" key={item}>{item}</span>
+                ))}
+              </dd>
+            </div>
+          </dl>
+        )}
       </div>
       <RepositoryActions repo={repo} locale={locale} />
     </article>
@@ -589,10 +816,21 @@ function CaseStudies({ locale }: { locale: Locale }) {
 
   return (
     <section className="cases" id="casos" aria-labelledby="cases-title">
-      <div className="section-lead case-lead">
-        <h2 id="cases-title">{content.casesTitle}</h2>
-        <p>{content.casesBody}</p>
-      </div>
+      <header className="cases-header">
+        <div className="cases-header-left">
+          <span className="live-lab-tag">{locale === 'pt' ? 'LABORATÓRIO VIVO' : 'LIVE LAB'}</span>
+          <h2 id="cases-title">{content.casesTitle}</h2>
+          <p>{content.casesBody}</p>
+        </div>
+        <div className="cases-hud-meta" aria-hidden="true">
+          <span className="bracket-top" />
+          <div className="meta-terminal-line">SYSTEM: CASOS_EM_FOCO</div>
+          <div className="meta-terminal-line">TOTAL_ITEMS: {studies.length}</div>
+          <div className="meta-terminal-line">ENV: PRODUCTION</div>
+          <div className="meta-terminal-line">OBSERVABILITY: OK</div>
+          <span className="bracket-bottom" />
+        </div>
+      </header>
       <div className="case-board">
         {studies[0] ? <CaseStudyCard study={studies[0].study} repo={studies[0].repo} locale={locale} primary /> : null}
         <div className="case-rail">
@@ -602,6 +840,38 @@ function CaseStudies({ locale }: { locale: Locale }) {
         </div>
       </div>
       <RadarPanel locale={locale} />
+      
+      {/* SECTION FOOTER PILLARS */}
+      <footer className="cases-footer">
+        <div className="cases-footer-pillars">
+          <article className="cases-footer-pillar">
+            <GraduationCap aria-hidden="true" />
+            <div className="pillar-copy">
+              <h3>{locale === 'pt' ? 'Educação tecnológica' : 'Technical education'}</h3>
+              <p>{locale === 'pt' ? 'Capacitação prática orientada a projetos e resolução de problemas.' : 'Project-oriented practical training and problem solving.'}</p>
+            </div>
+          </article>
+          <article className="cases-footer-pillar">
+            <BrainCircuit aria-hidden="true" />
+            <div className="pillar-copy">
+              <h3>{locale === 'pt' ? 'Pesquisa aplicada' : 'Applied research'}</h3>
+              <p>{locale === 'pt' ? 'Investigação científica de modelos eficientes de IA e visão.' : 'Scientific investigation of efficient AI and vision models.'}</p>
+            </div>
+          </article>
+          <article className="cases-footer-pillar">
+            <Network aria-hidden="true" />
+            <div className="pillar-copy">
+              <h3>{locale === 'pt' ? 'Engenharia de redes' : 'Network engineering'}</h3>
+              <p>{locale === 'pt' ? 'Desenvolvimento de infraestruturas físicas resilientes e monitoradas.' : 'Development of resilient and monitored physical infrastructures.'}</p>
+            </div>
+          </article>
+        </div>
+        <div className="cases-footer-terminal" aria-hidden="true">
+          <span>&gt; SYSTEM_ONLINE = TRUE</span>
+          <span>&gt; APRENDER_CONTINUO = TRUE</span>
+          <span>&gt; REGION = BR_PA_BEL</span>
+        </div>
+      </footer>
     </section>
   );
 }
@@ -618,6 +888,7 @@ function HomeView({ locale }: { locale: Locale }) {
         <section className="hero" id="sobre">
           <div className="hero-copy">
             <h1>{content.heroTitle}</h1>
+            <div className="hero-title-connector" aria-hidden="true" />
             <p className="hero-body">{content.heroBody}</p>
             <p className="location">
               <MapPin aria-hidden="true" />
@@ -633,23 +904,61 @@ function HomeView({ locale }: { locale: Locale }) {
               </a>
             </div>
           </div>
-          <PortraitStage />
+          <PortraitStage locale={locale} />
           <HeroConsole locale={locale} />
+          
+          <div className="hero-hud-rail">
+            <div className="rail-status">
+              <span className="rail-status-dot" />
+              <span className="rail-status-text">{locale === 'pt' ? 'LAB EM OPERAÇÃO' : 'LAB IN OPERATION'}</span>
+            </div>
+            <div className="rail-items">
+              <a href="#projetos" className="rail-item">
+                <span className="rail-item-num">01</span>
+                <span className="rail-item-name">WebCraft Studio</span>
+              </a>
+              <a href="#projetos" className="rail-item">
+                <span className="rail-item-num">02</span>
+                <span className="rail-item-name">NetMaster CLI</span>
+              </a>
+              <a href="#projetos" className="rail-item">
+                <span className="rail-item-num">03</span>
+                <span className="rail-item-name">CampusWatch SNMP</span>
+              </a>
+              <a href="#projetos" className="rail-item">
+                <span className="rail-item-num">04</span>
+                <span className="rail-item-name">EcoWake</span>
+              </a>
+            </div>
+          </div>
         </section>
 
-        <section className="pillars" aria-labelledby="pillars-title">
-          <h2 id="pillars-title">{content.pillarsTitle}</h2>
-          <div className="pillar-band">
-            {content.pillars.map((pillar, index) => {
-              const Icon = [Network, ScanSearch, GraduationCap][index];
-              return (
-                <article key={pillar.title}>
-                  <Icon aria-hidden="true" />
-                  <h3>{pillar.title}</h3>
-                  <p>{pillar.body}</p>
-                </article>
-              );
-            })}
+        <section className="live-lab-section" aria-labelledby="livelab-title">
+          <div className="live-lab-container">
+            <div className="live-lab-copy">
+              <span className="live-lab-tag-highlight">{locale === 'pt' ? 'AMBIENTE DE INTEGRAÇÃO' : 'INTEGRATION ENVIRONMENT'}</span>
+              <h2 id="livelab-title">
+                <span className="accent-bar" />
+                {locale === 'pt' ? 'Laboratório Vivo' : 'Live Lab'}
+              </h2>
+              <p>{locale === 'pt' ? 'Um ecossistema prático onde redes IP, visão computacional e educação tecnológica se integram de verdade. O laboratório funciona como espaço de teste contínuo para soluções leves de automação, documentação de infovias metropolitanas e desenvolvimento maker.' : 'A practical ecosystem where IP networks, computer vision, and tech education are truly integrated. The lab serves as a continuous testing space for lightweight automation, municipal network documentation, and maker development.'}</p>
+              
+              <div className="live-lab-meta" aria-hidden="true">
+                <div className="meta-line">STATUS: ACTIVE</div>
+                <div className="meta-line">IP: 10.20.30.0/24</div>
+                <div className="meta-line">TELEMETRY: OK</div>
+              </div>
+            </div>
+            <div className="live-lab-visual" aria-hidden="true">
+              <img src="/assets/lab-environment.png" alt="Laboratório Vivo" />
+              <div className="hud-overlay">
+                <span className="corner-tl" />
+                <span className="corner-tr" />
+                <span className="corner-bl" />
+                <span className="corner-br" />
+              </div>
+              <span className="hud-visual-label">LAB_VIEW_CAM_01</span>
+            </div>
           </div>
         </section>
 
@@ -667,10 +976,14 @@ function HomeView({ locale }: { locale: Locale }) {
                 <h3>WebCraft Studio</h3>
                 <span>{webcraft.summary[locale]}</span>
               </div>
-              <div className="webcraft-stage" aria-hidden="true">
-                <code>&lt;main&gt;</code>
-                <b>Missão Web</b>
-                <code>color: impact;</code>
+              <div className="webcraft-stage-screenshot" aria-hidden="true">
+                <img src="/assets/webcraft-preview.png" alt="WebCraft Studio" />
+                <div className="hud-overlay">
+                  <span className="corner-tl" />
+                  <span className="corner-tr" />
+                  <span className="corner-bl" />
+                  <span className="corner-br" />
+                </div>
               </div>
               <RepositoryActions repo={webcraft} locale={locale} />
             </article>
@@ -863,21 +1176,84 @@ function groupRepositories(visible: PortfolioRepository[]) {
 function CatalogLegend({ locale }: { locale: Locale }) {
   const content = copy[locale];
 
+  const legendItems = [
+    {
+      title: locale === 'pt' ? 'Projetos Profissionais' : 'Professional Projects',
+      body: locale === 'pt' ? 'Produtos, APIs e ferramentas prontas para operação real.' : 'Products, APIs, and tools ready for real operations.',
+      icon: Briefcase,
+      colorClass: 'color-profissionais',
+    },
+    {
+      title: locale === 'pt' ? 'Laboratórios Educacionais' : 'Educational Laboratories',
+      body: locale === 'pt' ? 'Aplicações didáticas, simuladores e atividades com dados seguros.' : 'Didactic apps, simulators, and tasks with secure data.',
+      icon: GraduationCap,
+      colorClass: 'color-educacionais',
+    },
+    {
+      title: locale === 'pt' ? 'Pesquisa Aplicada' : 'Applied Research',
+      body: locale === 'pt' ? 'Protótipos de IA, visão computacional e notebooks de ciência de dados.' : 'AI prototypes, computer vision, and data science notebooks.',
+      icon: BrainCircuit,
+      colorClass: 'color-pesquisa',
+    },
+    {
+      title: locale === 'pt' ? 'Colaborações' : 'Collaborations',
+      body: locale === 'pt' ? 'Hackathons, turmas, mentorias e trabalho em equipe.' : 'Hackathons, classes, mentoring, and teamwork.',
+      icon: Network,
+      colorClass: 'color-colaboracoes',
+    },
+    {
+      title: locale === 'pt' ? 'Arquivados' : 'Archived',
+      body: locale === 'pt' ? 'Projetos legados ou repositórios congelados para histórico.' : 'Legacy projects or frozen repositories kept for historical purposes.',
+      icon: Archive,
+      colorClass: 'color-arquivados',
+    },
+  ];
+
   return (
     <aside className="catalog-legend" aria-label={content.legendTitle}>
       <h2>{content.legendTitle}</h2>
-      {content.legend.map(([title, body], index) => (
-        <article key={title}>
-          <span>{String(index + 1).padStart(2, '0')}</span>
-          <h3>{title}</h3>
-          <p>{body}</p>
-        </article>
-      ))}
+      <div className="legend-items">
+        {legendItems.map((item) => {
+          const Icon = item.icon;
+          return (
+            <article className={`legend-row ${item.colorClass}`} key={item.title}>
+              <span className="legend-icon-wrapper">
+                <Icon aria-hidden="true" />
+              </span>
+              <div className="legend-copy">
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+              </div>
+            </article>
+          );
+        })}
+      </div>
     </aside>
   );
 }
 
-function CatalogView({ locale }: { locale: Locale }) {
+function getRepoSymbol(name: string): string {
+  switch (name) {
+    case 'webcraft-studio':
+      return 'W';
+    case 'netmaster-cli-api':
+      return 'N';
+    case 'campuswatch-snmp':
+      return 'C';
+    case 'ecowake':
+      return 'E';
+    case 'certiflow-api':
+      return 'F';
+    case 'edumetrics-hub':
+      return 'H';
+    case 'boas-praticas-isp':
+      return 'B';
+    default:
+      return '>';
+  }
+}
+
+function CatalogView({ locale, setLocale }: { locale: Locale; setLocale: (l: Locale) => void }) {
   const content = copy[locale];
   const [filters, setFilters] = useState<CatalogFilters>({
     query: '',
@@ -893,19 +1269,177 @@ function CatalogView({ locale }: { locale: Locale }) {
   );
   const signals = useMemo(signalOptions, []);
   const visible = useMemo(() => filterRepositories(repositories, filters), [filters]);
-  const groups = useMemo(() => groupRepositories(visible), [visible]);
+
+  const categoryGroups = useMemo(() => {
+    const categories = [
+      {
+        id: 'profissionais',
+        title: { pt: 'PROJETOS PROFISSIONAIS', en: 'PROFESSIONAL PROJECTS' },
+        icon: Briefcase,
+        colorClass: 'color-profissionais',
+        families: ['premium', 'vitrine', 'colaboracoes'],
+      },
+      {
+        id: 'educacionais',
+        title: { pt: 'LABORATÓRIOS EDUCACIONAIS', en: 'EDUCATIONAL LABORATORIES' },
+        icon: GraduationCap,
+        colorClass: 'color-educacionais',
+        families: ['eetepa', 'informatica-redes', 'aulas-ludicas'],
+      },
+      {
+        id: 'pesquisa',
+        title: { pt: 'PESQUISA APLICADA', en: 'APPLIED RESEARCH' },
+        icon: BrainCircuit,
+        colorClass: 'color-pesquisa',
+        families: ['visao-computacional', 'ciencia-de-dados'],
+      },
+    ];
+
+    return categories.map(cat => {
+      const catRepos = visible.filter(repo => cat.families.includes(repo.family));
+      return {
+        ...cat,
+        repos: catRepos,
+      };
+    }).filter(group => group.repos.length > 0);
+  }, [visible]);
 
   return (
-    <>
-      <main className="catalog-page">
-        <section className="catalog-intro">
-          <a href="#" className="back-home">
-            <ArrowRight aria-hidden="true" />
-            {content.backHome}
+    <div className="catalog-shell">
+      {/* Coluna Esquerda: Sidebar */}
+      <aside className="catalog-sidebar">
+        <a className="brand" href="#" aria-label="Alberto Mateus">
+          <svg className="brand-hexagon" viewBox="0 0 100 100" aria-hidden="true">
+            <polygon points="50,5 93,30 93,80 50,105 7,80 7,30" />
+            <text x="50" y="65" textAnchor="middle">AM</text>
+          </svg>
+          <div className="brand-text">
+            <span className="brand-name">Alberto Mateus</span>
+            <span className="brand-subtitle">{locale === 'pt' ? 'Engenharia que conecta • Visão que transforma • Ensino que inspira' : 'Engineering that connects • Vision that transforms • Teaching that inspires'}</span>
+          </div>
+        </a>
+
+        <nav className="sidebar-nav">
+          <a href="#" className="nav-item">
+            <HomeIcon aria-hidden="true" />
+            <span>{locale === 'pt' ? 'Início' : 'Home'}</span>
           </a>
-          <h1>{content.catalogTitle}</h1>
-          <p>{content.catalogBody}</p>
+          <a href="#catalogo" className="nav-item active">
+            <LayoutGrid aria-hidden="true" />
+            <span>{locale === 'pt' ? 'Catálogo' : 'Catalog'}</span>
+          </a>
+          <a href="#projetos" className="nav-item">
+            <Briefcase aria-hidden="true" />
+            <span>{locale === 'pt' ? 'Projetos' : 'Projects'}</span>
+          </a>
+          <a href="#pesquisa" className="nav-item">
+            <BrainCircuit aria-hidden="true" />
+            <span>{locale === 'pt' ? 'Pesquisa' : 'Research'}</span>
+          </a>
+          <a href="#aulas" className="nav-item">
+            <GraduationCap aria-hidden="true" />
+            <span>{locale === 'pt' ? 'Educação' : 'Education'}</span>
+          </a>
+          <a href="#trajetoria" className="nav-item">
+            <BookOpen aria-hidden="true" />
+            <span>{locale === 'pt' ? 'Trajetória' : 'Trajectory'}</span>
+          </a>
+          <a href="#contato" className="nav-item">
+            <Mail aria-hidden="true" />
+            <span>{locale === 'pt' ? 'Contato' : 'Contact'}</span>
+          </a>
+        </nav>
+
+        <div className="sidebar-profile">
+          <div className="avatar-hexagon-wrapper">
+            <svg viewBox="0 0 100 100" className="avatar-hexagon-svg">
+              <defs>
+                <clipPath id="hex-clip">
+                  <polygon points="50,5 93,30 93,80 50,105 7,80 7,30" />
+                </clipPath>
+              </defs>
+              <polygon points="50,5 93,30 93,80 50,105 7,80 7,30" className="avatar-hex-border" />
+              <image 
+                href="/assets/alberto-mateus-portrait-real-cutout.webp" 
+                x="5" y="5" 
+                width="90" height="90" 
+                clipPath="url(#hex-clip)"
+                preserveAspectRatio="xMidYMid slice"
+              />
+            </svg>
+          </div>
+          <div className="profile-info">
+            <span className="profile-name">Alberto Mateus</span>
+            <span className="profile-role">{locale === 'pt' ? 'Doutorando e Engenheiro' : 'PhD Candidate & Engineer'}</span>
+          </div>
+        </div>
+
+        <div className="sidebar-socials">
+          <TextLink href={githubUrl} aria-label="GitHub"><Github /></TextLink>
+          <TextLink href={linkedinUrl} aria-label="LinkedIn"><Linkedin /></TextLink>
+          <TextLink href={lattesUrl} className="sidebar-lattes" aria-label="Lattes">
+            <ExternalLink />
+            <span className="lattes-label">Lattes</span>
+          </TextLink>
+          <TextLink href={emailUrl} aria-label="Email"><Mail /></TextLink>
+        </div>
+
+        <div className="sidebar-language-container">
+          <LanguageSelector locale={locale} onChange={setLocale} />
+        </div>
+
+        <footer className="sidebar-footer">
+          <p>© 2026 Alberto Mateus</p>
+          <p>Belém, Pará, Brasil</p>
+        </footer>
+      </aside>
+
+      {/* Coluna Direita: Main Content Area */}
+      <main className="catalog-content">
+        <section className="catalog-header-hud">
+          <div className="catalog-intro-compact">
+            <a href="#" className="back-home">
+              <ArrowRight aria-hidden="true" />
+              {content.backHome}
+            </a>
+            <h1>{content.catalogTitle}</h1>
+            <p>{content.catalogBody}</p>
+          </div>
+          
+          <div className="catalog-topo-diagram" aria-hidden="true">
+            <svg viewBox="0 0 400 80" className="topo-svg">
+              <path d="M 30 40 L 90 20 L 150 40 L 210 20 L 270 40 L 330 20 M 90 20 L 90 60 L 150 40 M 210 20 L 210 60 L 270 40" stroke="rgba(162, 211, 108, 0.4)" strokeWidth="1" fill="none" />
+              
+              <circle cx="30" cy="40" r="4" fill="var(--green)" />
+              <circle cx="90" cy="20" r="4" fill="var(--cyan)" />
+              <circle cx="90" cy="60" r="4" fill="var(--green)" />
+              <circle cx="150" cy="45" r="5" fill="var(--bg)" stroke="var(--green)" strokeWidth="1.5" />
+              <circle cx="210" cy="20" r="4" fill="var(--cyan)" />
+              <circle cx="210" cy="60" r="4" fill="var(--green)" />
+              <circle cx="270" cy="40" r="4" fill="var(--green)" />
+              <circle cx="330" cy="20" r="4" fill="var(--coral)" />
+              
+              <text x="30" y="52" fontSize="6" fill="var(--paper-muted)" fontFamily="monospace" textAnchor="middle">192.168.1.1</text>
+              <text x="90" y="12" fontSize="6" fill="var(--paper-muted)" fontFamily="monospace" textAnchor="middle">192.168.1.254</text>
+              <text x="150" y="56" fontSize="6" fill="var(--green)" fontFamily="monospace" textAnchor="middle">GW_CORE</text>
+              <text x="210" y="12" fontSize="6" fill="var(--paper-muted)" fontFamily="monospace" textAnchor="middle">10.0.0.1</text>
+              <text x="330" y="12" fontSize="6" fill="var(--coral)" fontFamily="monospace" textAnchor="middle">WAN_EDGE</text>
+
+              <path d="M 370 10 L 390 10 L 390 30" fill="none" stroke="var(--cyan)" strokeWidth="1" />
+              <text x="385" y="45" fontSize="7" fill="var(--cyan)" fontFamily="monospace" textAnchor="end">SYS: ACTIVE</text>
+            </svg>
+            
+            <div className="catalog-hud-timeline">
+              <span className="timeline-year">2016</span>
+              <div className="timeline-track">
+                <span className="timeline-bar" />
+                <span className="timeline-indicator" style={{ left: '100%' }} />
+              </div>
+              <span className="timeline-year active">2026</span>
+            </div>
+          </div>
         </section>
+
         <section className="catalog-controls" aria-label={content.catalogTitle}>
           <label className="search-control">
             <Search aria-hidden="true" />
@@ -916,59 +1450,80 @@ function CatalogView({ locale }: { locale: Locale }) {
               placeholder={content.search}
             />
           </label>
-          <select
-            aria-label={content.allFamilies}
-            value={filters.family}
-            onChange={(event) =>
-              setFilters((current) => ({
-                ...current,
-                family: event.target.value as CatalogFilters['family'],
-              }))
-            }
-          >
-            <option value="todas">{content.allFamilies}</option>
-            {familyOrder.map((family) => (
-              <option value={family} key={family}>
-                {familyNames[locale][family]}
-              </option>
-            ))}
-          </select>
-          <select
-            aria-label={content.allLanguages}
-            value={filters.language}
-            onChange={(event) => setFilters((current) => ({ ...current, language: event.target.value }))}
-          >
-            <option value="">{content.allLanguages}</option>
-            {languages.map((language) => (
-              <option value={language} key={language}>
-                {language}
-              </option>
-            ))}
-          </select>
-          <select
-            aria-label={content.allSignals}
-            value={filters.signal}
-            onChange={(event) => setFilters((current) => ({ ...current, signal: event.target.value }))}
-          >
-            <option value="">{content.allSignals}</option>
-            {signals.map((signal) => (
-              <option value={signal} key={signal}>
-                {signal}
-              </option>
-            ))}
-          </select>
-          <div className="status-control">
-            {(['todos', 'ativos', 'arquivados', 'forks'] as const).map((status) => (
-              <button
-                className={filters.status === status ? 'active' : ''}
-                type="button"
-                key={status}
-                onClick={() => setFilters((current) => ({ ...current, status }))}
-              >
-                {content.status[status]}
-              </button>
-            ))}
+          
+          <div className="select-control">
+            <Boxes className="select-icon" aria-hidden="true" />
+            <select
+              aria-label={content.allFamilies}
+              value={filters.family}
+              onChange={(event) =>
+                setFilters((current) => ({
+                  ...current,
+                  family: event.target.value as CatalogFilters['family'],
+                }))
+              }
+            >
+              <option value="todas">{content.allFamilies}</option>
+              {familyOrder.map((family) => (
+                <option value={family} key={family}>
+                  {familyNames[locale][family]}
+                </option>
+              ))}
+            </select>
           </div>
+
+          <div className="select-control">
+            <Code2 className="select-icon" aria-hidden="true" />
+            <select
+              aria-label={content.allLanguages}
+              value={filters.language}
+              onChange={(event) => setFilters((current) => ({ ...current, language: event.target.value }))}
+            >
+              <option value="">{content.allLanguages}</option>
+              {languages.map((language) => (
+                <option value={language} key={language}>
+                  {language}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="select-control">
+            <ScanSearch className="select-icon" aria-hidden="true" />
+            <select
+              aria-label={content.allSignals}
+              value={filters.signal}
+              onChange={(event) => setFilters((current) => ({ ...current, signal: event.target.value }))}
+            >
+              <option value="">{content.allSignals}</option>
+              {signals.map((signal) => (
+                <option value={signal} key={signal}>
+                  {signal}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="select-control">
+            <CircleDot className="select-icon" aria-hidden="true" />
+            <select
+              aria-label={locale === 'pt' ? 'Status' : 'Status'}
+              value={filters.status}
+              onChange={(event) =>
+                setFilters((current) => ({
+                  ...current,
+                  status: event.target.value as CatalogFilters['status'],
+                }))
+              }
+            >
+              {(['todos', 'ativos', 'arquivados', 'forks'] as const).map((status) => (
+                <option value={status} key={status}>
+                  {content.status[status]}
+                </option>
+              ))}
+            </select>
+          </div>
+
           <label className="demo-control">
             <input
               type="checkbox"
@@ -978,40 +1533,51 @@ function CatalogView({ locale }: { locale: Locale }) {
             {content.demoOnly}
           </label>
         </section>
+        
         <section className="catalog-results" aria-live="polite">
           <p className="result-count">
             {visible.length} {content.results}
           </p>
           <div className="catalog-observatory">
-            {groups.length ? (
-              <div className="repo-groups">
-                {groups.map((group) => (
-                  <section className="repo-group" key={group.family}>
-                    <div className="group-head">
-                      <span />
-                      <h2>{familyNames[locale][group.family]}</h2>
-                      <small>{group.repos.length}</small>
-                    </div>
-                    {group.repos.map((repo) => (
-                      <article className="catalog-row" key={repo.name}>
-                        <div className="repo-index">
-                          <time dateTime={repo.updatedAt}>{repo.updatedAt.slice(0, 10)}</time>
-                          {repo.demo ? <em>demo</em> : null}
-                        </div>
-                        <div className="repo-copy">
-                          <h3>{repo.name}</h3>
-                          <p>{repo.summary[locale]}</p>
-                          <div className="repo-badges">
-                            {badges(repo, locale).map((badge) => (
-                              <span key={badge}>{badge}</span>
-                            ))}
-                          </div>
-                        </div>
-                        <RepositoryActions repo={repo} locale={locale} />
-                      </article>
-                    ))}
-                  </section>
-                ))}
+            {categoryGroups.length ? (
+              <div className="repo-category-groups">
+                <div className="category-vertical-connector" />
+                {categoryGroups.map((group) => {
+                  const Icon = group.icon;
+                  return (
+                    <section className={`repo-category-group ${group.colorClass}`} key={group.id}>
+                      <div className="category-group-head">
+                        <span className="category-icon-wrapper">
+                          <Icon aria-hidden="true" />
+                        </span>
+                        <h2>{group.title[locale]}</h2>
+                        <small>{group.repos.length}</small>
+                      </div>
+                      <div className="category-repos-list">
+                        {group.repos.map((repo) => (
+                          <article className="catalog-row" key={repo.name}>
+                            <div className="repo-index">
+                              <span className="repo-square-icon" aria-hidden="true">
+                                {getRepoSymbol(repo.name)}
+                              </span>
+                              {repo.demo ? <em>demo</em> : null}
+                            </div>
+                            <div className="repo-copy">
+                              <h3>{repo.name}</h3>
+                              <p>{repo.summary[locale]}</p>
+                              <div className="repo-badges">
+                                {badges(repo, locale).map((badge) => (
+                                  <span key={badge}>{badge}</span>
+                                ))}
+                              </div>
+                            </div>
+                            <RepositoryActions repo={repo} locale={locale} />
+                          </article>
+                        ))}
+                      </div>
+                    </section>
+                  );
+                })}
               </div>
             ) : (
               <p className="empty">{content.empty}</p>
@@ -1020,8 +1586,7 @@ function CatalogView({ locale }: { locale: Locale }) {
           </div>
         </section>
       </main>
-      <SiteFooter locale={locale} />
-    </>
+    </div>
   );
 }
 
@@ -1070,8 +1635,8 @@ export function App() {
 
   return (
     <div className="site-shell">
-      <SiteHeader locale={locale} onToggle={() => setLocale((current) => (current === 'pt' ? 'en' : 'pt'))} />
-      {view === 'catalogo' ? <CatalogView locale={locale} /> : <HomeView locale={locale} />}
+      <SiteHeader locale={locale} setLocale={setLocale} />
+      {view === 'catalogo' ? <CatalogView locale={locale} setLocale={setLocale} /> : <HomeView locale={locale} />}
     </div>
   );
 }
