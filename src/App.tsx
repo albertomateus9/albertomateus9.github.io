@@ -9,6 +9,8 @@ import {
   Github,
   Globe2,
   GraduationCap,
+  Linkedin,
+  Mail,
   MapPin,
   Network,
   ScanSearch,
@@ -19,7 +21,7 @@ import { useEffect, useMemo, useState } from 'react';
 
 import snapshots from './data/github-repositories.json';
 import { curatedRepositories, familyOrder } from './data/curation';
-import { caseStudies, technologyRadar } from './data/portfolio';
+import { caseStudies, technologyRadar, educationHistory, experienceHistory, publicationList } from './data/portfolio';
 import { enrichRepository, filterRepositories, sortRepositories } from './lib/catalog';
 import type {
   CatalogFilters,
@@ -32,6 +34,8 @@ import type {
 
 const lattesUrl = 'http://lattes.cnpq.br/1831130831245161';
 const githubUrl = 'https://github.com/albertomateus9';
+const linkedinUrl = 'https://www.linkedin.com/in/alberto-mateus-10b858146';
+const emailUrl = 'mailto:albertomateus9@yahoo.com';
 
 const copy = {
   pt: {
@@ -111,6 +115,17 @@ const copy = {
       ['Pesquisa', 'Formação de pós-graduação e linha atual em Visão Computacional e IA aplicada.'],
       ['Educação', 'Cursos, cultura maker, robótica e portfólios curriculares na EETEPA Vilhena Alves.'],
     ],
+    cvTabs: {
+      timeline: 'Pilares',
+      experience: 'Experiência',
+      education: 'Formação',
+      publications: 'Publicações',
+    },
+    pubTypes: {
+      article: 'Artigo',
+      chapter: 'Capítulo de Livro',
+      proceeding: 'Trabalho em Congresso',
+    },
     researchTitle: 'Pesquisa',
     researchBody:
       'Minha frente atual combina visão computacional, IA aplicada e engenharia para investigar leitura visual, automação e protótipos eficientes.',
@@ -230,6 +245,17 @@ const copy = {
       ['Research', 'Graduate work and a current line in Computer Vision and applied AI.'],
       ['Education', 'Courses, maker culture, robotics, and curricular portfolios at EETEPA Vilhena Alves.'],
     ],
+    cvTabs: {
+      timeline: 'Pillars',
+      experience: 'Experience',
+      education: 'Education',
+      publications: 'Publications',
+    },
+    pubTypes: {
+      article: 'Article',
+      chapter: 'Book Chapter',
+      proceeding: 'Conference Paper',
+    },
     researchTitle: 'Research',
     researchBody:
       'My current front combines computer vision, applied AI, and engineering to explore visual reading, automation, and efficient prototypes.',
@@ -584,6 +610,7 @@ function HomeView({ locale }: { locale: Locale }) {
   const content = copy[locale];
   const showcase = repositories.filter((repo) => repo.featured && repo.family !== 'premium').slice(0, 6);
   const webcraft = repositories.find((repo) => repo.name === 'webcraft-studio');
+  const [activeTab, setActiveTab] = useState<'timeline' | 'experience' | 'education' | 'publications'>('timeline');
 
   return (
     <>
@@ -679,14 +706,80 @@ function HomeView({ locale }: { locale: Locale }) {
         </section>
 
         <section className="trajectory" id="trajetoria" aria-labelledby="trajectory-title">
-          <div className="timeline">
+          <div className="timeline-container">
             <h2 id="trajectory-title">{content.timelineTitle}</h2>
-            {content.timeline.map(([title, body]) => (
-              <article key={title}>
-                <h3>{title}</h3>
-                <p>{body}</p>
-              </article>
-            ))}
+            <div className="trajectory-tabs" role="tablist">
+              {(['timeline', 'experience', 'education', 'publications'] as const).map((tab) => (
+                <button
+                  key={tab}
+                  className={`tab-btn${activeTab === tab ? ' active' : ''}`}
+                  onClick={() => setActiveTab(tab)}
+                  role="tab"
+                  aria-selected={activeTab === tab}
+                >
+                  {content.cvTabs[tab]}
+                </button>
+              ))}
+            </div>
+
+            {activeTab === 'timeline' && (
+              <div className="timeline">
+                {content.timeline.map(([title, body]) => (
+                  <article key={title}>
+                    <h3>{title}</h3>
+                    <p>{body}</p>
+                  </article>
+                ))}
+              </div>
+            )}
+
+            {activeTab === 'experience' && (
+              <div className="cv-list">
+                {experienceHistory.map((exp, idx) => (
+                  <article key={idx} className="cv-item">
+                    <h3>{exp.role[locale]}</h3>
+                    <div className="meta">
+                      {exp.company} <span>• {exp.period[locale]}</span>
+                    </div>
+                    <ul>
+                      {exp.description[locale].map((desc, dIdx) => (
+                        <li key={dIdx}>{desc}</li>
+                      ))}
+                    </ul>
+                  </article>
+                ))}
+              </div>
+            )}
+
+            {activeTab === 'education' && (
+              <div className="cv-list">
+                {educationHistory.map((edu, idx) => (
+                  <article key={idx} className="cv-item">
+                    <h3>{edu.degree[locale]}</h3>
+                    <div className="meta">
+                      {edu.institution} <span>• {edu.period}</span>
+                    </div>
+                    {edu.description && (
+                      <p className="edu-description">{edu.description[locale]}</p>
+                    )}
+                  </article>
+                ))}
+              </div>
+            )}
+
+            {activeTab === 'publications' && (
+              <div className="cv-list">
+                {publicationList.map((pub, idx) => (
+                  <article key={idx} className="pub-item">
+                    <h4>{pub.title}</h4>
+                    <p className="authors">{pub.authors}</p>
+                    <p className="meta-pub">
+                      <span className="pub-type">{content.pubTypes[pub.type]}</span> • <span className="venue">{pub.venue}</span> • <span>{pub.year}</span>
+                    </p>
+                  </article>
+                ))}
+              </div>
+            )}
           </div>
           <div className="research-education">
             <article id="pesquisa" className="research">
@@ -949,6 +1042,14 @@ function SiteFooter({ locale }: { locale: Locale }) {
         <TextLink href={lattesUrl}>
           <ExternalLink aria-hidden="true" />
           Lattes
+        </TextLink>
+        <TextLink href={linkedinUrl}>
+          <Linkedin aria-hidden="true" />
+          LinkedIn
+        </TextLink>
+        <TextLink href={emailUrl}>
+          <Mail aria-hidden="true" />
+          Email
         </TextLink>
       </div>
     </footer>

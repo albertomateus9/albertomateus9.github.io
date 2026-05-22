@@ -71,3 +71,25 @@ export interface TechnologyRadarBand {
   items: string[];
   tone: 'use' | 'signal' | 'next';
 }
+
+export interface EducationItem {
+  degree: Record<Locale, string>;
+  institution: string;
+  period: string;
+  description?: Record<Locale, string>;
+}
+
+export interface ExperienceItem {
+  role: Record<Locale, string>;
+  company: string;
+  period: Record<Locale, string>;
+  description: Record<Locale, string[]>;
+}
+
+export interface PublicationItem {
+  title: string;
+  authors: string;
+  venue: string;
+  year: number;
+  type: 'article' | 'chapter' | 'proceeding';
+}
