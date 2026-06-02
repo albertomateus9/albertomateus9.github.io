@@ -1196,7 +1196,7 @@ function InteractiveIde({ locale }: { locale: Locale }) {
             <code>
               <span className="syntax-keyword">import</span> {'{ useState }'} <span className="syntax-keyword">from</span> <span className="syntax-string">'react'</span>;<br />
               <span className="syntax-keyword">import</span> {'{ Sparkles }'} <span className="syntax-keyword">from</span> <span className="syntax-string">'lucide-react'</span>;<br /><br />
-              <span className="syntax-keyword">export default function</span> <span className="syntax-function">AIProductCard</span>({'{ title, desc, onTrigger }'}) {'{'}<br />
+              <span className="syntax-keyword">export default function</span> <span className="syntax-function">DigitalSolutionCard</span>({'{ title, desc, onTrigger }'}) {'{'}<br />
               &nbsp;&nbsp;<span className="syntax-keyword">const</span> [loading, setLoading] = <span className="syntax-function">useState</span>(<span className="syntax-keyword">false</span>);<br /><br />
               &nbsp;&nbsp;<span className="syntax-keyword">const</span> <span className="syntax-function">handleAction</span> = <span className="syntax-keyword">async</span> () =&gt; {'{'}<br />
               &nbsp;&nbsp;&nbsp;&nbsp;<span className="syntax-function">setLoading</span>(<span className="syntax-keyword">true</span>);<br />
