@@ -63,13 +63,13 @@ const copy = {
       <>
         Alberto Mateus
         <br />
-        <span className="hero-midtext">AI Product Developer & Engenheiro</span>
+        <span className="hero-midtext">Engenheiro de Telecomunicações e professor</span>
         <br />
-        <span className="hero-highlight">Mestre & Doutorando em IA<span className="red-dot">.</span></span>
+        <span className="hero-highlight">Mestre e doutorando em inteligência artificial aplicada<span className="red-dot">.</span></span>
       </>
     ),
     heroBody:
-      'Engenheiro, professor universitário, pesquisador em Inteligência Artificial (doutorando) e especialista em Redes e Gestão de TI. Desenvolvo produtos de IA e soluções de alta performance integrando React, bancos Supabase, fluxos de automação n8n/Make e engenharia de software assistida por IA (Claude Code, ChatGPT) para acelerar a entrega de valor de negócio.',
+      'Atuo conectando redes, infraestrutura, pesquisa aplicada e produtos digitais. Minha trajetória combina engenharia, docência e desenvolvimento de soluções com React, automações, Supabase e IA, sempre com foco em clareza técnica e entregas úteis.',
     heroCta: 'Ver projetos',
     trajectoryCta: 'Trajetória',
     signal: 'Belém, Pará, Brasil',
@@ -138,12 +138,12 @@ const copy = {
       chapter: 'Capítulo de Livro',
       proceeding: 'Trabalho em Congresso',
     },
-    researchTitle: 'Engenharia de Prompt',
+    researchTitle: 'Pesquisa aplicada em IA',
     researchBody:
-      'Pesquisa prática e aplicação de prompts estruturados, orquestração de agentes autônomos e automação de desenvolvimento para entregas de software de alta performance.',
-    educationTitle: 'Autoria Maker',
+      'Investigação e prototipagem de soluções em visão computacional, automação e modelagem de dados, com base acadêmica e aplicação prática.',
+    educationTitle: 'Educação tecnológica',
     educationBody:
-      'Criação de laboratórios interativos na web e ambientes didáticos gamificados para o ensino rápido de programação, redes e no-code.',
+      'Experiência em docência, cultura maker e laboratórios digitais para transformar temas técnicos em aprendizagem clara e aplicável.',
     resumeTitle: 'Resumo executivo',
     resumeBody:
       'Mestre em Engenharia Elétrica, doutorando em IA aplicada, Engenheiro de Telecomunicações e Tecnólogo em Análise e Desenvolvimento de Sistemas. Especialista em juntar ferramentas de IA, no-code, low-code e React para construir produtos viáveis rapidamente.',
@@ -200,13 +200,13 @@ const copy = {
       <>
         Alberto Mateus
         <br />
-        <span className="hero-midtext">AI Product Developer & Engineer</span>
+        <span className="hero-midtext">Telecommunications Engineer and Educator</span>
         <br />
-        <span className="hero-highlight">M.Sc. & PhD Candidate in AI<span className="red-dot">.</span></span>
+        <span className="hero-highlight">M.Sc. and PhD Candidate in Applied AI<span className="red-dot">.</span></span>
       </>
     ),
     heroBody:
-      'Engineer, university professor, researcher in Artificial Intelligence (PhD candidate), and specialist in Structured Networks and IT Management. I build high-performance AI products and digital solutions by integrating React, Supabase, n8n/Make automation, and AI-assisted software engineering (Claude Code, ChatGPT) to drive business value.',
+      'I connect networks, infrastructure, applied research, and digital products. My background combines engineering, teaching, and solution development with React, automation, Supabase, and AI, focused on technical clarity and useful delivery.',
     heroCta: 'View projects',
     trajectoryCta: 'Trajectory',
     signal: 'Belem, Para, Brazil',
@@ -275,12 +275,12 @@ const copy = {
       chapter: 'Book Chapter',
       proceeding: 'Conference Paper',
     },
-    researchTitle: 'Prompt Engineering',
+    researchTitle: 'Applied AI Research',
     researchBody:
-      'Practical research and application of structured prompts, autonomous agent orchestration, and development automation for high-performance software delivery.',
-    educationTitle: 'Maker Authorship',
+      'Research and prototyping in computer vision, automation, and data modeling, joining academic depth with practical implementation.',
+    educationTitle: 'Technology Education',
     educationBody:
-      'Building interactive web labs and gamified environments for accelerated teaching of coding, networking, and no-code.',
+      'Teaching, maker culture, and digital labs that translate technical subjects into clear, practical learning experiences.',
     resumeTitle: 'Executive summary',
     resumeBody:
       'M.Sc. in Electrical Engineering, PhD candidate in applied AI, Telecommunications Engineer, and Systems Analysis technologist. Expert in linking AI tools, no-code, low-code, and React to build viable products quickly.',
@@ -937,7 +937,7 @@ function CaseStudies({ locale }: { locale: Locale }) {
     <section className="cases" id="casos" aria-labelledby="cases-title">
       <header className="cases-header">
         <div className="cases-header-left">
-          <span className="live-lab-tag">{locale === 'pt' ? 'LABORATÓRIO VIVO' : 'LIVE LAB'}</span>
+          <span className="live-lab-tag">{locale === 'pt' ? 'EVIDÊNCIAS SELECIONADAS' : 'SELECTED EVIDENCE'}</span>
           <h2 id="cases-title">{content.casesTitle}</h2>
           <p>{content.casesBody}</p>
         </div>
@@ -1155,7 +1155,7 @@ function InteractiveIde({ locale }: { locale: Locale }) {
         </div>
         <div className="ide-status-pill">
           <span className="live-pulse" />
-          <span>LIVE LAB</span>
+          <span>{locale === 'pt' ? 'DEMO ATIVA' : 'ACTIVE DEMO'}</span>
         </div>
       </div>
       
@@ -1401,6 +1401,10 @@ function HomeView({ locale }: { locale: Locale }) {
               <a href="#trajetoria" className="secondary-action">
                 {content.trajectoryCta}
               </a>
+              <a href={githubUrl} target="_blank" rel="noreferrer" className="social-action-btn" title="GitHub">
+                <Github aria-hidden="true" />
+                <span>GitHub</span>
+              </a>
               <a href={linkedinUrl} target="_blank" rel="noreferrer" className="social-action-btn" title="LinkedIn">
                 <Linkedin aria-hidden="true" />
                 <span>LinkedIn</span>
@@ -1409,46 +1413,25 @@ function HomeView({ locale }: { locale: Locale }) {
                 <ExternalLink aria-hidden="true" />
                 <span>Lattes</span>
               </a>
+              <a href={emailUrl} className="social-action-btn" title={locale === 'pt' ? 'Contato' : 'Contact'}>
+                <Mail aria-hidden="true" />
+                <span>{locale === 'pt' ? 'Contato' : 'Contact'}</span>
+              </a>
             </div>
           </div>
           <PortraitStage locale={locale} />
           <HeroConsole locale={locale} />
-          
-          <div className="hero-hud-rail">
-            <div className="rail-status">
-              <span className="rail-status-dot" />
-              <span className="rail-status-text">{locale === 'pt' ? 'LAB EM OPERAÇÃO' : 'LAB IN OPERATION'}</span>
-            </div>
-            <div className="rail-items">
-              <a href="#projetos" className="rail-item">
-                <span className="rail-item-num">01</span>
-                <span className="rail-item-name">WebCraft Studio</span>
-              </a>
-              <a href="#projetos" className="rail-item">
-                <span className="rail-item-num">02</span>
-                <span className="rail-item-name">NetMaster CLI</span>
-              </a>
-              <a href="#projetos" className="rail-item">
-                <span className="rail-item-num">03</span>
-                <span className="rail-item-name">CampusWatch SNMP</span>
-              </a>
-              <a href="#projetos" className="rail-item">
-                <span className="rail-item-num">04</span>
-                <span className="rail-item-name">EcoWake</span>
-              </a>
-            </div>
-          </div>
         </section>
 
         <section className="live-lab-section" aria-labelledby="livelab-title">
           <div className="live-lab-container">
             <div className="live-lab-copy">
-              <span className="live-lab-tag-highlight">{locale === 'pt' ? 'AMBIENTE DE INTEGRAÇÃO' : 'INTEGRATION ENVIRONMENT'}</span>
+              <span className="live-lab-tag-highlight">{locale === 'pt' ? 'DEMONSTRAÇÃO PRÁTICA' : 'PRACTICAL DEMO'}</span>
               <h2 id="livelab-title">
                 <span className="accent-bar" />
-                {locale === 'pt' ? 'Laboratório Vivo' : 'Live Lab'}
+                {locale === 'pt' ? 'Soluções digitais em operação' : 'Digital solutions in action'}
               </h2>
-              <p>{locale === 'pt' ? 'Um ecossistema prático onde redes IP, visão computacional e educação tecnológica se integram de verdade. O laboratório funciona como espaço de teste contínuo para soluções leves de automação, documentação de infovias metropolitanas e desenvolvimento maker.' : 'A practical ecosystem where IP networks, computer vision, and tech education are truly integrated. The lab serves as a continuous testing space for lightweight automation, municipal network documentation, and maker development.'}</p>
+              <p>{locale === 'pt' ? 'Uma amostra interativa de como organizo interfaces, automações e dados para transformar requisitos técnicos em fluxos compreensíveis. O objetivo é mostrar método, clareza e entrega prática sem depender de jargões internos.' : 'An interactive sample of how I organize interfaces, automation, and data to turn technical requirements into understandable flows. The goal is to show method, clarity, and practical delivery without relying on internal jargon.'}</p>
               
               <div className="live-lab-meta" aria-hidden="true">
                 <div className="meta-line">STATUS: ACTIVE</div>
@@ -1870,7 +1853,7 @@ function CatalogView({ locale, setLocale }: { locale: Locale; setLocale: (l: Loc
           </div>
           <div className="profile-info">
             <span className="profile-name">Alberto Mateus</span>
-            <span className="profile-role">{locale === 'pt' ? 'Doutorando e Engenheiro' : 'PhD Candidate & Engineer'}</span>
+            <span className="profile-role">{locale === 'pt' ? 'Doutorando e Engenheiro' : 'PhD Candidate and Engineer'}</span>
           </div>
         </div>
 
