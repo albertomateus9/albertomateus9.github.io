@@ -23,6 +23,7 @@ const eetepaBatch = [
 ];
 
 const dataScienceBatch = [
+  'tea-pose-analysis',
   'enem-data-cleaning-lab',
   'movies-sql-python-lab',
   'ibge-json-dataframe-lab',

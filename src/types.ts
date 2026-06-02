@@ -93,3 +93,16 @@ export interface PublicationItem {
   year: number;
   type: 'article' | 'chapter' | 'proceeding';
 }
+
+export interface SkillItem {
+  name: Record<Locale, string>;
+  level: number;
+  evidence: Record<Locale, string>;
+  tags: string[];
+}
+
+export interface SkillCategory {
+  title: Record<Locale, string>;
+  description: Record<Locale, string>;
+  items: SkillItem[];
+}

@@ -7,6 +7,7 @@ import {
   Briefcase,
   CircleDot,
   Code2,
+  Database,
   ExternalLink,
   Github,
   Globe2,
@@ -17,15 +18,20 @@ import {
   Mail,
   MapPin,
   Network,
+  Play,
   ScanSearch,
   Search,
+  Settings,
   Sparkles,
+  Terminal,
+  Trash2,
+  CheckCircle2,
 } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 
 import snapshots from './data/github-repositories.json';
 import { curatedRepositories, familyOrder } from './data/curation';
-import { caseStudies, technologyRadar, educationHistory, experienceHistory, publicationList } from './data/portfolio';
+import { caseStudies, technologyRadar, educationHistory, experienceHistory, publicationList, hardSkillsList, softSkillsList } from './data/portfolio';
 import { enrichRepository, filterRepositories, sortRepositories } from './lib/catalog';
 import type {
   CatalogFilters,
@@ -46,7 +52,7 @@ const copy = {
     nav: [
       ['Início', '#sobre'],
       ['Projetos', '#projetos'],
-      ['Pesquisa', '#pesquisa'],
+      ['Automação', '#skills'],
       ['Educação', '#aulas'],
       ['Trajetória', '#trajetoria'],
       ['Contato', '#contato'],
@@ -57,47 +63,47 @@ const copy = {
       <>
         Alberto Mateus
         <br />
-        <span className="hero-midtext">Engenharia, visão e ensino</span>
+        <span className="hero-midtext">AI Product Developer</span>
         <br />
-        <span className="hero-highlight">em operação<span className="red-dot">.</span></span>
+        <span className="hero-highlight">em Belém<span className="red-dot">.</span></span>
       </>
     ),
     heroBody:
-      'Engenheiro de Telecomunicações, pesquisador em Visão Computacional e educador STEAM em Belém, Pará.',
+      'Desenvolvedor front-end focado em soluções digitais criativas e práticas. Integrando React, bancos Supabase, fluxos de automação n8n/Make e desenvolvimento auxiliado por IA (Claude Code, ChatGPT) para criar produtos eficientes e funcionais.',
     heroCta: 'Ver projetos',
     trajectoryCta: 'Trajetória',
     signal: 'Belém, Pará, Brasil',
     rail: 'Projetos em destaque',
     heroSignals: [
-      ['Rede', 'Automação, monitoramento e enlaces reais.'],
-      ['Visão', 'Pesquisa aplicada e protótipos leves.'],
-      ['Aula', 'Laboratórios, jogos e autoria técnica.'],
+      ['React + IA', 'Código ágil e interfaces inteligentes.'],
+      ['Automações', 'APIs, webhooks e orquestrações n8n.'],
+      ['Prototipagem', 'Criação de MVPs e soluções simples.'],
     ],
-    pillarsTitle: 'Três frentes que se reforçam',
+    pillarsTitle: 'Três frentes de entrega rápida',
     pillars: [
       {
-        title: 'Infraestrutura conectada',
-        body: 'Redes IP, enlaces ópticos, automação, monitoramento e leitura operacional de ambientes reais.',
+        title: 'Desenvolvimento React',
+        body: 'Criação de interfaces web modernas em React e TypeScript com foco em usabilidade, performance e deploy ágil.',
       },
       {
-        title: 'Visão Computacional',
-        body: 'Pesquisa e protótipos de IA aplicada que tornam sinais visuais úteis, responsáveis e leves.',
+        title: 'Automações & APIs',
+        body: 'Integração de formulários, CRMs, bancos de dados (Supabase) e fluxos automatizados com n8n, Make e webhooks.',
       },
       {
-        title: 'Ensino que constrói',
-        body: 'STEAM, laboratórios EETEPA e jogos para transformar conteúdos técnicos em prática viva.',
+        title: 'Engenharia de Prompts & IA',
+        body: 'Uso estratégico de IAs como Claude Code e ChatGPT para acelerar entregas, testar MVPs e criar soluções funcionais.',
       },
     ],
-    featuredTitle: 'Projetos que conectam engenharia, pesquisa e ensino',
+    featuredTitle: 'Projetos que unem código e automação',
     featuredBody:
-      'A vitrine mostra produtos, demos e laboratórios públicos. O catálogo abre o restante do GitHub com contexto.',
+      'A vitrine exibe MVPs, demos e laboratórios operacionais. O catálogo abre o restante do GitHub com contexto técnico.',
     openCatalog: 'Explorar catálogo completo',
     openRepo: 'Repositório',
     openDemo: 'Demo',
-    flagship: 'Projeto premium',
+    flagship: 'Projeto destaque',
     casesTitle: 'Casos em foco',
     casesBody:
-      'Cada caso conecta problema, arquitetura, stack e resultado para mostrar competência além do volume de repositórios.',
+      'Cada caso documenta o problema de negócio, arquitetura proposta, stack selecionado e o resultado prático entregue.',
     caseLabels: {
       problem: 'Problema',
       architecture: 'Arquitetura',
@@ -107,19 +113,19 @@ const copy = {
     },
     radarTitle: 'Radar técnico',
     radarBody:
-      'Sinais públicos do mercado orientam a curadoria; projetos reais sustentam o que aparece como experiência.',
-    tracksTitle: 'Lotes e trilhas',
+      'Sinais práticos de mercado que orientam minhas implementações; projetos reais comprovam o conhecimento das stacks.',
+    tracksTitle: 'Trilhas & Automações',
     tracks: [
-      ['Telecom + Visão', 'MVPs de enlace, OCR leve, telemetria e benchmarking local.'],
-      ['EETEPA aplicada', 'Apps de redes, maker, dados, inventário e segurança para sala/lab.'],
-      ['Ciência de Dados', '20 repositórios Python/Jupyter com amostras seguras e narrativa didática.'],
-      ['Aulas lúdicas', 'Missões Web para equipes, professor, placar e evidências exportáveis.'],
+      ['React + APIs', 'Interfaces responsivas de alto nível integradas a backends serverless.'],
+      ['Automação n8n', 'Fluxos de webhooks, enriquecimento de leads e processamento por IA.'],
+      ['Prototipagem Rápida', 'Criação de MVPs funcionais para validação de hipóteses de negócio.'],
+      ['Educação STEAM', 'Laboratórios interativos e jogos educacionais para o ensino de programação.'],
     ],
     timelineTitle: 'Trajetória',
     timeline: [
-      ['Infraestrutura', 'Redes ópticas, roteamento, monitoramento e documentação técnica em escala pública.'],
-      ['Pesquisa', 'Formação de pós-graduação e linha atual em Visão Computacional e IA aplicada.'],
-      ['Educação', 'Cursos, cultura maker, robótica e portfólios curriculares na EETEPA Vilhena Alves.'],
+      ['Front-End & IA', 'Desenvolvimento acelerado de MVPs e interfaces web com suporte de IA.'],
+      ['Automações', 'Orquestração de dados, conexões de APIs e webhooks em infraestrutura pública.'],
+      ['Didática & P&D', 'Ensino de programação, robótica maker e modelagem computacional na UFPA.'],
     ],
     cvTabs: {
       timeline: 'Pilares',
@@ -132,21 +138,21 @@ const copy = {
       chapter: 'Capítulo de Livro',
       proceeding: 'Trabalho em Congresso',
     },
-    researchTitle: 'Pesquisa',
+    researchTitle: 'Engenharia de Prompt',
     researchBody:
-      'Minha frente atual combina visão computacional, IA aplicada e engenharia para investigar leitura visual, automação e protótipos eficientes.',
-    educationTitle: 'Educação',
+      'Pesquisa prática e aplicação de prompts estruturados, orquestração de agentes autônomos e automação de desenvolvimento para entregas de software de alta performance.',
+    educationTitle: 'Autoria Maker',
     educationBody:
-      'Projeto experiências que dão ao estudante autoria técnica: laboratórios browser-first, notebooks seguros e jogos conduzidos em sala.',
-    resumeTitle: 'Resumo público',
+      'Criação de laboratórios interativos na web e ambientes didáticos gamificados para o ensino rápido de programação, redes e no-code.',
+    resumeTitle: 'Resumo executivo',
     resumeBody:
-      'Mestre em Engenharia Elétrica, doutorando com linha de pesquisa em Visão Computacional, Engenheiro de Telecomunicações, Tecnólogo em Análise e Desenvolvimento de Sistemas e Licenciado em Física.',
+      'Mestre em Engenharia Elétrica, doutorando em IA aplicada, Engenheiro de Telecomunicações e Tecnólogo em Análise e Desenvolvimento de Sistemas. Especialista em juntar ferramentas de IA, no-code, low-code e React para construir produtos viáveis rapidamente.',
     dataPolicy:
-      'Os projetos públicos usam dados sintéticos, amostras pequenas ou fontes públicas documentadas. Documentos pessoais e dados de estudantes ficam fora deste portfólio.',
+      'Os projetos usam dados sintéticos ou bases públicas anonimizadas. Arquivos e informações corporativas sensíveis permanecem sob rígido sigilo de desenvolvimento.',
     lattes: 'Ver Lattes',
-    catalogTitle: 'Catálogo técnico',
+    catalogTitle: 'Catálogo de soluções',
     catalogBody:
-      'Observatório filtrável dos repositórios públicos, com contexto para produtos, laboratórios, pesquisa e colaborações.',
+      'Inventário completo de repositórios públicos, detalhando tecnologias, status e propostas de cada código.',
     search: 'Buscar por projeto, tema ou tecnologia',
     allFamilies: 'Todas as trilhas',
     allLanguages: 'Todas as linguagens',
@@ -171,14 +177,19 @@ const copy = {
       ['Colaborações', 'Hackathons, turmas e trabalho em equipe.'],
     ],
     empty: 'Nenhum repositório atende aos filtros atuais.',
-    contactTitle: 'Contato público',
-    contactBody: 'Para acompanhar meu trabalho público, use GitHub e Currículo Lattes.',
+    contactTitle: 'Contato',
+    contactBody: 'Acompanhe minhas entregas, automações e histórico profissional.',
+    skillsTitle: 'Habilidades & Evidências',
+    skillsSubtitle: 'Métricas reais de proficiência com comprovações diretas nos repositórios e produtos do portfólio.',
+    hardSkillsTitle: 'Hard Skills // Tecnologias & Desenvolvimento',
+    softSkillsTitle: 'Soft Skills // Metodologia & Negócio',
+    skillsEvidence: 'Evidência',
   },
   en: {
     nav: [
       ['Home', '#sobre'],
       ['Projects', '#projetos'],
-      ['Research', '#pesquisa'],
+      ['Automation', '#skills'],
       ['Education', '#aulas'],
       ['Trajectory', '#trajetoria'],
       ['Contact', '#contato'],
@@ -189,47 +200,47 @@ const copy = {
       <>
         Alberto Mateus
         <br />
-        <span className="hero-midtext">Engineering, vision, and teaching</span>
+        <span className="hero-midtext">AI Product Developer</span>
         <br />
-        <span className="hero-highlight">in operation<span className="red-dot">.</span></span>
+        <span className="hero-highlight">in Belem<span className="red-dot">.</span></span>
       </>
     ),
     heroBody:
-      'Telecommunications engineer, Computer Vision researcher, and STEAM educator in Belem, Para, Brazil.',
+      'Front-end developer focused on creative, practical digital solutions. Integrating React, Supabase databases, n8n/Make automation flows, and AI-assisted development (Claude Code, ChatGPT) to build efficient, functional products.',
     heroCta: 'View projects',
     trajectoryCta: 'Trajectory',
     signal: 'Belem, Para, Brazil',
     rail: 'Featured projects',
     heroSignals: [
-      ['Network', 'Automation, monitoring, and real links.'],
-      ['Vision', 'Applied research and lightweight prototypes.'],
-      ['Class', 'Labs, games, and technical authorship.'],
+      ['React + AI', 'Agile code and smart interfaces.'],
+      ['Automations', 'APIs, webhooks, and n8n orchestration.'],
+      ['Prototyping', 'Lean MVPs and simple solutions.'],
     ],
-    pillarsTitle: 'Three fronts that reinforce each other',
+    pillarsTitle: 'Three pillars of fast delivery',
     pillars: [
       {
-        title: 'Connected infrastructure',
-        body: 'IP networks, optical links, automation, monitoring, and operational clarity for real environments.',
+        title: 'React Development',
+        body: 'Building modern web interfaces in React and TypeScript with a strong focus on usability, performance, and fast deployments.',
       },
       {
-        title: 'Computer Vision',
-        body: 'Research and applied AI prototypes that make visual signals useful, responsible, and lightweight.',
+        title: 'Automations & APIs',
+        body: 'Integrating forms, CRMs, databases (Supabase), and automated workflows using n8n, Make, and webhooks.',
       },
       {
-        title: 'Teaching by building',
-        body: 'STEAM, EETEPA labs, and classroom games that turn technical content into practice.',
+        title: 'Prompt Engineering & AI',
+        body: 'Strategic use of AI platforms like Claude Code and ChatGPT to speed up development cycles, test MVPs, and deliver working solutions.',
       },
     ],
-    featuredTitle: 'Projects joining engineering, research, and education',
+    featuredTitle: 'Projects joining code and automation',
     featuredBody:
-      'The showcase highlights products, demos, and public labs. The catalog opens the rest of GitHub with context.',
+      'The showcase exhibits MVPs, demos, and operational labs. The catalog opens the rest of GitHub with technical context.',
     openCatalog: 'Explore full catalog',
     openRepo: 'Repository',
     openDemo: 'Demo',
-    flagship: 'Premium project',
+    flagship: 'Featured project',
     casesTitle: 'Cases in focus',
     casesBody:
-      'Each case links problem, architecture, stack, and result to show competence beyond repository volume.',
+      'Each case documents the business problem, proposed architecture, selected stack, and the practical result delivered.',
     caseLabels: {
       problem: 'Problem',
       architecture: 'Architecture',
@@ -239,19 +250,19 @@ const copy = {
     },
     radarTitle: 'Technical radar',
     radarBody:
-      'Public market signals guide curation; real projects support what appears as experience.',
-    tracksTitle: 'Batches and tracks',
+      'Practical market signals that guide my builds; real projects prove hands-on knowledge of these stacks.',
+    tracksTitle: 'Tracks & Automations',
     tracks: [
-      ['Telecom + Vision', 'Link planning, lightweight OCR, telemetry, and local benchmarking MVPs.'],
-      ['Applied EETEPA', 'Networking, maker, data, inventory, and security apps for labs and classrooms.'],
-      ['Data Science', '20 Python/Jupyter repositories with safe samples and didactic narratives.'],
-      ['Playful classes', 'Web missions for teams, teacher control, scoring, and exportable evidence.'],
+      ['React + APIs', 'High-level responsive interfaces integrated with serverless backends.'],
+      ['n8n Automation', 'Webhooks flows, lead enrichment, and AI processing pipelines.'],
+      ['Rapid Prototyping', 'Building functional MVPs to validate business hypotheses.'],
+      ['STEAM Education', 'Interactive labs and educational games for teaching coding.'],
     ],
     timelineTitle: 'Trajectory',
     timeline: [
-      ['Infrastructure', 'Optical networks, routing, monitoring, and technical documentation at public scale.'],
-      ['Research', 'Graduate work and a current line in Computer Vision and applied AI.'],
-      ['Education', 'Courses, maker culture, robotics, and curricular portfolios at EETEPA Vilhena Alves.'],
+      ['Front-End & AI', 'Accelerated development of MVPs and web interfaces with AI support.'],
+      ['Automations', 'Data orchestration, API connections, and webhooks in public infrastructure.'],
+      ['Didactics & R&D', 'Teaching programming, maker robotics, and computational modeling at UFPA.'],
     ],
     cvTabs: {
       timeline: 'Pillars',
@@ -264,21 +275,21 @@ const copy = {
       chapter: 'Book Chapter',
       proceeding: 'Conference Paper',
     },
-    researchTitle: 'Research',
+    researchTitle: 'Prompt Engineering',
     researchBody:
-      'My current front combines computer vision, applied AI, and engineering to explore visual reading, automation, and efficient prototypes.',
-    educationTitle: 'Education',
+      'Practical research and application of structured prompts, autonomous agent orchestration, and development automation for high-performance software delivery.',
+    educationTitle: 'Maker Authorship',
     educationBody:
-      'I design experiences that give students technical authorship: browser-first labs, safe notebooks, and teacher-led games.',
-    resumeTitle: 'Public summary',
+      'Building interactive web labs and gamified environments for accelerated teaching of coding, networking, and no-code.',
+    resumeTitle: 'Executive summary',
     resumeBody:
-      'M.Sc. in Electrical Engineering, PhD candidate with a current Computer Vision research line, Telecommunications Engineer, Systems Analysis technologist, and Physics educator.',
+      'M.Sc. in Electrical Engineering, PhD candidate in applied AI, Telecommunications Engineer, and Systems Analysis technologist. Expert in linking AI tools, no-code, low-code, and React to build viable products quickly.',
     dataPolicy:
-      'Public projects use synthetic data, small samples, or documented public sources. Personal documents and student data stay outside this portfolio.',
+      'Projects use synthetic data or anonymized public sets. Sensitive corporate files and data remain strictly confidential under NDA.',
     lattes: 'Open Lattes',
-    catalogTitle: 'Technical catalog',
+    catalogTitle: 'Solutions catalog',
     catalogBody:
-      'A filterable observatory for public repositories with context for products, labs, research, and collaborations.',
+      'Complete inventory of public repositories, detailing technologies, status, and the goal of each codebase.',
     search: 'Search by project, theme, or technology',
     allFamilies: 'All tracks',
     allLanguages: 'All languages',
@@ -303,8 +314,13 @@ const copy = {
       ['Collaborations', 'Hackathons, classes, and teamwork.'],
     ],
     empty: 'No repository matches the current filters.',
-    contactTitle: 'Public contact',
-    contactBody: 'Follow my public work through GitHub and the Lattes curriculum.',
+    contactTitle: 'Contact',
+    contactBody: 'Follow my deliveries, automations, and professional background.',
+    skillsTitle: 'Skills & Evidences',
+    skillsSubtitle: 'Real proficiency metrics with direct evidence verified in repositories and portfolio products.',
+    hardSkillsTitle: 'Hard Skills // Technologies & Development',
+    softSkillsTitle: 'Soft Skills // Methodology & Business',
+    skillsEvidence: 'Evidence',
   },
 } as const;
 
@@ -876,6 +892,386 @@ function CaseStudies({ locale }: { locale: Locale }) {
   );
 }
 
+function SkillsSection({ locale }: { locale: Locale }) {
+  const content = copy[locale];
+
+  return (
+    <section className="skills-section" id="skills" aria-labelledby="skills-title">
+      <header className="skills-header">
+        <div className="skills-header-left">
+          <span className="live-lab-tag">{locale === 'pt' ? 'MÉTRICAS & EFICIÊNCIA' : 'METRICS & EFFICIENCY'}</span>
+          <h2 id="skills-title">{content.skillsTitle}</h2>
+          <p>{content.skillsSubtitle}</p>
+        </div>
+        <div className="skills-hud-meta" aria-hidden="true">
+          <span className="bracket-top" />
+          <div className="meta-terminal-line">SYS: SKILLS_TELEMETRY</div>
+          <div className="meta-terminal-line">HARD_SKILLS: {hardSkillsList.reduce((acc, cat) => acc + cat.items.length, 0)}</div>
+          <div className="meta-terminal-line">SOFT_SKILLS: {softSkillsList.reduce((acc, cat) => acc + cat.items.length, 0)}</div>
+          <div className="meta-terminal-line">EVIDENCE_TRACKS: ACTIVE</div>
+          <span className="bracket-bottom" />
+        </div>
+      </header>
+
+      <div className="skills-grid">
+        {/* Hard Skills Column */}
+        <div className="skills-column hard-skills-col">
+          <h3 className="column-title">
+            <span className="title-dot green" />
+            {content.hardSkillsTitle}
+          </h3>
+          <div className="skills-categories-list">
+            {hardSkillsList.map((category, catIdx) => (
+              <div className="skill-category-card" key={catIdx}>
+                <h4>{category.title[locale]}</h4>
+                <p className="category-desc">{category.description[locale]}</p>
+                <div className="category-items">
+                  {category.items.map((item, itemIdx) => (
+                    <div className="skill-item-row" key={itemIdx}>
+                      <div className="skill-item-info">
+                        <span className="skill-name">{item.name[locale]}</span>
+                        <span className="skill-evidence">
+                          {content.skillsEvidence}: <em>{item.evidence[locale]}</em>
+                        </span>
+                      </div>
+                      <div className="telemetry-bar-wrapper">
+                        <div className="telemetry-bar">
+                          <div className="telemetry-fill green" style={{ width: `${item.level}%` }} />
+                        </div>
+                        <span className="telemetry-percent">{item.level}%</span>
+                      </div>
+                      <div className="skill-tags">
+                        {item.tags.map((tag) => (
+                          <span className="skill-tag" key={tag}>{tag}</span>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Soft Skills Column */}
+        <div className="skills-column soft-skills-col">
+          <h3 className="column-title">
+            <span className="title-dot cyan" />
+            {content.softSkillsTitle}
+          </h3>
+          <div className="skills-categories-list">
+            {softSkillsList.map((category, catIdx) => (
+              <div className="skill-category-card" key={catIdx}>
+                <h4>{category.title[locale]}</h4>
+                <p className="category-desc">{category.description[locale]}</p>
+                <div className="category-items">
+                  {category.items.map((item, itemIdx) => (
+                    <div className="skill-item-row" key={itemIdx}>
+                      <div className="skill-item-info">
+                        <span className="skill-name">{item.name[locale]}</span>
+                        <span className="skill-evidence">
+                          {content.skillsEvidence}: <em>{item.evidence[locale]}</em>
+                        </span>
+                      </div>
+                      <div className="telemetry-bar-wrapper">
+                        <div className="telemetry-bar">
+                          <div className="telemetry-fill cyan" style={{ width: `${item.level}%` }} />
+                        </div>
+                        <span className="telemetry-percent">{item.level}%</span>
+                      </div>
+                      <div className="skill-tags">
+                        {item.tags.map((tag) => (
+                          <span className="skill-tag" key={tag}>{tag}</span>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Component: Interactive IDE / Code Editor replica inspired by modern developer tooling
+function InteractiveIde({ locale }: { locale: Locale }) {
+  const [activeTab, setActiveTab] = useState<'react' | 'n8n' | 'supabase' | 'preview'>('react');
+  const [leadName, setLeadName] = useState('');
+  const [leadEmail, setLeadEmail] = useState('');
+  const [simulatedLeads, setSimulatedLeads] = useState<Array<{ name: string; email: string; date: string }>>([
+    { name: 'Ana Souza', email: 'ana.souza@empresa.com', date: '01/06/2026 14:32' },
+    { name: 'Carlos Lima', email: 'carlos@tech.br', date: '01/06/2026 15:45' }
+  ]);
+  const [simStatus, setSimStatus] = useState<'idle' | 'webhook' | 'n8n' | 'supabase' | 'done'>('idle');
+
+  const triggerSimulation = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!leadName || !leadEmail) return;
+
+    setSimStatus('webhook');
+    setTimeout(() => {
+      setSimStatus('n8n');
+      setTimeout(() => {
+        setSimStatus('supabase');
+        setTimeout(() => {
+          setSimStatus('done');
+          setSimulatedLeads((prev) => [
+            {
+              name: leadName,
+              email: leadEmail,
+              date: new Date().toLocaleString('pt-BR', { hour12: false }).substring(0, 16),
+            },
+            ...prev,
+          ]);
+          setLeadName('');
+          setLeadEmail('');
+        }, 1000);
+      }, 1000);
+    }, 1000);
+  };
+
+  const clearSimulation = () => {
+    setSimulatedLeads([]);
+    setSimStatus('idle');
+  };
+
+  return (
+    <div className="interactive-ide glass-card">
+      <div className="ide-header">
+        <div className="ide-window-controls">
+          <span className="dot dot-red" />
+          <span className="dot dot-yellow" />
+          <span className="dot dot-green" />
+        </div>
+        <div className="ide-title">
+          <Terminal size={12} />
+          <span>workspace/ai-product-dev/</span>
+        </div>
+        <div className="ide-status-pill">
+          <span className="live-pulse" />
+          <span>LIVE LAB</span>
+        </div>
+      </div>
+      
+      <div className="ide-tabs-wrapper">
+        <button 
+          className={`ide-tab ${activeTab === 'react' ? 'active' : ''}`}
+          onClick={() => setActiveTab('react')}
+        >
+          <Code2 size={14} />
+          <span>App.tsx</span>
+        </button>
+        <button 
+          className={`ide-tab ${activeTab === 'n8n' ? 'active' : ''}`}
+          onClick={() => setActiveTab('n8n')}
+        >
+          <Settings size={14} />
+          <span>n8n-flow.json</span>
+        </button>
+        <button 
+          className={`ide-tab ${activeTab === 'supabase' ? 'active' : ''}`}
+          onClick={() => setActiveTab('supabase')}
+        >
+          <Database size={14} />
+          <span>schema.sql</span>
+        </button>
+        <button 
+          className={`ide-tab ide-tab-preview ${activeTab === 'preview' ? 'active' : ''}`}
+          onClick={() => setActiveTab('preview')}
+        >
+          <Play size={14} />
+          <span>Live Preview</span>
+        </button>
+      </div>
+
+      <div className="ide-editor-body">
+        {activeTab === 'react' && (
+          <pre className="code-block">
+            <code>
+              <span className="syntax-keyword">import</span> {'{ useState }'} <span className="syntax-keyword">from</span> <span className="syntax-string">'react'</span>;<br />
+              <span className="syntax-keyword">import</span> {'{ Sparkles }'} <span className="syntax-keyword">from</span> <span className="syntax-string">'lucide-react'</span>;<br /><br />
+              <span className="syntax-keyword">export default function</span> <span className="syntax-function">AIProductCard</span>({'{ title, desc, onTrigger }'}) {'{'}<br />
+              &nbsp;&nbsp;<span className="syntax-keyword">const</span> [loading, setLoading] = <span className="syntax-function">useState</span>(<span className="syntax-keyword">false</span>);<br /><br />
+              &nbsp;&nbsp;<span className="syntax-keyword">const</span> <span className="syntax-function">handleAction</span> = <span className="syntax-keyword">async</span> () =&gt; {'{'}<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;<span className="syntax-function">setLoading</span>(<span className="syntax-keyword">true</span>);<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;<span className="syntax-keyword">await</span> <span className="syntax-function">onTrigger</span>();<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;<span className="syntax-function">setLoading</span>(<span className="syntax-keyword">false</span>);<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;<span className="syntax-function">alert</span>(<span className="syntax-string">'Webhook enviado!'</span>);<br />
+              &nbsp;&nbsp;{'}'};<br /><br />
+              &nbsp;&nbsp;<span className="syntax-keyword">return</span> (<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;<span className="syntax-tag">&lt;div</span> <span className="syntax-attr">className</span>=<span className="syntax-string">"p-6 glass-card"</span><span className="syntax-tag">&gt;</span><br />
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="syntax-tag">&lt;h3</span> <span className="syntax-attr">className</span>=<span className="syntax-string">"text-xl font-bold"</span><span className="syntax-tag">&gt;</span>{'{title}'}<span className="syntax-tag">&lt;/h3&gt;</span><br />
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="syntax-tag">&lt;p</span> <span className="syntax-attr">className</span>=<span className="syntax-string">"text-muted"</span><span className="syntax-tag">&gt;</span>{'{desc}'}<span className="syntax-tag">&lt;/p&gt;</span><br />
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="syntax-tag">&lt;button</span> <span className="syntax-attr">onClick</span>={'{handleAction}'} <span className="syntax-attr">disabled</span>={'{loading}'}<span className="syntax-tag">&gt;</span><br />
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{'{loading ? \'Enviando...\' : \'Deploy com IA\'}'}<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="syntax-tag">&lt;/button&gt;</span><br />
+              &nbsp;&nbsp;&nbsp;&nbsp;<span className="syntax-tag">&lt;/div&gt;</span><br />
+              &nbsp;&nbsp;);<br />
+              {'}'}
+            </code>
+          </pre>
+        )}
+
+        {activeTab === 'n8n' && (
+          <pre className="code-block">
+            <code>
+              {'{'}<br />
+              &nbsp;&nbsp;<span className="syntax-string">"name"</span>: <span className="syntax-string">"Supabase Webhook Processor"</span>,<br />
+              &nbsp;&nbsp;<span className="syntax-string">"nodes"</span>: [<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;{'{'}<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="syntax-string">"parameters"</span>: {'{'}<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="syntax-string">"httpMethod"</span>: <span className="syntax-string">"POST"</span>,<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="syntax-string">"path"</span>: <span className="syntax-string">"supabase-trigger"</span><br />
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{'}'},<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="syntax-string">"type"</span>: <span className="syntax-string">"n8n-nodes-base.webhook"</span>,<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="syntax-string">"name"</span>: <span className="syntax-string">"Webhook Receiver"</span><br />
+              &nbsp;&nbsp;&nbsp;&nbsp;{'}'},<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;{'{'}<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="syntax-string">"parameters"</span>: {'{'}<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="syntax-string">"url"</span>: <span className="syntax-string">"https://api.openai.com/v1/chat/completions"</span>,<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="syntax-string">"sendBody"</span>: <span className="syntax-keyword">true</span><br />
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{'}'},<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="syntax-string">"type"</span>: <span className="syntax-string">"n8n-nodes-base.httpRequest"</span>,<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="syntax-string">"name"</span>: <span className="syntax-string">"AI Completion"</span><br />
+              &nbsp;&nbsp;&nbsp;&nbsp;{'}'}<br />
+              &nbsp;&nbsp;]<br />
+              {'}'}
+            </code>
+          </pre>
+        )}
+
+        {activeTab === 'supabase' && (
+          <pre className="code-block">
+            <code>
+              <span className="syntax-comment">-- Criar tabela para rastrear leads de inovação</span><br />
+              <span className="syntax-keyword">CREATE TABLE</span> public.leads_campanhas (<br />
+              &nbsp;&nbsp;id uuid <span className="syntax-keyword">DEFAULT</span> gen_random_uuid() <span className="syntax-keyword">PRIMARY KEY</span>,<br />
+              &nbsp;&nbsp;created_at <span className="syntax-keyword">TIMESTAMP WITH TIME ZONE DEFAULT</span> timezone(<span className="syntax-string">'utc'</span>::text, now()) <span className="syntax-keyword">NOT NULL</span>,<br />
+              &nbsp;&nbsp;nome <span className="syntax-keyword">TEXT NOT NULL</span>,<br />
+              &nbsp;&nbsp;email <span className="syntax-keyword">TEXT NOT NULL UNIQUE</span>,<br />
+              &nbsp;&nbsp;status <span className="syntax-keyword">TEXT DEFAULT</span> <span className="syntax-string">'pending'</span>::text<br />
+              );<br /><br />
+              <span className="syntax-comment">-- Habilitar Políticas de Segurança RLS</span><br />
+              <span className="syntax-keyword">ALTER TABLE</span> public.leads_campanhas <span className="syntax-keyword">ENABLE ROW LEVEL SECURITY</span>;<br /><br />
+              <span className="syntax-comment">-- Permitir que a chave anônima (ou automações) faça inserts</span><br />
+              <span className="syntax-keyword">CREATE POLICY</span> <span className="syntax-string">"Permitir inserts públicos"</span> <span className="syntax-keyword">ON</span> public.leads_campanhas<br />
+              &nbsp;&nbsp;<span className="syntax-keyword">FOR INSERT WITH CHECK</span> (<span className="syntax-keyword">true</span>);
+            </code>
+          </pre>
+        )}
+
+        {activeTab === 'preview' && (
+          <div className="preview-container">
+            <div className="preview-header">
+              <span className="preview-dot-active" />
+              <span>{locale === 'pt' ? 'Formulário de Lead' : 'Lead Form'}</span>
+            </div>
+            
+            <div className="preview-grid-layout">
+              <form onSubmit={triggerSimulation} className="preview-form">
+                <div className="preview-input-group">
+                  <label>{locale === 'pt' ? 'Nome do Lead' : 'Lead Name'}</label>
+                  <input 
+                    type="text" 
+                    placeholder="Ex: Alberto Mateus" 
+                    value={leadName}
+                    onChange={(e) => setLeadName(e.target.value)}
+                    disabled={simStatus !== 'idle'}
+                    required
+                  />
+                </div>
+                <div className="preview-input-group">
+                  <label>{locale === 'pt' ? 'E-mail Corporativo' : 'Corporate E-mail'}</label>
+                  <input 
+                    type="email" 
+                    placeholder="Ex: alberto@empresa.com" 
+                    value={leadEmail}
+                    onChange={(e) => setLeadEmail(e.target.value)}
+                    disabled={simStatus !== 'idle'}
+                    required
+                  />
+                </div>
+                <button 
+                  type="submit" 
+                  className="preview-submit-btn"
+                  disabled={simStatus !== 'idle' || !leadName || !leadEmail}
+                >
+                  {simStatus === 'idle' && (locale === 'pt' ? 'Disparar Fluxo (n8n + Supabase)' : 'Trigger Flow (n8n + Supabase)')}
+                  {simStatus !== 'idle' && simStatus !== 'done' && (locale === 'pt' ? 'Orquestrando...' : 'Orchestrating...')}
+                  {simStatus === 'done' && (locale === 'pt' ? 'Concluído!' : 'Completed!')}
+                </button>
+              </form>
+
+              <div className="preview-telemetry">
+                <h4>{locale === 'pt' ? 'Telemetria do Fluxo' : 'Flow Telemetry'}</h4>
+                <div className="telemetry-steps">
+                  <div className={`step-row ${simStatus === 'webhook' ? 'active' : ''} ${['n8n', 'supabase', 'done'].includes(simStatus) ? 'completed' : ''}`}>
+                    <span className="step-num">1</span>
+                    <span>Webhook Trigger</span>
+                  </div>
+                  <div className={`step-row ${simStatus === 'n8n' ? 'active' : ''} ${['supabase', 'done'].includes(simStatus) ? 'completed' : ''}`}>
+                    <span className="step-num">2</span>
+                    <span>n8n Process (OpenAI Integration)</span>
+                  </div>
+                  <div className={`step-row ${simStatus === 'supabase' ? 'active' : ''} ${['done'].includes(simStatus) ? 'completed' : ''}`}>
+                    <span className="step-num">3</span>
+                    <span>Supabase Insert & RLS Policy</span>
+                  </div>
+                </div>
+
+                {simStatus === 'done' && (
+                  <div className="telemetry-success-banner">
+                    <CheckCircle2 size={14} />
+                    <span>200 OK - Lead salvo no Supabase</span>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className="preview-leads-list">
+              <div className="leads-list-header">
+                <h4>{locale === 'pt' ? 'Leads Gravados no Supabase' : 'Leads Saved in Supabase'}</h4>
+                {simulatedLeads.length > 0 && (
+                  <button type="button" onClick={clearSimulation} className="clear-btn" title="Limpar dados simulados">
+                    <Trash2 size={12} />
+                    <span>{locale === 'pt' ? 'Limpar' : 'Clear'}</span>
+                  </button>
+                )}
+              </div>
+              
+              {simulatedLeads.length === 0 ? (
+                <div className="leads-empty-state">
+                  {locale === 'pt' ? 'Nenhum lead gravado ainda.' : 'No leads recorded yet.'}
+                </div>
+              ) : (
+                <div className="leads-rows">
+                  {simulatedLeads.map((l, index) => (
+                    <div className="lead-row" key={index}>
+                      <div className="lead-meta-info">
+                        <span className="lead-name">{l.name}</span>
+                        <span className="lead-email">{l.email}</span>
+                      </div>
+                      <span className="lead-date">{l.date}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
+      <div className="ide-footer">
+        <span>UTF-8</span>
+        <span>TypeScript JSX</span>
+        <span>Line 1, Col 1</span>
+      </div>
+    </div>
+  );
+}
+
 function HomeView({ locale }: { locale: Locale }) {
   const content = copy[locale];
   const showcase = repositories.filter((repo) => repo.featured && repo.family !== 'premium').slice(0, 6);
@@ -949,20 +1345,13 @@ function HomeView({ locale }: { locale: Locale }) {
                 <div className="meta-line">TELEMETRY: OK</div>
               </div>
             </div>
-            <div className="live-lab-visual" aria-hidden="true">
-              <img src="/assets/lab-environment.png" alt="Laboratório Vivo" />
-              <div className="hud-overlay">
-                <span className="corner-tl" />
-                <span className="corner-tr" />
-                <span className="corner-bl" />
-                <span className="corner-br" />
-              </div>
-              <span className="hud-visual-label">LAB_VIEW_CAM_01</span>
-            </div>
+            <InteractiveIde locale={locale} />
           </div>
         </section>
 
         <CaseStudies locale={locale} />
+
+        <SkillsSection locale={locale} />
 
         <section className="projects-section" id="projetos" aria-labelledby="projects-title">
           <div className="section-lead">
