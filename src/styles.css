@@ -268,9 +268,9 @@ main {
   display: grid;
   grid-template-columns: minmax(28rem, 1fr) minmax(15rem, 0.43fr) minmax(18rem, 0.54fr);
   gap: clamp(1rem, 2.3vw, 2.8rem);
-  align-items: end;
+  align-items: center;
   min-height: clamp(32rem, calc(100svh - 165px), 38rem);
-  padding: clamp(2rem, 7vh, 5.8rem) 0 1.1rem;
+  padding: clamp(1.5rem, 5vh, 4.5rem) 0 1.1rem;
 }
 
 .hero::before {
@@ -287,7 +287,7 @@ main {
 
 .hero-copy {
   align-self: center;
-  padding-bottom: clamp(2rem, 8vh, 7rem);
+  padding-bottom: 0.5rem;
 }
 
 h1,
@@ -368,6 +368,40 @@ h2 {
   border-bottom: 1px solid var(--line-strong);
   color: var(--paper-muted);
   padding: 0.4rem 0;
+}
+
+.social-action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0 1.2rem;
+  min-height: 3.35rem;
+  border: 1px solid var(--line-strong);
+  color: var(--paper-muted);
+  background: rgba(191, 163, 111, 0.04);
+  font-weight: 800;
+  font-size: 0.88rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.social-action-btn:hover {
+  color: var(--paper);
+  border-color: var(--bronze);
+  background: rgba(191, 163, 111, 0.12);
+  box-shadow: 0 0 14px rgba(191, 163, 111, 0.25);
+  transform: translateY(-1px);
+}
+
+.social-action-btn svg {
+  width: 1.05rem;
+  height: 1.05rem;
+  color: var(--bronze);
+}
+
+.social-action-btn:hover svg {
+  color: var(--paper);
 }
 
 .portrait-stage {

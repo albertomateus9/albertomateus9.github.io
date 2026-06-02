@@ -63,13 +63,13 @@ const copy = {
       <>
         Alberto Mateus
         <br />
-        <span className="hero-midtext">AI Product Developer</span>
+        <span className="hero-midtext">AI Product Developer & Engenheiro</span>
         <br />
-        <span className="hero-highlight">em Belém<span className="red-dot">.</span></span>
+        <span className="hero-highlight">Mestre & Doutorando em IA<span className="red-dot">.</span></span>
       </>
     ),
     heroBody:
-      'Desenvolvedor front-end focado em soluções digitais criativas e práticas. Integrando React, bancos Supabase, fluxos de automação n8n/Make e desenvolvimento auxiliado por IA (Claude Code, ChatGPT) para criar produtos eficientes e funcionais.',
+      'Engenheiro, professor universitário, pesquisador em Inteligência Artificial (doutorando) e especialista em Redes e Gestão de TI. Desenvolvo produtos de IA e soluções de alta performance integrando React, bancos Supabase, fluxos de automação n8n/Make e engenharia de software assistida por IA (Claude Code, ChatGPT) para acelerar a entrega de valor de negócio.',
     heroCta: 'Ver projetos',
     trajectoryCta: 'Trajetória',
     signal: 'Belém, Pará, Brasil',
@@ -200,13 +200,13 @@ const copy = {
       <>
         Alberto Mateus
         <br />
-        <span className="hero-midtext">AI Product Developer</span>
+        <span className="hero-midtext">AI Product Developer & Engineer</span>
         <br />
-        <span className="hero-highlight">in Belem<span className="red-dot">.</span></span>
+        <span className="hero-highlight">M.Sc. & PhD Candidate in AI<span className="red-dot">.</span></span>
       </>
     ),
     heroBody:
-      'Front-end developer focused on creative, practical digital solutions. Integrating React, Supabase databases, n8n/Make automation flows, and AI-assisted development (Claude Code, ChatGPT) to build efficient, functional products.',
+      'Engineer, university professor, researcher in Artificial Intelligence (PhD candidate), and specialist in Structured Networks and IT Management. I build high-performance AI products and digital solutions by integrating React, Supabase, n8n/Make automation, and AI-assisted software engineering (Claude Code, ChatGPT) to drive business value.',
     heroCta: 'View projects',
     trajectoryCta: 'Trajectory',
     signal: 'Belem, Para, Brazil',
@@ -535,41 +535,78 @@ function HeroConsole({ locale }: { locale: Locale }) {
       <section className="hud-panel rede-panel">
         <header className="hud-panel-header">
           <span className="panel-dot status-active" />
-          <h3 className="panel-title">REDE // TOPOLOGIA METROPOLITANA</h3>
+          <h3 className="panel-title">
+            {locale === 'pt' ? 'REDE // TOPOLOGIA METROPOLITANA' : 'NETWORK // METROPOLITAN TOPOLOGY'}
+          </h3>
           <span className="panel-id">[ID: 102.GPON]</span>
         </header>
         <div className="hud-panel-body">
-          <svg viewBox="0 0 300 100" className="hud-svg">
-            {/* Connections */}
-            <line x1="40" y1="50" x2="100" y2="25" stroke="var(--green)" strokeWidth="1" strokeDasharray="3 3" />
-            <line x1="40" y1="50" x2="100" y2="75" stroke="var(--green)" strokeWidth="1" />
-            <line x1="100" y1="25" x2="180" y2="25" stroke="var(--cyan)" strokeWidth="1.5" />
-            <line x1="100" y1="75" x2="180" y2="75" stroke="var(--green)" strokeWidth="1" />
-            <line x1="180" y1="25" x2="250" y2="50" stroke="var(--green)" strokeWidth="1" />
-            <line x1="180" y1="75" x2="250" y2="50" stroke="var(--cyan)" strokeWidth="1" strokeDasharray="2 2" />
-            <line x1="100" y1="25" x2="100" y2="75" stroke="var(--line)" strokeWidth="1" />
-            <line x1="180" y1="25" x2="180" y2="75" stroke="var(--line)" strokeWidth="1" />
+          <svg viewBox="0 0 300 100" className="hud-svg" aria-hidden="true">
+            {/* Grid background */}
+            <defs>
+              <pattern id="grid-net" width="12" height="12" patternUnits="userSpaceOnUse">
+                <path d="M 12 0 L 0 0 0 12" fill="none" stroke="rgba(191, 163, 111, 0.04)" strokeWidth="0.5"/>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid-net)" />
             
-            {/* Nodes */}
-            <circle cx="40" cy="50" r="6" fill="var(--bg)" stroke="var(--coral)" strokeWidth="2" />
-            <circle cx="100" cy="25" r="5" fill="var(--green)" />
-            <circle cx="100" cy="75" r="5" fill="var(--green)" />
-            <circle cx="180" cy="25" r="5" fill="var(--cyan)" />
-            <circle cx="180" cy="75" r="5" fill="var(--green)" />
-            <circle cx="250" cy="50" r="6" fill="var(--bg)" stroke="var(--green)" strokeWidth="2" />
+            {/* Fiber Ring Backbone */}
+            <path d="M 30,50 Q 80,15 150,15 T 270,50 Q 220,85 150,85 Z" fill="none" stroke="var(--line)" strokeWidth="1" strokeDasharray="3 3" />
+            <path d="M 30,50 Q 80,15 150,15" fill="none" stroke="var(--green)" strokeWidth="1.5" />
+            <path d="M 150,15 Q 220,15 270,50" fill="none" stroke="var(--cyan)" strokeWidth="1" />
             
-            {/* Pulsing overlay */}
-            <circle cx="40" cy="50" r="10" fill="none" stroke="var(--coral)" strokeWidth="1" className="hud-pulse" />
-            <circle cx="250" cy="50" r="10" fill="none" stroke="var(--green)" strokeWidth="1" className="hud-pulse-delay" />
-
-            {/* Labels */}
-            <text x="40" y="38" fontSize="8" fill="var(--coral)" textAnchor="middle" fontFamily="monospace">GW_01</text>
-            <text x="100" y="16" fontSize="7" fill="var(--paper-muted)" textAnchor="middle" fontFamily="monospace">192.168.10.1</text>
-            <text x="180" y="16" fontSize="7" fill="var(--paper-muted)" textAnchor="middle" fontFamily="monospace">10.0.0.5</text>
-            <text x="250" y="38" fontSize="8" fill="var(--green)" textAnchor="middle" fontFamily="monospace">SW_CORE</text>
-
-            <path d="M 5 5 L 15 5 L 5 15 Z" fill="var(--green)" opacity="0.3" />
-            <path d="M 295 5 L 285 5 L 295 15 Z" fill="var(--green)" opacity="0.3" />
+            {/* OLT Central Hub */}
+            <g transform="translate(30, 50)">
+              <circle r="7" fill="var(--bg)" stroke="var(--coral)" strokeWidth="1.5" />
+              <circle r="2.5" fill="var(--coral)" />
+              <circle r="11" fill="none" stroke="var(--coral)" strokeWidth="0.5" strokeDasharray="2 2" className="hud-rotate" />
+            </g>
+            <text x="30" y="36" fontSize="7" fill="var(--coral)" textAnchor="middle" fontFamily="monospace" fontWeight="bold">OLT_METRO</text>
+            
+            {/* Splitter Node */}
+            <g transform="translate(150, 15)">
+              <rect x="-10" y="-6" width="20" height="12" fill="var(--bg)" stroke="var(--green)" strokeWidth="1.5" rx="2" />
+              <text x="0" y="3" fontSize="6.5" fill="var(--green)" textAnchor="middle" fontFamily="monospace" fontWeight="bold">1:8</text>
+            </g>
+            <text x="150" y="27" fontSize="7" fill="var(--green)" textAnchor="middle" fontFamily="monospace">SPLITTER_GPON</text>
+            
+            {/* Splitter connections to ONTs */}
+            <path d="M 160,15 L 210,35" stroke="var(--green)" strokeWidth="0.75" />
+            <path d="M 160,15 L 220,20" stroke="var(--green)" strokeWidth="0.75" strokeDasharray="2 1" />
+            <path d="M 160,15 L 205,5" stroke="var(--green)" strokeWidth="0.5" strokeDasharray="1 2" />
+            
+            <g transform="translate(210, 35)">
+              <circle r="4" fill="var(--bg)" stroke="var(--green)" strokeWidth="1" />
+              <text x="8" y="2" fontSize="6.5" fill="var(--paper-muted)" fontFamily="monospace">ONT_01</text>
+            </g>
+            
+            {/* Switch Core Node */}
+            <g transform="translate(270, 50)">
+              <circle r="7" fill="var(--bg)" stroke="var(--cyan)" strokeWidth="1.5" />
+              <line x1="-4" y1="0" x2="4" y2="0" stroke="var(--cyan)" strokeWidth="1" />
+              <line x1="0" y1="-4" x2="0" y2="4" stroke="var(--cyan)" strokeWidth="1" />
+            </g>
+            <text x="270" y="36" fontSize="7" fill="var(--cyan)" textAnchor="middle" fontFamily="monospace" fontWeight="bold">SW_CORE</text>
+            
+            {/* Metro Loop node */}
+            <g transform="translate(150, 85)">
+              <circle r="5" fill="var(--bg)" stroke="var(--paper-muted)" strokeWidth="1.2" />
+              <circle cx="150" cy="85" r="10" fill="none" stroke="var(--paper-muted)" strokeWidth="0.5" className="hud-pulse" />
+            </g>
+            <text x="150" y="78" fontSize="7" fill="var(--paper-muted)" textAnchor="middle" fontFamily="monospace">
+              {locale === 'pt' ? 'ANEL_METRO' : 'METRO_LOOP'}
+            </text>
+            
+            {/* Specs */}
+            <text x="85" y="46" fontSize="6.5" fill="var(--paper-muted)" fontFamily="monospace" opacity="0.8">λ: 1490nm</text>
+            <text x="85" y="55" fontSize="6.5" fill="var(--green)" fontFamily="monospace" fontWeight="bold">P_TX: +2.5 dBm</text>
+            <text x="195" y="75" fontSize="6.5" fill="var(--cyan)" fontFamily="monospace" fontWeight="bold">P_RX: -18.5 dBm</text>
+            
+            {/* Decorative corners */}
+            <path d="M 5 5 L 12 5 M 5 5 L 5 12" stroke="var(--green)" strokeWidth="0.75" opacity="0.4" />
+            <path d="M 295 5 L 288 5 M 295 5 L 295 12" stroke="var(--green)" strokeWidth="0.75" opacity="0.4" />
+            <path d="M 5 95 L 12 95 M 5 95 L 5 88" stroke="var(--green)" strokeWidth="0.75" opacity="0.4" />
+            <path d="M 295 95 L 288 95 M 295 95 L 295 88" stroke="var(--green)" strokeWidth="0.75" opacity="0.4" />
           </svg>
         </div>
         <footer className="hud-panel-footer">
@@ -582,54 +619,84 @@ function HeroConsole({ locale }: { locale: Locale }) {
       <section className="hud-panel visao-panel">
         <header className="hud-panel-header">
           <span className="panel-dot status-active" />
-          <h3 className="panel-title">VISÃO // RECONHECIMENTO DE ESTRUTURA</h3>
+          <h3 className="panel-title">
+            {locale === 'pt' ? 'VISÃO // RECONHECIMENTO DE ESTRUTURA' : 'VISION // STRUCTURE RECOGNITION'}
+          </h3>
           <span className="panel-id">[IA: FACE_MESH]</span>
         </header>
         <div className="hud-panel-body">
-          <svg viewBox="0 0 300 100" className="hud-svg">
+          <svg viewBox="0 0 300 100" className="hud-svg" aria-hidden="true">
             {/* Grid background */}
-            <line x1="0" y1="50" x2="300" y2="50" stroke="rgba(141, 216, 220, 0.1)" strokeWidth="1" />
-            <line x1="150" y1="0" x2="150" y2="100" stroke="rgba(141, 216, 220, 0.1)" strokeWidth="1" />
+            <defs>
+              <pattern id="grid-vision" width="12" height="12" patternUnits="userSpaceOnUse">
+                <path d="M 12 0 L 0 0 0 12" fill="none" stroke="rgba(92, 225, 230, 0.04)" strokeWidth="0.5"/>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid-vision)" />
             
-            {/* Wireframe Face mesh representation */}
-            <g transform="translate(110, 10)">
-              <polygon points="40,5 60,15 70,35 65,65 40,80 15,65 10,35 20,15" fill="none" stroke="rgba(141, 216, 220, 0.3)" strokeWidth="1" />
-              <polygon points="25,30 35,30 30,25" fill="none" stroke="var(--cyan)" strokeWidth="1" />
-              <polygon points="45,30 55,30 50,25" fill="none" stroke="var(--cyan)" strokeWidth="1" />
-              <line x1="30" y1="30" x2="50" y2="30" stroke="var(--line)" strokeWidth="0.5" />
-              <line x1="40" y1="20" x2="40" y2="50" stroke="var(--cyan)" strokeWidth="1" />
-              <line x1="35" y1="50" x2="45" y2="50" stroke="var(--cyan)" strokeWidth="1" />
-              <polygon points="30,60 40,57 50,60 40,65" fill="none" stroke="var(--coral)" strokeWidth="1" />
-              <circle cx="40" cy="5" r="2" fill="var(--cyan)" />
-              <circle cx="60" cy="15" r="2" fill="var(--cyan)" />
-              <circle cx="70" cy="35" r="2" fill="var(--cyan)" />
-              <circle cx="65" cy="65" r="2" fill="var(--cyan)" />
-              <circle cx="40" cy="80" r="2" fill="var(--cyan)" />
-              <circle cx="15" cy="65" r="2" fill="var(--cyan)" />
-              <circle cx="10" cy="35" r="2" fill="var(--cyan)" />
-              <circle cx="20" cy="15" r="2" fill="var(--cyan)" />
+            {/* Bounding box axes */}
+            <line x1="0" y1="50" x2="300" y2="50" stroke="rgba(92, 225, 230, 0.12)" strokeWidth="0.5" strokeDasharray="4 4" />
+            <line x1="150" y1="0" x2="150" y2="100" stroke="rgba(92, 225, 230, 0.12)" strokeWidth="0.5" strokeDasharray="4 4" />
+            
+            {/* Target Corners */}
+            <path d="M 115,22 L 125,22 M 115,22 L 115,32" stroke="var(--cyan)" strokeWidth="1.5" />
+            <path d="M 185,22 L 175,22 M 185,22 L 185,32" stroke="var(--cyan)" strokeWidth="1.5" />
+            <path d="M 115,78 L 125,78 M 115,78 L 115,68" stroke="var(--cyan)" strokeWidth="1.5" />
+            <path d="M 185,78 L 175,78 M 185,78 L 185,68" stroke="var(--cyan)" strokeWidth="1.5" />
+            
+            <text x="115" y="17" fontSize="5.5" fill="var(--cyan)" fontFamily="monospace">ROI [115, 22, 70, 56]</text>
+            
+            {/* Triangulated mesh */}
+            <g transform="translate(150, 50)">
+              {/* Outer mesh outline */}
+              <polygon points="0,-33 16,-23 25,-7 23,17 0,29 -23,17 -25,-7 -16,-23" fill="none" stroke="rgba(92, 225, 230, 0.25)" strokeWidth="0.75" />
+              <polygon points="0,-18 10,-13 16,-4 14,9 0,18 -14,9 -16,-4 -10,-13" fill="none" stroke="rgba(92, 225, 230, 0.15)" strokeWidth="0.5" />
               
-              <line x1="30" y1="25" x2="40" y2="5" stroke="rgba(141, 216, 220, 0.2)" strokeWidth="0.5" />
-              <line x1="50" y1="25" x2="40" y2="5" stroke="rgba(141, 216, 220, 0.2)" strokeWidth="0.5" />
-              <line x1="30" y1="30" x2="10" y2="35" stroke="rgba(141, 216, 220, 0.2)" strokeWidth="0.5" />
-              <line x1="55" y1="30" x2="70" y2="35" stroke="rgba(141, 216, 220, 0.2)" strokeWidth="0.5" />
-              <line x1="35" y1="50" x2="15" y2="65" stroke="rgba(141, 216, 220, 0.2)" strokeWidth="0.5" />
-              <line x1="45" y1="50" x2="65" y2="65" stroke="rgba(141, 216, 220, 0.2)" strokeWidth="0.5" />
-              <line x1="40" y1="80" x2="40" y2="65" stroke="rgba(141, 216, 220, 0.2)" strokeWidth="0.5" />
+              {/* Nose and eyes lines */}
+              <line x1="0" y1="-18" x2="0" y2="4" stroke="var(--cyan)" strokeWidth="1" />
+              <line x1="-7" y1="4" x2="7" y2="4" stroke="var(--cyan)" strokeWidth="1" />
+              
+              <polygon points="-10,-8 -3,-8 -7,-13" fill="none" stroke="var(--cyan)" strokeWidth="0.75" />
+              <polygon points="3,-8 10,-8 7,-13" fill="none" stroke="var(--cyan)" strokeWidth="0.75" />
+              
+              {/* Mouth */}
+              <polygon points="-8,12 0,9 8,12 0,15" fill="none" stroke="var(--coral)" strokeWidth="1" />
+              
+              {/* Connectors */}
+              <line x1="-10" y1="-8" x2="-16" y2="-23" stroke="rgba(92, 225, 230, 0.15)" strokeWidth="0.5" />
+              <line x1="10" y1="-8" x2="18" y2="-23" stroke="rgba(92, 225, 230, 0.15)" strokeWidth="0.5" />
+              <line x1="-25" y1="-7" x2="-10" y2="-8" stroke="rgba(92, 225, 230, 0.15)" strokeWidth="0.5" />
+              <line x1="25" y1="-7" x2="10" y2="-8" stroke="rgba(92, 225, 230, 0.15)" strokeWidth="0.5" />
+              <line x1="-23" y1="17" x2="-8" y2="12" stroke="rgba(92, 225, 230, 0.15)" strokeWidth="0.5" />
+              <line x1="23" y1="17" x2="8" y2="12" stroke="rgba(92, 225, 230, 0.15)" strokeWidth="0.5" />
+              
+              {/* Vertex points */}
+              <circle cx="0" cy="-33" r="1.2" fill="var(--cyan)" />
+              <circle cx="16" cy="-23" r="1.2" fill="var(--cyan)" />
+              <circle cx="25" cy="-7" r="1.2" fill="var(--cyan)" />
+              <circle cx="23" cy="17" r="1.2" fill="var(--cyan)" />
+              <circle cx="0" cy="29" r="1.2" fill="var(--cyan)" />
+              <circle cx="-23" cy="17" r="1.2" fill="var(--cyan)" />
+              <circle cx="-25" cy="-7" r="1.2" fill="var(--cyan)" />
+              <circle cx="-16" cy="-23" r="1.2" fill="var(--cyan)" />
             </g>
-
-            {/* Target overlay */}
-            <circle cx="150" cy="45" r="38" fill="none" stroke="var(--cyan)" strokeWidth="1" strokeDasharray="5 5" className="hud-rotate" />
-            <path d="M 105 45 L 115 45 M 185 45 L 195 45 M 150 5 L 150 15 M 150 75 L 150 85" stroke="var(--cyan)" strokeWidth="1" />
             
-            {/* Telemetry data */}
-            <text x="10" y="25" fontSize="7" fill="var(--cyan)" fontFamily="monospace">CONFIDENCE: 98.4%</text>
-            <text x="10" y="40" fontSize="7" fill="var(--paper-muted)" fontFamily="monospace">FPS: 60 // LAT: 4.2ms</text>
-            <text x="10" y="55" fontSize="7" fill="var(--paper-muted)" fontFamily="monospace">MODEL: YOLOV8-TINY</text>
-
-            <text x="290" y="25" fontSize="7" fill="var(--coral)" textAnchor="end" fontFamily="monospace">TARGET LOCKED</text>
-            <text x="290" y="40" fontSize="7" fill="var(--paper-muted)" textAnchor="end" fontFamily="monospace">X: 142.08</text>
-            <text x="290" y="55" fontSize="7" fill="var(--paper-muted)" textAnchor="end" fontFamily="monospace">Y: 88.51</text>
+            {/* Animated scanning line */}
+            <line x1="100" y1="22" x2="200" y2="22" stroke="rgba(255, 113, 91, 0.6)" strokeWidth="1" className="hud-pulse" style={{ animationDuration: '3.5s' }} />
+            
+            {/* Left statistics */}
+            <text x="10" y="24" fontSize="7" fill="var(--cyan)" fontFamily="monospace" fontWeight="bold">MATCH: 99.2%</text>
+            <text x="10" y="38" fontSize="6.5" fill="var(--paper-muted)" fontFamily="monospace">MODEL: FaceMesh_V2</text>
+            <text x="10" y="52" fontSize="6.5" fill="var(--paper-muted)" fontFamily="monospace">FPS: 90 / LAT: 2.1ms</text>
+            <text x="10" y="66" fontSize="6.5" fill="var(--paper-muted)" fontFamily="monospace">THRES: 0.85</text>
+            <text x="10" y="80" fontSize="6.5" fill="var(--green)" fontFamily="monospace" fontWeight="bold">STATUS: ACTIVE</text>
+            
+            {/* Right statistics */}
+            <text x="290" y="24" fontSize="7" fill="var(--coral)" textAnchor="end" fontFamily="monospace" fontWeight="bold">TRACK_ID: 104</text>
+            <text x="290" y="38" fontSize="6.5" fill="var(--paper-muted)" textAnchor="end" fontFamily="monospace">PITCH: +12.4°</text>
+            <text x="290" y="52" fontSize="6.5" fill="var(--paper-muted)" textAnchor="end" fontFamily="monospace">ROLL: -2.1°</text>
+            <text x="290" y="66" fontSize="6.5" fill="var(--paper-muted)" textAnchor="end" fontFamily="monospace">YAW: +0.5°</text>
+            <text x="290" y="80" fontSize="6.5" fill="var(--cyan)" textAnchor="end" fontFamily="monospace">MESH_PTS: 468</text>
           </svg>
         </div>
         <footer className="hud-panel-footer">
@@ -642,45 +709,81 @@ function HeroConsole({ locale }: { locale: Locale }) {
       <section className="hud-panel ensino-panel">
         <header className="hud-panel-header">
           <span className="panel-dot status-active" />
-          <h3 className="panel-title">ENSINO // METODOLOGIA STEAM & MAKER</h3>
+          <h3 className="panel-title">
+            {locale === 'pt' ? 'ENSINO // METODOLOGIA STEAM & MAKER' : 'EDUCATION // STEAM & MAKER METHODOLOGY'}
+          </h3>
           <span className="panel-id">[LAB: EETEPA]</span>
         </header>
         <div className="hud-panel-body">
-          <svg viewBox="0 0 300 100" className="hud-svg">
-            {/* Teacher Node */}
-            <circle cx="50" cy="50" r="14" fill="var(--bg)" stroke="var(--green)" strokeWidth="2" />
-            <text x="50" y="54" fontSize="10" fill="var(--green)" textAnchor="middle" fontFamily="monospace" fontWeight="bold">PROF</text>
-
-            {/* Wireless transmission waves */}
-            <path d="M 75 40 Q 90 50 75 60" fill="none" stroke="var(--green)" strokeWidth="1.5" strokeDasharray="3 3" />
-            <path d="M 85 30 Q 105 50 85 70" fill="none" stroke="var(--green)" strokeWidth="1" />
+          <svg viewBox="0 0 300 100" className="hud-svg" aria-hidden="true">
+            {/* Grid background */}
+            <defs>
+              <pattern id="grid-steam" width="10" height="10" patternUnits="userSpaceOnUse">
+                <path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(137, 226, 124, 0.04)" strokeWidth="0.5"/>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid-steam)" />
             
-            {/* Central classroom hub */}
-            <rect x="120" y="30" width="60" height="40" fill="var(--bg)" stroke="var(--cyan)" strokeWidth="1.5" rx="3" />
-            <text x="150" y="48" fontSize="8" fill="var(--cyan)" textAnchor="middle" fontFamily="monospace" fontWeight="bold">STEAM</text>
-            <text x="150" y="58" fontSize="7" fill="var(--paper-muted)" textAnchor="middle" fontFamily="monospace">LABORATÓRIO</text>
-
-            {/* Transmission to students */}
-            <path d="M 195 40 Q 210 50 195 60" fill="none" stroke="var(--green)" strokeWidth="1.5" strokeDasharray="3 3" />
+            {/* Central IoT Gateway */}
+            <g transform="translate(150, 50)">
+              <rect x="-24" y="-15" width="48" height="30" fill="var(--bg)" stroke="var(--green)" strokeWidth="1.5" rx="3" />
+              <text x="0" y="-3" fontSize="7" fill="var(--green)" textAnchor="middle" fontFamily="monospace" fontWeight="bold">IoT CORE</text>
+              <text x="0" y="6" fontSize="5.5" fill="var(--paper-muted)" textAnchor="middle" fontFamily="monospace">GATEWAY</text>
+              <text x="0" y="11" fontSize="4.5" fill="var(--cyan)" textAnchor="middle" fontFamily="monospace">115200 BPS</text>
+              <circle cx="-16" cy="-9" r="1.5" fill="var(--coral)" />
+              <circle cx="16" cy="-9" r="1.5" fill="var(--green)" />
+            </g>
             
-            {/* Students Nodes */}
-            <circle cx="240" cy="28" r="8" fill="var(--bg)" stroke="var(--green)" strokeWidth="1" />
-            <circle cx="260" cy="50" r="8" fill="var(--bg)" stroke="var(--green)" strokeWidth="1" />
-            <circle cx="240" cy="72" r="8" fill="var(--bg)" stroke="var(--green)" strokeWidth="1" />
+            {/* Stations */}
+            <g transform="translate(45, 25)">
+              <rect x="-18" y="-8" width="36" height="16" fill="var(--bg)" stroke="var(--cyan)" strokeWidth="1" rx="2" />
+              <text x="0" y="2" fontSize="6.5" fill="var(--cyan)" textAnchor="middle" fontFamily="monospace">STATION_A</text>
+              <circle cx="-12" cy="0" r="1.2" fill="var(--green)" />
+            </g>
+            <path d="M 63,25 L 126,40" stroke="var(--green)" strokeWidth="0.75" />
             
-            <text x="240" y="31" fontSize="7" fill="var(--paper)" textAnchor="middle" fontFamily="monospace">S1</text>
-            <text x="260" y="53" fontSize="7" fill="var(--paper)" textAnchor="middle" fontFamily="monospace">S2</text>
-            <text x="240" y="75" fontSize="7" fill="var(--paper)" textAnchor="middle" fontFamily="monospace">S3</text>
-
-            {/* Connecting lines */}
-            <line x1="180" y1="50" x2="220" y2="50" stroke="var(--green)" strokeWidth="1" />
-            <line x1="180" y1="50" x2="232" y2="28" stroke="var(--green)" strokeWidth="1" />
-            <line x1="180" y1="50" x2="232" y2="72" stroke="var(--green)" strokeWidth="1" />
+            <g transform="translate(45, 75)">
+              <rect x="-18" y="-8" width="36" height="16" fill="var(--bg)" stroke="var(--cyan)" strokeWidth="1" rx="2" />
+              <text x="0" y="2" fontSize="6.5" fill="var(--cyan)" textAnchor="middle" fontFamily="monospace">STATION_B</text>
+              <circle cx="-12" cy="0" r="1.2" fill="var(--green)" />
+            </g>
+            <path d="M 63,75 L 126,60" stroke="var(--green)" strokeWidth="0.75" />
+            
+            {/* Hardware Items */}
+            <g transform="translate(250, 25)">
+              <circle r="9" fill="var(--bg)" stroke="var(--green)" strokeWidth="1.2" />
+              <path d="M -4,-4 L 4,4 M -4,4 L 4,-4" stroke="var(--green)" strokeWidth="0.75" />
+              <text x="14" y="2" fontSize="6.5" fill="var(--paper-muted)" fontFamily="monospace">3D_PRINT</text>
+            </g>
+            <path d="M 174,40 L 241,25" stroke="var(--green)" strokeWidth="0.75" strokeDasharray="2 2" />
+            
+            <g transform="translate(250, 50)">
+              <circle r="8" fill="var(--bg)" stroke="var(--green)" strokeWidth="1.2" />
+              <path d="M-3,-3 H3 V3 H-3 Z" fill="none" stroke="var(--green)" strokeWidth="0.75" />
+              <text x="14" y="2" fontSize="6.5" fill="var(--paper-muted)" fontFamily="monospace">CNC_MILL</text>
+            </g>
+            <path d="M 174,50 L 242,50" stroke="var(--green)" strokeWidth="0.75" />
+            
+            <g transform="translate(250, 75)">
+              <circle r="8" fill="var(--bg)" stroke="var(--coral)" strokeWidth="1.2" />
+              <circle r="3" fill="var(--coral)" />
+              <text x="14" y="2" fontSize="6.5" fill="var(--coral)" fontFamily="monospace">SENSORS</text>
+            </g>
+            <path d="M 174,60 L 242,75" stroke="var(--coral)" strokeWidth="0.75" strokeDasharray="3 1" />
+            
+            {/* Signals */}
+            <circle cx="94" cy="32.5" r="3" fill="var(--green)" opacity="0.6" className="hud-pulse" />
+            <circle cx="208" cy="67.5" r="3" fill="var(--coral)" opacity="0.6" className="hud-pulse-delay" />
+            
+            {/* Metrics */}
+            <text x="10" y="48" fontSize="6.5" fill="var(--paper-muted)" fontFamily="monospace">STUDENTS: 24</text>
+            <text x="10" y="57" fontSize="6.5" fill="var(--paper-muted)" fontFamily="monospace">DEV_RATE: 82%</text>
+            <text x="290" y="93" fontSize="6.5" fill="var(--green)" textAnchor="end" fontFamily="monospace" fontWeight="bold">STEAM_LAB_CORE</text>
           </svg>
         </div>
         <footer className="hud-panel-footer">
-          <span>PROJETOS CURRICULARES: 24+</span>
-          <span>AÇÃO: AUTORIA_ESTUDANTE</span>
+          <span>{locale === 'pt' ? 'PROJETOS CURRICULARES: 24+' : 'CURRICULAR PROJECTS: 24+'}</span>
+          <span>{locale === 'pt' ? 'AÇÃO: AUTORIA_ESTUDANTE' : 'ACTION: STUDENT_AUTHORSHIP'}</span>
         </footer>
       </section>
     </aside>
@@ -1297,6 +1400,14 @@ function HomeView({ locale }: { locale: Locale }) {
               </a>
               <a href="#trajetoria" className="secondary-action">
                 {content.trajectoryCta}
+              </a>
+              <a href={linkedinUrl} target="_blank" rel="noreferrer" className="social-action-btn" title="LinkedIn">
+                <Linkedin aria-hidden="true" />
+                <span>LinkedIn</span>
+              </a>
+              <a href={lattesUrl} target="_blank" rel="noreferrer" className="social-action-btn" title="Currículo Lattes">
+                <ExternalLink aria-hidden="true" />
+                <span>Lattes</span>
               </a>
             </div>
           </div>
