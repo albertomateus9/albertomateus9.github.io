@@ -1151,7 +1151,7 @@ function InteractiveIde({ locale }: { locale: Locale }) {
         </div>
         <div className="ide-title">
           <Terminal size={12} />
-          <span>workspace/ai-product-dev/</span>
+          <span>{locale === 'pt' ? 'workspace/solucoes-digitais/' : 'workspace/digital-solutions/'}</span>
         </div>
         <div className="ide-status-pill">
           <span className="live-pulse" />

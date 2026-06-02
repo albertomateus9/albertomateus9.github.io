@@ -1578,7 +1578,7 @@ footer p,
   font-weight: 850;
 }
 
-/* Seção Laboratório Vivo */
+/* Seção de demonstração prática */
 .live-lab-section {
   position: relative;
   margin-bottom: clamp(4rem, 8vh, 7rem);
