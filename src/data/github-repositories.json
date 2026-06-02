@@ -1,5 +1,45 @@
 [
   {
+    "name": "desafio-dados-2026",
+    "description": "Desafio dos Dados 2026 - Portal de Orientação",
+    "htmlUrl": "https://github.com/albertomateus9/desafio-dados-2026",
+    "homepage": "",
+    "topics": [
+      "desafio-dos-dados",
+      "educacao-tecnologica",
+      "orientacao-docente",
+      "portugues-brasil"
+    ],
+    "language": "JavaScript",
+    "stars": 0,
+    "forks": 0,
+    "archived": false,
+    "fork": false,
+    "updatedAt": "2026-06-02T02:59:44Z"
+  },
+  {
+    "name": "albertomateus9.github.io",
+    "description": "Portfólio Laboratório Vivo de Alberto Mateus: Telecom, Visão Computacional e Educação Tecnológica.",
+    "htmlUrl": "https://github.com/albertomateus9/albertomateus9.github.io",
+    "homepage": "https://albertomateus9.github.io/",
+    "topics": [
+      "educacao-tecnologica",
+      "github-pages",
+      "portfolio",
+      "portugues-brasil",
+      "react",
+      "telecomunicacoes",
+      "typescript",
+      "visao-computacional"
+    ],
+    "language": "TypeScript",
+    "stars": 0,
+    "forks": 0,
+    "archived": false,
+    "fork": false,
+    "updatedAt": "2026-06-02T02:59:05Z"
+  },
+  {
     "name": "boas-praticas-isp-website",
     "description": "Website comercial de vendas de consultoria ISP - Boas Praticas, Governanca e Infraestrutura de Provedores de Internet.",
     "htmlUrl": "https://github.com/albertomateus9/boas-praticas-isp-website",
@@ -649,19 +689,6 @@
     "updatedAt": "2026-06-02T02:55:50Z"
   },
   {
-    "name": "desafio-dados-2026",
-    "description": "Desafio dos Dados 2026 - Portal de Orientação",
-    "htmlUrl": "https://github.com/albertomateus9/desafio-dados-2026",
-    "homepage": "",
-    "topics": [],
-    "language": "JavaScript",
-    "stars": 0,
-    "forks": 0,
-    "archived": false,
-    "fork": false,
-    "updatedAt": "2026-05-29T17:08:08Z"
-  },
-  {
     "name": "eetepa-vilhena-alves",
     "description": "Portal estatico premium demonstrativo da EETEPA Vilhena Alves com vitrine de cursos tecnicos.",
     "htmlUrl": "https://github.com/albertomateus9/eetepa-vilhena-alves",
@@ -685,28 +712,6 @@
     "archived": false,
     "fork": false,
     "updatedAt": "2026-05-29T13:52:22Z"
-  },
-  {
-    "name": "albertomateus9.github.io",
-    "description": "Portfólio Laboratório Vivo de Alberto Mateus: Telecom, Visão Computacional e Educação Tecnológica.",
-    "htmlUrl": "https://github.com/albertomateus9/albertomateus9.github.io",
-    "homepage": "https://albertomateus9.github.io/",
-    "topics": [
-      "educacao-tecnologica",
-      "github-pages",
-      "portfolio",
-      "portugues-brasil",
-      "react",
-      "telecomunicacoes",
-      "typescript",
-      "visao-computacional"
-    ],
-    "language": "TypeScript",
-    "stars": 0,
-    "forks": 0,
-    "archived": false,
-    "fork": false,
-    "updatedAt": "2026-05-25T23:11:53Z"
   },
   {
     "name": "boas-praticas-isp",

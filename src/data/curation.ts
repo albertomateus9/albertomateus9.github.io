@@ -23,6 +23,7 @@ const eetepaBatch = [
 ];
 
 const dataScienceBatch = [
+  'desafio-dados-2026',
   'tea-pose-analysis',
   'enem-data-cleaning-lab',
   'movies-sql-python-lab',
@@ -152,6 +153,15 @@ export const curatedRepositories: CuratedRepository[] = [
     demo: 'https://albertomateus9.github.io/boas-praticas-isp/',
     pt: 'Framework consultivo de maturidade operacional para provedores de internet.',
     en: 'Operational maturity consulting framework for internet service providers.',
+  },
+  {
+    name: 'eetepa-vilhena-alves',
+    family: 'vitrine',
+    labels: ['web', 'educacao', 'demo'],
+    featured: true,
+    demo: 'https://albertomateus9.github.io/eetepa-vilhena-alves/',
+    pt: 'Portal estático premium demonstrativo da EETEPA Vilhena Alves com vitrine de cursos técnicos.',
+    en: 'Premium static portal demo for EETEPA Vilhena Alves with a showcase of technical courses.',
   },
   ...batch(cvBatch, 'visao-computacional', ['telecom', 'visao-computacional']),
   ...batch(eetepaBatch, 'eetepa', ['eetepa', 'laboratorio']),
