@@ -7,7 +7,7 @@ Este guia orienta o deploy do **Portfolio OS** em uma VPS (Virtual Private Serve
 ## 1. Pré-requisitos na VPS
 Antes de começar, certifique-se de que a sua VPS possui os seguintes pacotes instalados:
 * **Docker Engine** (v20+) e **Docker Compose** (v2+)
-* **Git** (para clonar o repositório se a build for local na VPS)
+* **Git** (para clonar e gerenciar a branch de staging)
 
 Para instalar o Docker no Ubuntu:
 ```bash
@@ -19,37 +19,47 @@ sudo systemctl enable --now docker
 ---
 
 ## 2. Configurando o Ambiente
-1. Clone o repositório na VPS (ou configure um pipeline de CI/CD para transferir os arquivos):
+1. Clone o repositório no caminho recomendado em `/opt/alberto-portfolio`:
    ```bash
-   git clone https://github.com/albertomateus9/albertomateus9.github.io.git /var/www/portfolio
-   cd /var/www/portfolio
+   sudo mkdir -p /opt/alberto-portfolio
+   sudo chown -R $USER:$USER /opt/alberto-portfolio
+   git clone https://github.com/albertomateus9/albertomateus9.github.io.git /opt/alberto-portfolio
+   cd /opt/alberto-portfolio
    ```
 
 2. Crie o arquivo de variáveis de ambiente `.env` a partir do modelo:
    ```bash
    cp .env.example .env
    ```
-   *Ajuste as variáveis se desejar expor em outra porta ou configurar a URL pública oficial:*
+   *Ajuste as variáveis no `.env`. Como estamos rodando atrás de um proxy reverso no mesmo host, o HOSTNAME deve ser definido como `127.0.0.1` ou `0.0.0.0`:*
    ```ini
    PORT=3000
-   HOSTNAME=0.0.0.0
-   NEXT_PUBLIC_SITE_URL=https://albertomateus.dev
+   HOSTNAME=127.0.0.1
+   NEXT_PUBLIC_SITE_URL=https://staging.albertomateus.dev
    ```
 
 ---
 
 ## 3. Construção e Execução com Docker Compose
-O projeto utiliza a build `standalone` do Next.js, que empacota apenas os arquivos estritamente necessários para rodar o servidor em produção, gerando uma imagem Docker extremamente leve (~100MB).
+O projeto utiliza a build `standalone` do Next.js. O arquivo `docker-compose.yml` mapeia a porta interna do container para `127.0.0.1:3000:3000` na VPS para evitar expor a aplicação crua diretamente à internet.
 
 1. Execute a compilação e suba o container em background:
    ```bash
-   sudo docker compose up -d --build
+   docker compose up -d --build
    ```
 
-2. Verifique se o container está rodando e escutando na porta 3000:
+2. Verifique se o container está de fato rodando e saudável usando o endpoint de **Healthcheck**:
    ```bash
-   sudo docker compose ps
-   sudo docker compose logs -f
+   curl -f http://localhost:3000/api/health
+   ```
+   *Retorno esperado:*
+   ```json
+   {"status":"healthy",...}
+   ```
+
+3. Acompanhe os logs em tempo real:
+   ```bash
+   docker compose logs -f --tail 100
    ```
 
 ---
@@ -68,9 +78,9 @@ Caddy é a opção mais simples para obter HTTPS automático.
    sudo apt install caddy
    ```
 
-2. Crie ou edite `/etc/caddy/Caddyfile`:
+2. Configure `/etc/caddy/Caddyfile`:
    ```caddy
-   albertomateus.dev, www.albertomateus.dev {
+   staging.albertomateus.dev {
        reverse_proxy localhost:3000
    }
    ```
@@ -92,7 +102,7 @@ Caddy é a opção mais simples para obter HTTPS automático.
    ```nginx
    server {
        listen 80;
-       server_name albertomateus.dev www.albertomateus.dev;
+       server_name staging.albertomateus.dev;
 
        location / {
            proxy_pass http://127.0.0.1:3000;
@@ -114,15 +124,30 @@ Caddy é a opção mais simples para obter HTTPS automático.
 
 4. Obtenha o certificado SSL do Let's Encrypt:
    ```bash
-   sudo certbot --nginx -d albertomateus.dev -d www.albertomateus.dev
+   sudo certbot --nginx -d staging.albertomateus.dev
    ```
 
 ---
 
-## 5. Atualização Automatizada (Redeploy)
-Para atualizar o portfólio após alterações de código, execute a seguinte rotina na pasta `/var/www/portfolio`:
-```bash
-git pull origin portfolio-p3-nextjs-cutover
-sudo docker compose up -d --build
-```
-Como a build ocorre em multi-stage, o container antigo continuará respondendo até que a nova imagem esteja completamente pronta, reduzindo o downtime para praticamente zero.
+## 5. Rollback (Procedimento de Contingência)
+Se o deploy ou a nova build falhar ou introduzir erros em runtime, execute o rollback imediato para a versão estável anterior:
+
+1. Pare o container atual:
+   ```bash
+   docker compose down
+   ```
+
+2. Retorne o repositório Git para o commit/tag estável anterior (ex: commit da P4):
+   ```bash
+   git checkout 200c93d
+   ```
+
+3. Recompile e suba a imagem estável:
+   ```bash
+   docker compose up -d --build
+   ```
+
+4. Valide a recuperação acessando o healthcheck:
+   ```bash
+   curl -f http://localhost:3000/api/health
+   ```
