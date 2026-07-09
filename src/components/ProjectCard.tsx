@@ -22,50 +22,53 @@ const statusColor: Record<ProjectStatus, string> = {
 
 export default function ProjectCard({ project }: { project: Project }) {
   return (
-    <article className="group flex h-full flex-col rounded-lg border border-surface-border bg-surface p-5 transition-colors hover:border-accent-cyan/50">
+    <article className="group flex h-full flex-col rounded-lg border border-surface-border bg-surface/30 p-5 backdrop-blur-sm transition-all duration-300 hover:border-accent-cyan/40 hover:bg-surface/50 hover:glow-cyan-sm">
       <div className="mb-3 flex items-start justify-between gap-3">
         <div>
-          <h3 className="text-lg font-semibold tracking-tight text-ink">
-            <Link href={`/projects/${project.slug}`} className="hover:text-accent-cyan">
+          <h3 className="text-base font-semibold tracking-tight text-ink group-hover:text-accent-cyan transition-colors">
+            <Link href={`/projects/${project.slug}`}>
               {project.name}
             </Link>
           </h3>
-          <p className="mt-0.5 text-sm text-ink-muted">{project.tagline}</p>
+          <p className="mt-0.5 text-xs text-ink-muted leading-relaxed">{project.tagline}</p>
         </div>
         <span
-          className={`shrink-0 rounded border px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider ${statusColor[project.status]}`}
+          className={`shrink-0 rounded border px-2 py-0.5 font-mono text-[9px] uppercase tracking-wider ${statusColor[project.status]}`}
         >
           {statusLabel[project.status]}
         </span>
       </div>
 
-      <p className="mb-4 flex-1 text-sm leading-relaxed text-ink-muted">{project.description}</p>
+      <p className="mb-4 flex-1 text-xs leading-relaxed text-ink-muted">{project.description}</p>
 
       {project.disclaimer ? (
-        <p className="mb-3 rounded border border-accent-amber/30 bg-accent-amber/5 px-2 py-1 font-mono text-[10px] text-accent-amber">
+        <p className="mb-3 rounded border border-accent-amber/20 bg-accent-amber/5 px-2 py-1 font-mono text-[9px] text-accent-amber">
           {project.disclaimer}
         </p>
       ) : null}
 
-      <div className="mb-4 flex flex-wrap gap-1.5">
+      <div className="mb-4 flex flex-wrap gap-1">
         {project.stack.slice(0, 5).map((tech) => (
-          <TechBadge key={tech} label={tech} />
+          <TechBadge key={tech} label={tech} tone="default" />
         ))}
+        {project.stack.length > 5 ? (
+          <span className="font-mono text-[9px] text-ink-faint px-1.5 py-0.5">+{project.stack.length - 5}</span>
+        ) : null}
       </div>
 
-      <div className="mt-auto flex flex-wrap items-center gap-3 border-t border-surface-border pt-3">
+      <div className="mt-auto flex flex-wrap items-center gap-3 border-t border-surface-border/50 pt-3">
         <Link
           href={`/projects/${project.slug}`}
-          className="font-mono text-xs text-accent-cyan hover:text-accent-amber"
+          className="font-mono text-xs text-accent-cyan hover:text-accent-amber flex items-center gap-1 group/btn"
         >
-          Detalhes &rarr;
+          Detalhes <span className="inline-block transition-transform duration-200 group-hover/btn:translate-x-1">&rarr;</span>
         </Link>
         {project.links?.map((link) =>
           link.href.startsWith("/") ? (
             <Link
               key={link.href}
               href={link.href}
-              className="font-mono text-xs text-ink-muted hover:text-ink"
+              className="font-mono text-[10px] text-ink-muted hover:text-ink hover:underline"
             >
               {link.label}
             </Link>
@@ -75,7 +78,7 @@ export default function ProjectCard({ project }: { project: Project }) {
               href={link.href}
               target="_blank"
               rel="noreferrer"
-              className="font-mono text-xs text-ink-muted hover:text-ink"
+              className="font-mono text-[10px] text-ink-muted hover:text-ink hover:underline"
             >
               {link.label}
             </a>

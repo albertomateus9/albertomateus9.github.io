@@ -30,3 +30,35 @@ body {
   background-color: #1e293b;
   border-radius: 4px;
 }
+
+.bg-grid {
+  background-size: 40px 40px;
+  background-image:
+    linear-gradient(to right, rgba(34, 211, 238, 0.018) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(34, 211, 238, 0.018) 1px, transparent 1px);
+}
+
+.glow-cyan-sm {
+  box-shadow: 0 0 10px rgba(34, 211, 238, 0.06);
+}
+
+.glow-cyan-md {
+  box-shadow: 0 0 20px rgba(34, 211, 238, 0.12);
+}
+
+.glow-cyan-lg {
+  box-shadow: 0 0 30px rgba(34, 211, 238, 0.18);
+}
+
+.glow-amber-sm {
+  box-shadow: 0 0 10px rgba(245, 165, 36, 0.06);
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}

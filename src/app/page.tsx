@@ -5,6 +5,7 @@ import ProjectCard from "@/components/ProjectCard";
 import { projects, featuredProjects } from "@/lib/projects";
 import { articles } from "@/data/articles";
 import { igarixModules } from "@/data/igarix-modules";
+import Link from "next/link";
 
 export default function HomePage() {
   const publicCount = projects.filter((p) => p.status === "live" || p.status === "active").length;
@@ -50,6 +51,46 @@ export default function HomePage() {
           {others.slice(1).map((project) => (
             <ProjectCard key={project.slug} project={project} />
           ))}
+        </div>
+      </section>
+
+      <section className="border-t border-surface-border/50 pt-10">
+        <SectionHeader
+          eyebrow="atuação"
+          title="Núcleos de atuação profissional"
+          description="Navegue pelas frentes de infraestrutura, pesquisa acadêmica e atividade docente técnica."
+        />
+        <div className="grid gap-5 sm:grid-cols-3">
+          <div className="group relative rounded-lg border border-surface-border bg-surface/20 p-5 backdrop-blur-sm transition-all duration-300 hover:border-accent-cyan/40 hover:bg-surface/40 hover:glow-cyan-sm">
+            <p className="font-mono text-[9px] uppercase tracking-wider text-accent-cyan">[infraestrutura_e_redes]</p>
+            <h3 className="text-base font-semibold text-ink mt-2 group-hover:text-accent-cyan transition-colors">Redes & Operações</h3>
+            <p className="text-xs text-ink-muted mt-2 leading-relaxed">
+              Desenvolvimento de scripts SNMP, topologias SDN e automação de rotinas de suporte de redes.
+            </p>
+            <Link href="/infrastructure" className="inline-flex items-center gap-1 mt-4 font-mono text-xs text-accent-cyan hover:text-accent-amber group/btn">
+              [acessar_modulo] <span className="inline-block transition-transform duration-200 group-hover/btn:translate-x-1">&rarr;</span>
+            </Link>
+          </div>
+          <div className="group relative rounded-lg border border-surface-border bg-surface/20 p-5 backdrop-blur-sm transition-all duration-300 hover:border-accent-cyan/40 hover:bg-surface/40 hover:glow-cyan-sm">
+            <p className="font-mono text-[9px] uppercase tracking-wider text-accent-cyan">[pesquisa_aplicada]</p>
+            <h3 className="text-base font-semibold text-ink mt-2 group-hover:text-accent-cyan transition-colors">Pesquisa Acadêmica</h3>
+            <p className="text-xs text-ink-muted mt-2 leading-relaxed">
+              Trabalho científico sobre Visão Computacional, redes neurais e processamento temporal de keypoints.
+            </p>
+            <Link href="/research" className="inline-flex items-center gap-1 mt-4 font-mono text-xs text-accent-cyan hover:text-accent-amber group/btn">
+              [acessar_modulo] <span className="inline-block transition-transform duration-200 group-hover/btn:translate-x-1">&rarr;</span>
+            </Link>
+          </div>
+          <div className="group relative rounded-lg border border-surface-border bg-surface/20 p-5 backdrop-blur-sm transition-all duration-300 hover:border-accent-cyan/40 hover:bg-surface/40 hover:glow-cyan-sm">
+            <p className="font-mono text-[9px] uppercase tracking-wider text-accent-cyan">[ensino_tecnologico]</p>
+            <h3 className="text-base font-semibold text-ink mt-2 group-hover:text-accent-cyan transition-colors">Educação EBTT</h3>
+            <p className="text-xs text-ink-muted mt-2 leading-relaxed">
+              Prática acadêmica no ensino profissionalizante e desenvolvimento de didática laboratorial aplicada.
+            </p>
+            <Link href="/teaching" className="inline-flex items-center gap-1 mt-4 font-mono text-xs text-accent-cyan hover:text-accent-amber group/btn">
+              [acessar_modulo] <span className="inline-block transition-transform duration-200 group-hover/btn:translate-x-1">&rarr;</span>
+            </Link>
+          </div>
         </div>
       </section>
     </div>

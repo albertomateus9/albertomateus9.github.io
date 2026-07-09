@@ -23,15 +23,17 @@ export default function TopNav() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-1 lg:flex">
+        <nav className="hidden items-center gap-1.5 lg:flex">
           {navItems.map((item) => {
             const active = pathname === item.href;
             return (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`rounded px-2.5 py-1 font-mono text-xs transition-colors ${
-                  active ? "text-accent-cyan" : "text-ink-muted hover:text-ink"
+                className={`rounded border px-2.5 py-1 font-mono text-xs transition-all duration-200 ${
+                  active
+                    ? "text-accent-cyan border-accent-cyan/30 bg-accent-cyan/5 glow-cyan-sm"
+                    : "text-ink-muted border-transparent hover:text-ink hover:border-surface-border hover:bg-surface/50"
                 }`}
               >
                 {item.label}
@@ -43,7 +45,7 @@ export default function TopNav() {
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
-          className="rounded border border-surface-border px-2 py-1 font-mono text-xs text-ink-muted lg:hidden"
+          className="rounded border border-surface-border px-2 py-1 font-mono text-xs text-ink-muted hover:text-ink hover:border-accent-cyan/55 transition-colors lg:hidden"
           aria-expanded={open}
           aria-label="Alternar navegação"
         >
@@ -52,7 +54,7 @@ export default function TopNav() {
       </div>
 
       {open ? (
-        <nav className="border-t border-surface-border bg-navy-900 px-4 py-2 lg:hidden">
+        <nav className="border-t border-surface-border bg-navy-900 px-4 py-3 lg:hidden space-y-1">
           {navItems.map((item) => {
             const active = pathname === item.href;
             return (
@@ -60,12 +62,16 @@ export default function TopNav() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className={`block rounded px-2 py-2 text-sm ${
-                  active ? "text-accent-cyan" : "text-ink-muted hover:text-ink"
+                className={`block rounded px-3 py-2 text-sm font-mono transition-all ${
+                  active
+                    ? "text-accent-cyan bg-accent-cyan/5 border-l-2 border-accent-cyan"
+                    : "text-ink-muted hover:text-ink hover:bg-surface/30"
                 }`}
               >
-                {item.label}
-                <span className="ml-2 font-mono text-[10px] text-ink-faint">{item.hint}</span>
+                <div className="flex justify-between items-center">
+                  <span>{item.label}</span>
+                  <span className="font-mono text-[9px] text-ink-faint uppercase">{item.hint}</span>
+                </div>
               </Link>
             );
           })}
