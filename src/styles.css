@@ -1637,8 +1637,26 @@ footer p,
   margin: 0;
 }
 
+.simulation-notice {
+  display: grid;
+  gap: 0.25rem;
+  border-left: 2px solid var(--yellow);
+  padding: 0.75rem 0.9rem;
+  background: rgba(245, 199, 93, 0.06);
+  color: var(--paper-muted);
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+.simulation-notice strong {
+  color: var(--yellow);
+  font-family: monospace;
+  text-transform: uppercase;
+}
+
 .live-lab-meta {
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
   font-family: monospace;
   font-size: 0.7rem;
@@ -2172,6 +2190,7 @@ footer p {
 }
 
 .search-control input {
+  min-width: 0;
   width: 100%;
   border: 0;
   outline: 0;
@@ -2186,6 +2205,7 @@ footer p {
 }
 
 .select-control select {
+  min-width: 0;
   width: 100%;
   height: 100%;
   border: 0;
@@ -2512,6 +2532,11 @@ footer p {
   margin: 0 0 0.45rem;
   font-size: clamp(1.15rem, 1.4vw, 1.5rem);
   color: var(--paper);
+  overflow-wrap: anywhere;
+}
+
+.repo-copy {
+  min-width: 0;
 }
 
 .repo-copy p {
@@ -2850,18 +2875,21 @@ footer p {
   }
 }
 
-@media (max-width: 1380px) and (min-width: 1181px) {
+@media (max-width: 1600px) and (min-width: 1181px) {
   .catalog-controls {
-    grid-template-columns: minmax(15rem, 1fr) 12rem 11rem 12rem auto;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .demo-control {
-    grid-column: 1 / -1;
-    width: fit-content;
+    width: 100%;
   }
 }
 
 @media (max-width: 820px) {
+  .catalog-sidebar {
+    display: none;
+  }
+
   .site-header,
   main,
   footer {
@@ -3292,41 +3320,15 @@ footer p {
   box-shadow: 0 0 8px var(--coral);
 }
 
-.telemetry-bar-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.telemetry-bar {
-  flex-grow: 1;
-  height: 4px;
-  background: rgba(237, 241, 232, 0.08);
-  position: relative;
-  overflow: hidden;
-}
-
-.telemetry-fill {
-  height: 100%;
-  transition: width 1s ease-out;
-}
-
-.telemetry-fill.green {
-  background: var(--green);
-  box-shadow: 0 0 4px var(--green);
-}
-
-.telemetry-fill.cyan {
-  background: var(--cyan);
-  box-shadow: 0 0 4px var(--cyan);
-}
-
-.telemetry-percent {
+.skill-practice-label {
+  width: fit-content;
+  border: 1px solid rgba(137, 226, 124, 0.24);
+  padding: 0.18rem 0.4rem;
+  background: rgba(137, 226, 124, 0.05);
   font-family: monospace;
-  font-size: 0.75rem;
-  color: var(--paper-muted);
-  min-width: 2.2rem;
-  text-align: right;
+  font-size: 0.68rem;
+  color: var(--green);
+  text-transform: uppercase;
 }
 
 .skill-tags {

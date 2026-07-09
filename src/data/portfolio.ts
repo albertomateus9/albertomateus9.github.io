@@ -21,8 +21,8 @@ export const caseStudies: PortfolioCaseStudy[] = [
     },
     stack: ['React', 'TypeScript', 'PWA', 'Claude Code', 'Lovable', 'UX/UI Design'],
     result: {
-      pt: 'Desenvolvimento acelerado por IA reduzindo o time-to-market em 60%, entregando uma interface gamificada interativa e altamente responsiva.',
-      en: 'AI-accelerated development reducing time-to-market by 60%, delivering an interactive, highly responsive gamified interface.',
+      pt: 'Fluxo de desenvolvimento assistido por IA aplicado à entrega de uma interface gamificada, interativa e responsiva.',
+      en: 'AI-assisted development workflow applied to an interactive, responsive, gamified interface.',
     },
     next: {
       pt: 'Integrar IA gerativa para criação dinâmica de desafios de código customizados para os estudantes.',
@@ -50,8 +50,8 @@ export const caseStudies: PortfolioCaseStudy[] = [
     },
     stack: ['n8n', 'Supabase', 'Webhooks', 'REST APIs', 'React', 'TypeScript'],
     result: {
-      pt: 'Uma automação low-code escalável que processa milhares de eventos diários, gerando alertas instantâneos via webhook e telemetria fluida.',
-      en: 'A scalable low-code automation processing thousands of daily events, generating instant alerts via webhook and fluid telemetry.',
+      pt: 'Protótipo de automação low-code para organizar eventos, alertas via webhook e visualização de telemetria.',
+      en: 'Low-code automation prototype for organizing events, webhook alerts, and telemetry visualization.',
     },
     next: {
       pt: 'Adicionar análise preditiva de capacidade e comportamento usando IA para antecipar quedas de serviço.',
@@ -62,8 +62,8 @@ export const caseStudies: PortfolioCaseStudy[] = [
   {
     repository: 'tea-pose-analysis',
     title: {
-      pt: 'Diagnóstico de TEA com Inteligência Artificial',
-      en: 'ASD Diagnostics with Artificial Intelligence',
+      pt: 'Análise exploratória de movimentos com IA',
+      en: 'Exploratory Movement Analysis with AI',
     },
     summary: {
       pt: 'Classificação automatizada de movimentos corporais repetitivos a partir de coordenadas espaciais e visão computacional.',
@@ -79,8 +79,8 @@ export const caseStudies: PortfolioCaseStudy[] = [
     },
     stack: ['Python', 'OpenCV', 'FFT (Fourier)', 'SciPy', 'React (Dashboard)', 'APIs'],
     result: {
-      pt: 'Acurácia de 94% na detecção de movimentos estereotipados, validando a união de inteligência artificial aplicada com interfaces de visualização.',
-      en: '94% accuracy in detecting stereotyped movements, validating the merge of applied AI with visualization interfaces.',
+      pt: 'Pipeline experimental para estudar padrões de movimento e apoiar a avaliação técnica de métodos de visão computacional, sem finalidade diagnóstica.',
+      en: 'Experimental pipeline for studying movement patterns and evaluating computer-vision methods, without diagnostic use.',
     },
     next: {
       pt: 'Migrar a computação de pose para o navegador usando WebGPU no front-end para obter performance em tempo real.',
@@ -319,9 +319,9 @@ export const hardSkillsList: SkillCategory[] = [
       en: 'Creating fast, efficient, and responsive React SPAs integrated with no-code/low-code tools.'
     },
     items: [
-      { name: { pt: 'React & TypeScript (Vite)', en: 'React & TypeScript (Vite)' }, level: 92, evidence: { pt: 'WebCraft Studio', en: 'WebCraft Studio' }, tags: ['React', 'TypeScript', 'PWA', 'Vite'] },
-      { name: { pt: 'Plataformas No-Code & Low-Code', en: 'No-Code & Low-Code Platforms' }, level: 90, evidence: { pt: 'Projetos de Clientes', en: 'Client Projects' }, tags: ['Lovable', 'Wix', 'Framer', 'Webflow'] },
-      { name: { pt: 'HTML5, CSS3 Moderno & UI/UX', en: 'HTML5, Modern CSS3 & UI/UX' }, level: 88, evidence: { pt: 'Design Responsivo', en: 'Responsive Design' }, tags: ['Glassmorphism', 'Flexbox/Grid', 'UX/UI'] }
+      { name: { pt: 'React & TypeScript (Vite)', en: 'React & TypeScript (Vite)' }, evidence: { pt: 'WebCraft Studio', en: 'WebCraft Studio' }, tags: ['React', 'TypeScript', 'PWA', 'Vite'] },
+      { name: { pt: 'Plataformas No-Code & Low-Code', en: 'No-Code & Low-Code Platforms' }, evidence: { pt: 'Projetos de Clientes', en: 'Client Projects' }, tags: ['Lovable', 'Wix', 'Framer', 'Webflow'] },
+      { name: { pt: 'HTML5, CSS3 Moderno & UI/UX', en: 'HTML5, Modern CSS3 & UI/UX' }, evidence: { pt: 'Design Responsivo', en: 'Responsive Design' }, tags: ['Glassmorphism', 'Flexbox/Grid', 'UX/UI'] }
     ]
   },
   {
@@ -331,9 +331,9 @@ export const hardSkillsList: SkillCategory[] = [
       en: 'Building data workflows, webhooks, API orchestration, and simple/scalable database setups.'
     },
     items: [
-      { name: { pt: 'Plataformas de Workflow (n8n, Make)', en: 'Workflow Platforms (n8n, Make)' }, level: 92, evidence: { pt: 'Integrações de Infra', en: 'Infrastructure Integrations' }, tags: ['n8n', 'Make.com', 'Zapier', 'Automação'] },
-      { name: { pt: 'Bancos de Dados & Supabase', en: 'Databases & Supabase' }, level: 85, evidence: { pt: 'CampusWatch Hub', en: 'CampusWatch Hub' }, tags: ['Supabase', 'SQL', 'PostgreSQL', 'Firebase'] },
-      { name: { pt: 'APIs REST, Webhooks & JSON', en: 'REST APIs, Webhooks & JSON' }, level: 90, evidence: { pt: 'Automações Ativas', en: 'Active Automations' }, tags: ['Webhooks', 'API Integration', 'JSON Parsing'] }
+      { name: { pt: 'Plataformas de Workflow (n8n, Make)', en: 'Workflow Platforms (n8n, Make)' }, evidence: { pt: 'Integrações de Infra', en: 'Infrastructure Integrations' }, tags: ['n8n', 'Make.com', 'Zapier', 'Automação'] },
+      { name: { pt: 'Bancos de Dados & Supabase', en: 'Databases & Supabase' }, evidence: { pt: 'CampusWatch Hub', en: 'CampusWatch Hub' }, tags: ['Supabase', 'SQL', 'PostgreSQL', 'Firebase'] },
+      { name: { pt: 'APIs REST, Webhooks & JSON', en: 'REST APIs, Webhooks & JSON' }, evidence: { pt: 'Automações demonstrativas', en: 'Demonstration automations' }, tags: ['Webhooks', 'API Integration', 'JSON Parsing'] }
     ]
   },
   {
@@ -343,8 +343,8 @@ export const hardSkillsList: SkillCategory[] = [
       en: 'Prompt engineering for accelerated code development, automated testing, and functional MVPs.'
     },
     items: [
-      { name: { pt: 'Ferramentas de IA (Claude Code, ChatGPT)', en: 'AI Tools (Claude Code, ChatGPT)' }, level: 95, evidence: { pt: 'Prototipagem Ágil', en: 'Agile Prototyping' }, tags: ['Claude Code', 'ChatGPT', 'Cursor', 'Copilot'] },
-      { name: { pt: 'Otimização de Prompts & Agentes', en: 'Prompt & Agent Optimization' }, level: 80, evidence: { pt: 'Pesquisa UFPA / IA', en: 'UFPA Research / AI' }, tags: ['Prompt Engineering', 'AI Pipelines', 'Automation'] }
+      { name: { pt: 'Ferramentas de IA (Claude Code, ChatGPT)', en: 'AI Tools (Claude Code, ChatGPT)' }, evidence: { pt: 'Prototipagem Ágil', en: 'Agile Prototyping' }, tags: ['Claude Code', 'ChatGPT', 'Cursor', 'Copilot'] },
+      { name: { pt: 'Otimização de Prompts & Agentes', en: 'Prompt & Agent Optimization' }, evidence: { pt: 'Pesquisa UFPA / IA', en: 'UFPA Research / AI' }, tags: ['Prompt Engineering', 'AI Pipelines', 'Automation'] }
     ]
   }
 ];
@@ -357,8 +357,8 @@ export const softSkillsList: SkillCategory[] = [
       en: 'Focus on creative real-world problem solving, rapidly adapting solutions to fit business needs.'
     },
     items: [
-      { name: { pt: 'Prototipagem Lean & Entrega Rápida', en: 'Lean Prototyping & Fast Delivery' }, level: 95, evidence: { pt: 'MVPs em 48h', en: 'MVPs in 48h' }, tags: ['Agilidade', 'Lean MVP', 'Mão na Massa'] },
-      { name: { pt: 'Entendimento de Negócio & UX/UI', en: 'Business Alignment & UX/UI' }, level: 90, evidence: { pt: 'COP 30 Planejamento', en: 'COP 30 Planning' }, tags: ['Usabilidade', 'Soluções Simples', 'UX/UI'] }
+      { name: { pt: 'Prototipagem Lean & Entrega Rápida', en: 'Lean Prototyping & Fast Delivery' }, evidence: { pt: 'MVPs versionados', en: 'Versioned MVPs' }, tags: ['Agilidade', 'Lean MVP', 'Mão na Massa'] },
+      { name: { pt: 'Entendimento de Negócio & UX/UI', en: 'Business Alignment & UX/UI' }, evidence: { pt: 'Planejamento técnico', en: 'Technical planning' }, tags: ['Usabilidade', 'Soluções Simples', 'UX/UI'] }
     ]
   },
   {
@@ -368,8 +368,8 @@ export const softSkillsList: SkillCategory[] = [
       en: 'Ability to master new technology tools rapidly and independently, applying a structured scientific method.'
     },
     items: [
-      { name: { pt: 'Adaptabilidade & Autodidatismo', en: 'Adaptability & Self-learning' }, level: 96, evidence: { pt: 'Doutorado / P&D', en: 'PhD / R&D' }, tags: ['Autodidata', 'Curiosidade', 'IA Nova'] },
-      { name: { pt: 'Formação Técnica & Didática', en: 'Technical Teaching & Didactics' }, level: 92, evidence: { pt: 'Professor EETEPA', en: 'EETEPA Teacher' }, tags: ['Didática Maker', 'Capacitação STEAM'] }
+      { name: { pt: 'Adaptabilidade & Autodidatismo', en: 'Adaptability & Self-learning' }, evidence: { pt: 'Doutorado / P&D', en: 'PhD / R&D' }, tags: ['Autodidata', 'Curiosidade', 'IA Nova'] },
+      { name: { pt: 'Formação Técnica & Didática', en: 'Technical Teaching & Didactics' }, evidence: { pt: 'Professor EETEPA', en: 'EETEPA Teacher' }, tags: ['Didática Maker', 'Capacitação STEAM'] }
     ]
   }
 ];

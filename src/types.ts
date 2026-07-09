@@ -96,7 +96,6 @@ export interface PublicationItem {
 
 export interface SkillItem {
   name: Record<Locale, string>;
-  level: number;
   evidence: Record<Locale, string>;
   tags: string[];
 }

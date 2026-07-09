@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { hardSkillsList, softSkillsList } from './data/portfolio';
 
 describe('Skills Lists', () => {
-  it('defines hard skills with correct structure and valid levels', () => {
+  it('defines hard skills with verifiable evidence', () => {
     expect(hardSkillsList.length).toBeGreaterThan(0);
     
     for (const category of hardSkillsList) {
@@ -15,8 +15,6 @@ describe('Skills Lists', () => {
       for (const item of category.items) {
         expect(item.name.pt).toBeDefined();
         expect(item.name.en).toBeDefined();
-        expect(item.level).toBeGreaterThanOrEqual(0);
-        expect(item.level).toBeLessThanOrEqual(100);
         expect(item.evidence.pt).toBeDefined();
         expect(item.evidence.en).toBeDefined();
         expect(item.tags.length).toBeGreaterThan(0);
@@ -24,7 +22,7 @@ describe('Skills Lists', () => {
     }
   });
 
-  it('defines soft skills with correct structure and valid levels', () => {
+  it('defines soft skills with verifiable evidence', () => {
     expect(softSkillsList.length).toBeGreaterThan(0);
     
     for (const category of softSkillsList) {
@@ -37,8 +35,6 @@ describe('Skills Lists', () => {
       for (const item of category.items) {
         expect(item.name.pt).toBeDefined();
         expect(item.name.en).toBeDefined();
-        expect(item.level).toBeGreaterThanOrEqual(0);
-        expect(item.level).toBeLessThanOrEqual(100);
         expect(item.evidence.pt).toBeDefined();
         expect(item.evidence.en).toBeDefined();
         expect(item.tags.length).toBeGreaterThan(0);

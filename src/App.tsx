@@ -29,10 +29,13 @@ import {
 } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 
+import { SimulationNotice } from './components/SimulationNotice';
 import snapshots from './data/github-repositories.json';
 import { curatedRepositories, familyOrder } from './data/curation';
 import { caseStudies, technologyRadar, educationHistory, experienceHistory, publicationList, hardSkillsList, softSkillsList } from './data/portfolio';
+import { simulationCopy } from './data/simulation-copy';
 import { enrichRepository, filterRepositories, sortRepositories } from './lib/catalog';
+import { getPortfolioView, scrollResetOptions } from './lib/view-navigation';
 import type {
   CatalogFilters,
   Locale,
@@ -180,7 +183,7 @@ const copy = {
     contactTitle: 'Contato',
     contactBody: 'Acompanhe minhas entregas, automações e histórico profissional.',
     skillsTitle: 'Habilidades & Evidências',
-    skillsSubtitle: 'Métricas reais de proficiência com comprovações diretas nos repositórios e produtos do portfólio.',
+    skillsSubtitle: 'Áreas de prática com evidências verificáveis em repositórios e projetos públicos.',
     hardSkillsTitle: 'Hard Skills // Tecnologias & Desenvolvimento',
     softSkillsTitle: 'Soft Skills // Metodologia & Negócio',
     skillsEvidence: 'Evidência',
@@ -317,7 +320,7 @@ const copy = {
     contactTitle: 'Contact',
     contactBody: 'Follow my deliveries, automations, and professional background.',
     skillsTitle: 'Skills & Evidences',
-    skillsSubtitle: 'Real proficiency metrics with direct evidence verified in repositories and portfolio products.',
+    skillsSubtitle: 'Practice areas supported by verifiable evidence in public repositories and projects.',
     hardSkillsTitle: 'Hard Skills // Technologies & Development',
     softSkillsTitle: 'Soft Skills // Methodology & Business',
     skillsEvidence: 'Evidence',
@@ -355,14 +358,18 @@ const repositories = sortRepositories(
 );
 
 function useHashView() {
-  const readView = () => (window.location.hash === '#catalogo' ? 'catalogo' : 'home');
-  const [view, setView] = useState<'home' | 'catalogo'>(readView);
+  const readView = () => getPortfolioView(window.location.hash);
+  const [view, setView] = useState(readView);
 
   useEffect(() => {
     const onHashChange = () => setView(readView());
     window.addEventListener('hashchange', onHashChange);
     return () => window.removeEventListener('hashchange', onHashChange);
   }, []);
+
+  useEffect(() => {
+    window.scrollTo(scrollResetOptions);
+  }, [view]);
 
   return view;
 }
@@ -490,7 +497,7 @@ function PortraitStage({ locale }: { locale: Locale }) {
 
         {/* HUD Data overlays */}
         <div className="hud-camera-bottom">
-          <span className="hud-tag green">SYS: ACTIVE</span>
+          <span className="hud-tag green">SYS: PUBLIC_DEMO</span>
           <span className="hud-tag cyan">CALIB_2026_OK</span>
         </div>
 
@@ -685,11 +692,11 @@ function HeroConsole({ locale }: { locale: Locale }) {
             <line x1="100" y1="22" x2="200" y2="22" stroke="rgba(255, 113, 91, 0.6)" strokeWidth="1" className="hud-pulse" style={{ animationDuration: '3.5s' }} />
             
             {/* Left statistics */}
-            <text x="10" y="24" fontSize="7" fill="var(--cyan)" fontFamily="monospace" fontWeight="bold">MATCH: 99.2%</text>
+            <text x="10" y="24" fontSize="7" fill="var(--cyan)" fontFamily="monospace" fontWeight="bold">MODE: DEMO</text>
             <text x="10" y="38" fontSize="6.5" fill="var(--paper-muted)" fontFamily="monospace">MODEL: FaceMesh_V2</text>
             <text x="10" y="52" fontSize="6.5" fill="var(--paper-muted)" fontFamily="monospace">FPS: 90 / LAT: 2.1ms</text>
             <text x="10" y="66" fontSize="6.5" fill="var(--paper-muted)" fontFamily="monospace">THRES: 0.85</text>
-            <text x="10" y="80" fontSize="6.5" fill="var(--green)" fontFamily="monospace" fontWeight="bold">STATUS: ACTIVE</text>
+            <text x="10" y="80" fontSize="6.5" fill="var(--green)" fontFamily="monospace" fontWeight="bold">STATUS: CONCEPT</text>
             
             {/* Right statistics */}
             <text x="290" y="24" fontSize="7" fill="var(--coral)" textAnchor="end" fontFamily="monospace" fontWeight="bold">TRACK_ID: 104</text>
@@ -700,7 +707,7 @@ function HeroConsole({ locale }: { locale: Locale }) {
           </svg>
         </div>
         <footer className="hud-panel-footer">
-          <span>PIPELINE: ACTIVE</span>
+          <span>PIPELINE: CONCEPT</span>
           <span>COMPUTE: EDGE_DEVICE</span>
         </footer>
       </section>
@@ -776,13 +783,13 @@ function HeroConsole({ locale }: { locale: Locale }) {
             <circle cx="208" cy="67.5" r="3" fill="var(--coral)" opacity="0.6" className="hud-pulse-delay" />
             
             {/* Metrics */}
-            <text x="10" y="48" fontSize="6.5" fill="var(--paper-muted)" fontFamily="monospace">STUDENTS: 24</text>
-            <text x="10" y="57" fontSize="6.5" fill="var(--paper-muted)" fontFamily="monospace">DEV_RATE: 82%</text>
+            <text x="10" y="48" fontSize="6.5" fill="var(--paper-muted)" fontFamily="monospace">COHORT: EXAMPLE</text>
+            <text x="10" y="57" fontSize="6.5" fill="var(--paper-muted)" fontFamily="monospace">RATE: ILLUSTRATIVE</text>
             <text x="290" y="93" fontSize="6.5" fill="var(--green)" textAnchor="end" fontFamily="monospace" fontWeight="bold">STEAM_LAB_CORE</text>
           </svg>
         </div>
         <footer className="hud-panel-footer">
-          <span>{locale === 'pt' ? 'PROJETOS CURRICULARES: 24+' : 'CURRICULAR PROJECTS: 24+'}</span>
+          <span>{locale === 'pt' ? 'PROJETOS: AMOSTRA' : 'PROJECTS: SAMPLE'}</span>
           <span>{locale === 'pt' ? 'AÇÃO: AUTORIA_ESTUDANTE' : 'ACTION: STUDENT_AUTHORSHIP'}</span>
         </footer>
       </section>
@@ -945,7 +952,7 @@ function CaseStudies({ locale }: { locale: Locale }) {
           <span className="bracket-top" />
           <div className="meta-terminal-line">SYSTEM: CASOS_EM_FOCO</div>
           <div className="meta-terminal-line">TOTAL_ITEMS: {studies.length}</div>
-          <div className="meta-terminal-line">ENV: PRODUCTION</div>
+          <div className="meta-terminal-line">ENV: PUBLIC_SHOWCASE</div>
           <div className="meta-terminal-line">OBSERVABILITY: OK</div>
           <span className="bracket-bottom" />
         </div>
@@ -1002,13 +1009,13 @@ function SkillsSection({ locale }: { locale: Locale }) {
     <section className="skills-section" id="skills" aria-labelledby="skills-title">
       <header className="skills-header">
         <div className="skills-header-left">
-          <span className="live-lab-tag">{locale === 'pt' ? 'MÉTRICAS & EFICIÊNCIA' : 'METRICS & EFFICIENCY'}</span>
+          <span className="live-lab-tag">{locale === 'pt' ? 'PRÁTICA & EVIDÊNCIAS' : 'PRACTICE & EVIDENCE'}</span>
           <h2 id="skills-title">{content.skillsTitle}</h2>
           <p>{content.skillsSubtitle}</p>
         </div>
         <div className="skills-hud-meta" aria-hidden="true">
           <span className="bracket-top" />
-          <div className="meta-terminal-line">SYS: SKILLS_TELEMETRY</div>
+          <div className="meta-terminal-line">SYS: SKILLS_EVIDENCE</div>
           <div className="meta-terminal-line">HARD_SKILLS: {hardSkillsList.reduce((acc, cat) => acc + cat.items.length, 0)}</div>
           <div className="meta-terminal-line">SOFT_SKILLS: {softSkillsList.reduce((acc, cat) => acc + cat.items.length, 0)}</div>
           <div className="meta-terminal-line">EVIDENCE_TRACKS: ACTIVE</div>
@@ -1037,12 +1044,9 @@ function SkillsSection({ locale }: { locale: Locale }) {
                           {content.skillsEvidence}: <em>{item.evidence[locale]}</em>
                         </span>
                       </div>
-                      <div className="telemetry-bar-wrapper">
-                        <div className="telemetry-bar">
-                          <div className="telemetry-fill green" style={{ width: `${item.level}%` }} />
-                        </div>
-                        <span className="telemetry-percent">{item.level}%</span>
-                      </div>
+                      <span className="skill-practice-label">
+                        {locale === 'pt' ? 'Prática documentada' : 'Documented practice'}
+                      </span>
                       <div className="skill-tags">
                         {item.tags.map((tag) => (
                           <span className="skill-tag" key={tag}>{tag}</span>
@@ -1076,12 +1080,9 @@ function SkillsSection({ locale }: { locale: Locale }) {
                           {content.skillsEvidence}: <em>{item.evidence[locale]}</em>
                         </span>
                       </div>
-                      <div className="telemetry-bar-wrapper">
-                        <div className="telemetry-bar">
-                          <div className="telemetry-fill cyan" style={{ width: `${item.level}%` }} />
-                        </div>
-                        <span className="telemetry-percent">{item.level}%</span>
-                      </div>
+                      <span className="skill-practice-label">
+                        {locale === 'pt' ? 'Prática documentada' : 'Documented practice'}
+                      </span>
                       <div className="skill-tags">
                         {item.tags.map((tag) => (
                           <span className="skill-tag" key={tag}>{tag}</span>
@@ -1101,12 +1102,13 @@ function SkillsSection({ locale }: { locale: Locale }) {
 
 // Component: Interactive IDE / Code Editor replica inspired by modern developer tooling
 function InteractiveIde({ locale }: { locale: Locale }) {
+  const simulation = simulationCopy[locale];
   const [activeTab, setActiveTab] = useState<'react' | 'n8n' | 'supabase' | 'preview'>('react');
   const [leadName, setLeadName] = useState('');
   const [leadEmail, setLeadEmail] = useState('');
   const [simulatedLeads, setSimulatedLeads] = useState<Array<{ name: string; email: string; date: string }>>([
-    { name: 'Ana Souza', email: 'ana.souza@empresa.com', date: '01/06/2026 14:32' },
-    { name: 'Carlos Lima', email: 'carlos@tech.br', date: '01/06/2026 15:45' }
+    { name: 'Lead Demo A', email: 'demo-a@example.com', date: 'local session' },
+    { name: 'Lead Demo B', email: 'demo-b@example.com', date: 'local session' },
   ]);
   const [simStatus, setSimStatus] = useState<'idle' | 'webhook' | 'n8n' | 'supabase' | 'done'>('idle');
 
@@ -1155,7 +1157,7 @@ function InteractiveIde({ locale }: { locale: Locale }) {
         </div>
         <div className="ide-status-pill">
           <span className="live-pulse" />
-          <span>{locale === 'pt' ? 'DEMO ATIVA' : 'ACTIVE DEMO'}</span>
+          <span>{simulation.workspaceStatus}</span>
         </div>
       </div>
       
@@ -1302,9 +1304,9 @@ function InteractiveIde({ locale }: { locale: Locale }) {
                   className="preview-submit-btn"
                   disabled={simStatus !== 'idle' || !leadName || !leadEmail}
                 >
-                  {simStatus === 'idle' && (locale === 'pt' ? 'Disparar Fluxo (n8n + Supabase)' : 'Trigger Flow (n8n + Supabase)')}
-                  {simStatus !== 'idle' && simStatus !== 'done' && (locale === 'pt' ? 'Orquestrando...' : 'Orchestrating...')}
-                  {simStatus === 'done' && (locale === 'pt' ? 'Concluído!' : 'Completed!')}
+                  {simStatus === 'idle' && simulation.trigger}
+                  {simStatus !== 'idle' && simStatus !== 'done' && simulation.processing}
+                  {simStatus === 'done' && simulation.complete}
                 </button>
               </form>
 
@@ -1328,7 +1330,7 @@ function InteractiveIde({ locale }: { locale: Locale }) {
                 {simStatus === 'done' && (
                   <div className="telemetry-success-banner">
                     <CheckCircle2 size={14} />
-                    <span>200 OK - Lead salvo no Supabase</span>
+                    <span>{simulation.success}</span>
                   </div>
                 )}
               </div>
@@ -1336,7 +1338,7 @@ function InteractiveIde({ locale }: { locale: Locale }) {
 
             <div className="preview-leads-list">
               <div className="leads-list-header">
-                <h4>{locale === 'pt' ? 'Leads Gravados no Supabase' : 'Leads Saved in Supabase'}</h4>
+                <h4>{simulation.recordsTitle}</h4>
                 {simulatedLeads.length > 0 && (
                   <button type="button" onClick={clearSimulation} className="clear-btn" title="Limpar dados simulados">
                     <Trash2 size={12} />
@@ -1347,7 +1349,7 @@ function InteractiveIde({ locale }: { locale: Locale }) {
               
               {simulatedLeads.length === 0 ? (
                 <div className="leads-empty-state">
-                  {locale === 'pt' ? 'Nenhum lead gravado ainda.' : 'No leads recorded yet.'}
+                  {simulation.empty}
                 </div>
               ) : (
                 <div className="leads-rows">
@@ -1377,6 +1379,7 @@ function InteractiveIde({ locale }: { locale: Locale }) {
 
 function HomeView({ locale }: { locale: Locale }) {
   const content = copy[locale];
+  const simulation = simulationCopy[locale];
   const showcase = repositories.filter((repo) => repo.featured && repo.family !== 'premium').slice(0, 6);
   const webcraft = repositories.find((repo) => repo.name === 'webcraft-studio');
   const [activeTab, setActiveTab] = useState<'timeline' | 'experience' | 'education' | 'publications'>('timeline');
@@ -1432,11 +1435,12 @@ function HomeView({ locale }: { locale: Locale }) {
                 {locale === 'pt' ? 'Soluções digitais em operação' : 'Digital solutions in action'}
               </h2>
               <p>{locale === 'pt' ? 'Uma amostra interativa de como organizo interfaces, automações e dados para transformar requisitos técnicos em fluxos compreensíveis. O objetivo é mostrar método, clareza e entrega prática sem depender de jargões internos.' : 'An interactive sample of how I organize interfaces, automation, and data to turn technical requirements into understandable flows. The goal is to show method, clarity, and practical delivery without relying on internal jargon.'}</p>
+              <SimulationNotice locale={locale} />
               
               <div className="live-lab-meta" aria-hidden="true">
-                <div className="meta-line">STATUS: ACTIVE</div>
-                <div className="meta-line">IP: 10.20.30.0/24</div>
-                <div className="meta-line">TELEMETRY: OK</div>
+                <div className="meta-line">{simulation.status}</div>
+                <div className="meta-line">{simulation.network}</div>
+                <div className="meta-line">{simulation.telemetry}</div>
               </div>
             </div>
             <InteractiveIde locale={locale} />
@@ -1902,14 +1906,14 @@ function CatalogView({ locale, setLocale }: { locale: Locale; setLocale: (l: Loc
               <circle cx="270" cy="40" r="4" fill="var(--green)" />
               <circle cx="330" cy="20" r="4" fill="var(--coral)" />
               
-              <text x="30" y="52" fontSize="6" fill="var(--paper-muted)" fontFamily="monospace" textAnchor="middle">192.168.1.1</text>
-              <text x="90" y="12" fontSize="6" fill="var(--paper-muted)" fontFamily="monospace" textAnchor="middle">192.168.1.254</text>
+              <text x="30" y="52" fontSize="6" fill="var(--paper-muted)" fontFamily="monospace" textAnchor="middle">192.0.2.1</text>
+              <text x="90" y="12" fontSize="6" fill="var(--paper-muted)" fontFamily="monospace" textAnchor="middle">192.0.2.254</text>
               <text x="150" y="56" fontSize="6" fill="var(--green)" fontFamily="monospace" textAnchor="middle">GW_CORE</text>
-              <text x="210" y="12" fontSize="6" fill="var(--paper-muted)" fontFamily="monospace" textAnchor="middle">10.0.0.1</text>
+              <text x="210" y="12" fontSize="6" fill="var(--paper-muted)" fontFamily="monospace" textAnchor="middle">198.51.100.1</text>
               <text x="330" y="12" fontSize="6" fill="var(--coral)" fontFamily="monospace" textAnchor="middle">WAN_EDGE</text>
 
               <path d="M 370 10 L 390 10 L 390 30" fill="none" stroke="var(--cyan)" strokeWidth="1" />
-              <text x="385" y="45" fontSize="7" fill="var(--cyan)" fontFamily="monospace" textAnchor="end">SYS: ACTIVE</text>
+              <text x="385" y="45" fontSize="7" fill="var(--cyan)" fontFamily="monospace" textAnchor="end">NET: DOCUMENTATION</text>
             </svg>
             
             <div className="catalog-hud-timeline">
