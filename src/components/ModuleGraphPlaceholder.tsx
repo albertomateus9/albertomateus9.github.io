@@ -3,15 +3,15 @@ import type { IgarixModule, ModuleStatus } from "@/types";
 const statusTone: Record<ModuleStatus, string> = {
   active: "text-accent-cyan border-accent-cyan/30 bg-accent-cyan/5",
   prototype: "text-accent-amber border-accent-amber/30 bg-accent-amber/5",
-  concept: "text-violet-300 border-violet-500/20 bg-violet-500/5",
-  research: "text-sky-300 border-sky-500/20 bg-sky-500/5",
+  concept: "text-accent-education border-accent-education/30 bg-accent-education/5",
+  research: "text-accent-research border-accent-research/30 bg-accent-research/5",
 };
 
 const statusBorderColor: Record<ModuleStatus, string> = {
-  active: "#22d3ee",
-  prototype: "#f5a524",
-  concept: "#a78bfa",
-  research: "#38bdf8",
+  active: "var(--color-accent-primary)",
+  prototype: "var(--color-accent-operational)",
+  concept: "var(--color-accent-education)",
+  research: "var(--color-accent-research)",
 };
 
 const statusText: Record<ModuleStatus, string> = {
@@ -53,10 +53,10 @@ export default function ModuleGraphPlaceholder({ modules }: { modules: IgarixMod
     <div className="rounded-lg border border-surface-border bg-surface/20 p-5 backdrop-blur-sm">
       <div className="mb-6 flex items-center justify-between border-b border-surface-border pb-3">
         <div>
-          <p className="font-mono text-[10px] uppercase tracking-widest text-accent-cyan">[module_dependency_graph]</p>
-          <p className="mt-1 text-xs text-ink-muted">Visão operacional e fluxo de dependências do ecossistema central.</p>
+          <p className="font-mono text-xs uppercase tracking-widest text-accent-cyan">[module_dependency_graph]</p>
+          <p className="mt-1 text-sm text-ink-muted">Visão operacional e fluxo de dependências do ecossistema central.</p>
         </div>
-        <div className="flex items-center gap-3 font-mono text-[9px] text-ink-faint select-none">
+        <div className="flex items-center gap-3 font-mono text-xs text-ink-faint select-none">
           <span className="flex items-center gap-1"><span className="h-1.5 w-1.5 rounded-full bg-cyan-400" /> ATIVO</span>
           <span className="flex items-center gap-1"><span className="h-1.5 w-1.5 rounded-full bg-amber-400" /> PROTÓTIPO</span>
           <span className="flex items-center gap-1"><span className="h-1.5 w-1.5 rounded-full bg-violet-400" /> CONCEITO</span>
@@ -81,16 +81,16 @@ export default function ModuleGraphPlaceholder({ modules }: { modules: IgarixMod
               }
             `}</style>
             <marker id="arrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-              <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#64748b" opacity="0.4" />
+              <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--color-border-strong)" opacity="0.4" />
             </marker>
             <marker id="arrow-active" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-              <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#22d3ee" opacity="0.8" />
+              <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--color-accent-primary)" opacity="0.8" />
             </marker>
           </defs>
 
           {/* Background grid dots for technical blueprint feeling */}
           <pattern id="dotGrid" width="20" height="20" patternUnits="userSpaceOnUse">
-            <circle cx="2" cy="2" r="0.6" fill="#1e293b" fillOpacity="0.6" />
+            <circle cx="2" cy="2" r="0.6" fill="var(--color-border-subtle)" fillOpacity="0.6" />
           </pattern>
           <rect width="100%" height="100%" fill="url(#dotGrid)" />
 
@@ -103,16 +103,16 @@ export default function ModuleGraphPlaceholder({ modules }: { modules: IgarixMod
             const isActive = fromMod.status === "active" && toMod.status === "active";
             const isProto = !isActive && (fromMod.status === "active" || fromMod.status === "prototype") && (toMod.status === "active" || toMod.status === "prototype");
 
-            let strokeColor = "#1e293b";
+            let strokeColor = "var(--color-border-subtle)";
             let strokeOpacity = 0.5;
             let marker = "url(#arrow)";
 
             if (isActive) {
-              strokeColor = "#22d3ee";
+              strokeColor = "var(--color-accent-primary)";
               strokeOpacity = 0.35;
               marker = "url(#arrow-active)";
             } else if (isProto) {
-              strokeColor = "#f5a524";
+              strokeColor = "var(--color-accent-operational)";
               strokeOpacity = 0.25;
             }
 
@@ -122,10 +122,10 @@ export default function ModuleGraphPlaceholder({ modules }: { modules: IgarixMod
                 <path d={c.d} fill="none" stroke={strokeColor} strokeWidth="1.5" strokeOpacity={strokeOpacity} markerEnd={marker} />
                 {/* Animated data flow paths overlay */}
                 {isActive && (
-                  <path d={c.d} fill="none" stroke="#22d3ee" strokeWidth="1.2" strokeOpacity="0.75" className="flow-line flow-active" />
+                  <path d={c.d} fill="none" stroke="var(--color-accent-primary)" strokeWidth="1.2" strokeOpacity="0.75" className="flow-line flow-active" />
                 )}
                 {isProto && !isActive && (
-                  <path d={c.d} fill="none" stroke="#f5a524" strokeWidth="1.0" strokeOpacity="0.5" className="flow-line flow-proto" />
+                  <path d={c.d} fill="none" stroke="var(--color-accent-operational)" strokeWidth="1.0" strokeOpacity="0.5" className="flow-line flow-proto" />
                 )}
               </g>
             );
@@ -145,9 +145,9 @@ export default function ModuleGraphPlaceholder({ modules }: { modules: IgarixMod
                   width="160"
                   height="70"
                   rx="6"
-                  fill="#0d1320"
+                  fill="var(--color-surface-primary)"
                   fillOpacity="0.85"
-                  stroke={m.status === "active" ? "#1e293b" : "#111827"}
+                  stroke={m.status === "active" ? "var(--color-border-default)" : "var(--color-border-subtle)"}
                   strokeWidth="1"
                   className="group-hover:stroke-accent-cyan/40 transition-colors"
                 />
@@ -162,17 +162,17 @@ export default function ModuleGraphPlaceholder({ modules }: { modules: IgarixMod
                 />
 
                 {/* Module title */}
-                <text x="12" y="24" fill="#e2e8f0" fontSize="11" fontFamily="ui-monospace, monospace" fontWeight="600" className="group-hover:fill-accent-cyan transition-colors">
+                <text x="12" y="24" fill="var(--color-text-primary)" fontSize="11" fontFamily="var(--family-mono)" fontWeight="600" className="group-hover:fill-accent-cyan transition-colors">
                   {m.name}
                 </text>
 
                 {/* Module role (subheading) */}
-                <text x="12" y="40" fill={m.status === "active" ? "#22d3ee" : "#f5a524"} fillOpacity="0.9" fontSize="8" fontFamily="ui-monospace, monospace" letterSpacing="0.05em">
+                <text x="12" y="40" fill={m.status === "active" ? "var(--color-accent-primary)" : "var(--color-accent-operational)"} fillOpacity="0.9" fontSize="10" fontFamily="var(--family-mono)" letterSpacing="0.05em">
                   {m.role.toUpperCase()}
                 </text>
 
                 {/* Module details */}
-                <text x="12" y="54" fill="#94a3b8" fontSize="8" fontFamily="system-ui, sans-serif">
+                <text x="12" y="56" fill="var(--color-text-secondary)" fontSize="10" fontFamily="var(--family-body)">
                   {m.description.length > 32 ? m.description.slice(0, 32) + "..." : m.description}
                 </text>
 
@@ -196,14 +196,14 @@ export default function ModuleGraphPlaceholder({ modules }: { modules: IgarixMod
             >
               <div className="flex items-center justify-between">
                 <h4 className="font-mono text-xs font-semibold text-ink">{m.name}</h4>
-                <span className="font-mono text-[8px] uppercase tracking-wider px-1.5 py-0.5 rounded border border-current opacity-80">
+                <span className="font-mono text-xs uppercase tracking-wider px-1.5 py-0.5 rounded border border-current opacity-80">
                   {statusText[m.status]}
                 </span>
               </div>
-              <p className="mt-1 font-mono text-[9px] uppercase tracking-widest text-accent-cyan">{m.role}</p>
-              <p className="mt-2 text-xs text-ink-muted leading-relaxed">{m.description}</p>
+              <p className="mt-1 font-mono text-xs uppercase tracking-widest text-accent-cyan">{m.role}</p>
+              <p className="mt-2 text-sm text-ink-muted leading-relaxed">{m.description}</p>
 
-              <div className="mt-3 pt-2.5 border-t border-surface-border/40 flex items-center justify-between text-[9px] font-mono text-ink-faint">
+              <div className="mt-3 pt-2.5 border-t border-surface-border/40 flex items-center justify-between text-xs font-mono text-ink-faint">
                 <span>{isRoot ? "Módulo Raiz" : "Dependente"}</span>
                 {!isRoot && (
                   <span>DEP: {m.dependsOn.join(", ").toUpperCase()}</span>

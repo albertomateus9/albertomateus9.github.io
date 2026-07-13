@@ -1,0 +1,43 @@
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 3px;
+  box-shadow: var(--shadow-focus);
+}
+
+:where(button, [aria-disabled="true"]):disabled {
+  cursor: not-allowed;
+}
+
+.ds-surface-grid {
+  background-image:
+    linear-gradient(to right, var(--paint-grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--paint-grid) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.ds-visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: var(--reduced-motion-duration) !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: var(--reduced-motion-duration) !important;
+  }
+}

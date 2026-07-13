@@ -1,22 +1,8 @@
-// Section heading with an eyebrow label and optional description.
-interface SectionHeaderProps {
-  eyebrow?: string;
-  title: string;
-  description?: string;
-}
+import { Heading, Stack, Text } from "@/components/ui";
+import styles from "@/components/portfolio/portfolio.module.css";
+
+interface SectionHeaderProps { eyebrow?: string; title: string; description?: string; }
 
 export default function SectionHeader({ eyebrow, title, description }: SectionHeaderProps) {
-  return (
-    <header className="mb-8 border-l-2 border-accent-cyan/60 pl-4">
-      {eyebrow ? (
-        <p className="mb-1 font-mono text-xs uppercase tracking-[0.2em] text-accent-cyan">
-          {eyebrow}
-        </p>
-      ) : null}
-      <h2 className="text-2xl font-semibold tracking-tight text-ink">{title}</h2>
-      {description ? (
-        <p className="mt-2 max-w-2xl text-sm text-ink-muted">{description}</p>
-      ) : null}
-    </header>
-  );
+  return <header className={styles.sectionHeader}><Stack gap={2}>{eyebrow ? <Text variant="caption">{eyebrow}</Text> : null}<Heading level={2} size="heading3">{title}</Heading>{description ? <Text variant="small">{description}</Text> : null}</Stack></header>;
 }

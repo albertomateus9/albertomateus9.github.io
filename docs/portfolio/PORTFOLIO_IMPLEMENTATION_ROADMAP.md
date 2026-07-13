@@ -1,41 +1,37 @@
 # Portfolio Implementation Roadmap
 
-## Estratégia de entrega
+## Estado em 13 de julho de 2026
 
-Evoluir por fundações mensuráveis, mantendo as rotas públicas atuais até que cada substituição tenha conteúdo, acessibilidade, SEO e rollback validados. Nenhuma fase depende de 3D.
+| Fase | Objetivo | Estado | Gate principal |
+|---|---|---|---|
+| P1 | Estratégia UX e conceito Sol | Concluída | Conceito isolado, narrativa e evidências visuais |
+| P2 | Design System Foundation | Concluída localmente | Tokens, APIs, acessibilidade, testes, build e screenshots |
+| P3 | New Portfolio Shell | Próxima recomendação | Nova shell e home sem remover rotas públicas antes dos redirects |
+| P4 | Flagship Project Cases | Pendente | Evidências sanitizadas e claims revisados |
+| P5 | Research and Teaching | Pendente | Publicações e conteúdo acadêmico validados |
+| P6 | Knowledge Graph | Pendente | Dataset público, fallback em lista e teclado completo |
+| P7 | Advanced Motion / 3D opcional | Pendente | Benefício narrativo provado e budgets aprovados |
+| P8 | Docker e VPS | Bloqueada por autorização operacional | Staging, healthcheck e rollback ensaiado |
+| P9 | Observability, SEO e melhoria contínua | Pendente | Baseline de CWV e política privacy-first |
 
-| Fase | Objetivo | Dependências | Risco | Arquivos/áreas afetados | Critério de aceite | Agente recomendado |
-|---|---|---|---|---|---|---|
-| **P2 — Design System Foundation** | Transformar tokens conceituais em contratos CSS/Tailwind, primitives e documentação | Aprovação de direção P1; auditoria de contraste | Médio: regressão visual nas rotas atuais | `globals.css`, `tailwind.config.ts`, `src/components/ui`, Storybook somente se justificado | Tokens semânticos, foco/touch/contraste AA, primitives testadas em 320–1440 | GPT-5.6 Sol → Codex |
-| **P3 — New Portfolio Shell** | Criar navegação, footer, home narrativa, `/about`, `/lab`, SEO base | P2; conteúdo profissional validado | Alto: mudança de IA e SEO | `src/app/layout.tsx`, `page.tsx`, `AppShell`, `TopNav`, metadata, sitemap/robots | Jornada 30 s compreensível em teste; rotas antigas preservadas/redirects mapeados; CWV budget | Ambos em sequência |
-| **P4 — Flagship Project Cases** | Cases profundos IGARIX, OpenLake e Lab 02 | Evidências sanitizadas, diagramas e status confirmados | Alto: alegações e vazamento de contexto interno | `src/app/projects/[slug]`, dados/cases, assets, `/proof` | Cada case tem problema, restrições, decisão, arquitetura, resultado, limites e fontes | GPT-5.6 Sol → Codex |
-| **P5 — Research and Teaching Experience** | Estruturar pesquisa, publicações, ensino e ética | Currículo/publicações validados; política de dados | Médio: desatualização ou exposição acadêmica | `/research`, `/research/[slug]`, `/teaching`, dados públicos | Conteúdo verificável, citações/links, revisão humana e nenhum dado de aluno | GPT-5.6 Sol → Codex |
-| **P6 — Knowledge Graph Experience** | Implementar dataset público e exploração acessível | IA e IDs estáveis; schema; export seguro | Alto: acessibilidade, performance e privacidade | `/lab/knowledge-graph`, data/schema, gerador, testes | Grafo + lista equivalentes, teclado completo, URLs estáveis, secret/privacy scan, lazy load | Codex → GPT-5.6 Sol |
-| **P7 — Advanced Motion and Optional 3D** | Adicionar motion apenas onde melhora compreensão | P2–P6 estáveis; budgets medidos | Alto: JS, enjoo, mobile e manutenção | componentes interativos, chunks dinâmicos, fallbacks | Reduced motion completo; sem bloquear LCP; 2D equivalente; budgets aprovados | GPT-5.6 Sol → Codex |
-| **P8 — Docker and VPS Production Deployment** | Produção 24/7 em Dokploy/Traefik com rollback | Build verde, domínio/infra aprovados, staging | RED: produção, DNS, TLS e disponibilidade | Dockerfile, Compose, Dokploy, runbooks, headers | Staging, healthcheck, image SHA, rollback ensaiado, aprovação humana para produção | Codex + operador humano |
-| **P9 — Observability, SEO and Continuous Improvement** | Medir saúde, descoberta e conversão sem invadir privacidade | P8; baseline CWV e objetivos | Médio: dados/telemetria e ruído | logs, analytics privacy-first, sitemap/OG, dashboards, runbooks | CWV p75 dentro do budget, uptime monitorado, SEO indexável, revisão mensal | Codex → GPT-5.6 Sol |
+## P3 — próximo passo recomendado
 
-## Sequência de decisão
-
-1. Aprovar tese, headline e inventário P1.
-2. Validar fatos profissionais e conteúdo permitido.
-3. Construir P2/P3 sem substituir irreversivelmente a versão pública.
-4. Publicar profundidade P4/P5 antes de investir em grafo/3D.
-5. Só executar P8 após staging e aprovação humana explícita.
+Construir a nova shell sobre a fundação P2: navegação consolidada, footer, home narrativa, `/about`, índice `/lab`, metadata e budgets de Core Web Vitals. Preservar as rotas atuais até mapear redirects e validar conteúdo. Não implementar tema claro, grafo interativo ou 3D junto com a shell.
 
 ## Gates transversais
 
-- `lint`, `typecheck`, testes e build verdes.
-- `git diff --check` sem erro e nenhuma credencial/artefato de build versionado.
-- Teste visual em 1440, 1280, 768, 390 e 320 px.
-- Navegação completa por teclado, `prefers-reduced-motion` e graceful degradation.
-- Revisão de alegações, datas e links por Alberto.
-- Bundle e imagens medidos contra `PORTFOLIO_VPS_READINESS.md`.
+- lint, typecheck, testes e build verdes;
+- `git diff --check` limpo;
+- zero segredo, `.next`, log ou `node_modules` versionado;
+- validação visual em 1280, 768, 390 e 320 px;
+- teclado, reduced motion, contraste e semântica revisados;
+- claims profissionais e links confirmados por Alberto;
+- nenhuma publicação, push, deploy, DNS ou operação externa sem autorização explícita.
 
-## Débitos identificados para entrada no backlog
+## Backlog técnico
 
-- Atualizar README raiz que ainda descreve pipeline Vite/GitHub Pages.
-- Planejar migração segura do site publicado monolítico para Next.js/VPS.
-- Resolver divergência entre `/igarix` e futuro `/projects/igarix`.
-- Implementar `/about` e `/lab` como índices reais antes de expor navegação.
-- Atualizar Next.js e dependências em sprint separada com teste de regressão; não misturar com direção visual.
+- Atualizar Next.js em sprint dedicada com regressão completa.
+- Resolver a relação de IA entre `/igarix` e `/projects/igarix-os`.
+- Criar índices reais para `/about` e `/lab` na P3.
+- Migrar microcopy legado abaixo da escala P2 conforme cada rota for refatorada.
+- Avaliar tema claro somente quando todos os pares passarem contraste e revisão visual.

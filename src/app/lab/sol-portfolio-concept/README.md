@@ -1,23 +1,26 @@
 # Sol Portfolio Concept
 
-Protótipo isolado da sprint P1, acessível em `/lab/sol-portfolio-concept`.
+Protótipo isolado da P1, acessível em `/lab/sol-portfolio-concept` e refatorado na P2 para consumir a fundação compartilhada.
 
 ## Escopo
 
 - Não substitui a home atual.
-- Usa apenas React, Next.js, SVG e CSS já disponíveis no projeto.
-- Mantém todo o conteúdo em dados locais tipados.
+- Usa apenas React, Next.js, SVG e CSS existentes.
+- O conteúdo permanece em dados locais tipados.
 - O grafo é demonstrativo e não acessa Obsidian, IGARIX ou APIs externas.
-- O motion é progressive enhancement e desativado com `prefers-reduced-motion`.
+- Motion é progressive enhancement e respeita a regra global de `prefers-reduced-motion`.
+- A rota possui metadata `noindex`.
 
-## Arquivos
+## Integração P2
 
-- `page.tsx`: composição semântica e metadata `noindex`.
-- `concept.module.css`: tokens e comportamento responsivo isolados.
-- `src/components/sol-concept`: visualização full-cycle, cards e grafo.
-- `src/data/sol-portfolio-concept.ts`: conteúdo tipado do protótipo.
+- Cores, tipografia, espaço e motion usam `src/styles/tokens.css`; o conceito não mantém tokens paralelos.
+- CTAs usam `LinkButton`.
+- Camadas full-cycle usam `CapabilityLayer`.
+- Cards de projeto usam `Card`, `Badge`, `Heading` e `Text`.
+- Trajetória usa `TimelineItem`.
+- O grafo usa `GraphNodeLabel` e cores semânticas.
 
-## Validação esperada
+## Validação
 
 ```bash
 npm run lint
@@ -26,4 +29,4 @@ npm test
 npm run build
 ```
 
-Breakpoints visuais da sprint: 1440, 1280, 768, 390 e 320 px.
+Evidências P2 estão em `docs/portfolio/p2-design-system-evidence`, nos viewports 1280×768, 390×844 e 320×720.

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { TimelineItem } from "@/components/portfolio";
+import { Heading, LinkButton, Text } from "@/components/ui";
 import FullCycleMap from "@/components/sol-concept/FullCycleMap";
 import KnowledgeGraph from "@/components/sol-concept/KnowledgeGraph";
 import ProjectSignal from "@/components/sol-concept/ProjectSignal";
@@ -41,15 +43,15 @@ export default function SolPortfolioConceptPage() {
           <span>01 — 06</span>
         </div>
         <div className={styles.heroCopy}>
-          <p className={styles.eyebrow}>Engenharia · software · inteligência</p>
-          <h1>Entre o mundo físico e a inteligência, eu construo o sistema inteiro.</h1>
-          <p className={styles.heroLead}>
+          <Text variant="caption" className={styles.eyebrow}>Engenharia · software · inteligência</Text>
+          <Heading level={1} size="display">Entre o mundo físico e a inteligência, eu construo o sistema inteiro.</Heading>
+          <Text variant="secondary" className={styles.heroLead}>
             Alberto Mateus projeta, integra e opera soluções que atravessam telecomunicações, infraestrutura,
             software, dados e IA — com método científico e responsabilidade de produção.
-          </p>
+          </Text>
           <div className={styles.heroActions}>
-            <a href="#flagships" className={styles.primaryAction}>Ver sistemas em campo</a>
-            <Link href="/proof" className={styles.secondaryAction}>Examinar evidências</Link>
+            <LinkButton href="#flagships">Ver sistemas em campo</LinkButton>
+            <LinkButton href="/proof" variant="secondary">Examinar evidências</LinkButton>
           </div>
         </div>
         <aside className={styles.heroPanel} aria-label="Resumo operacional">
@@ -139,7 +141,7 @@ export default function SolPortfolioConceptPage() {
         </div>
         <ol>
           {trajectory.map(([title, body], index) => (
-            <li key={title}><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{title}</h3><p>{body}</p></div></li>
+            <TimelineItem key={title} marker={String(index + 1).padStart(2, "0")} title={title} description={body} />
           ))}
         </ol>
       </section>
@@ -149,8 +151,8 @@ export default function SolPortfolioConceptPage() {
         <h2 id="contact-title">Qual sistema precisa existir agora?</h2>
         <p>Converse sobre uma arquitetura, um laboratório ou um produto que exija visão além de uma única camada.</p>
         <div className={styles.heroActions}>
-          <Link href="/contact" className={styles.primaryAction}>Iniciar uma conversa</Link>
-          <Link href="/projects" className={styles.secondaryAction}>Explorar todos os projetos</Link>
+          <LinkButton href="/contact">Iniciar uma conversa</LinkButton>
+          <LinkButton href="/projects" variant="secondary">Explorar todos os projetos</LinkButton>
         </div>
       </section>
     </div>

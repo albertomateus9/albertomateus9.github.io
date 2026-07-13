@@ -1,21 +1,8 @@
-// Monospace pill for a technology or tag.
-interface TechBadgeProps {
-  label: string;
-  tone?: "default" | "cyan" | "amber";
-}
+import { Badge } from "@/components/ui";
 
-const toneMap: Record<NonNullable<TechBadgeProps["tone"]>, string> = {
-  default: "border-surface-border text-ink-muted",
-  cyan: "border-accent-cyan/40 text-accent-cyan",
-  amber: "border-accent-amber/40 text-accent-amber",
-};
+interface TechBadgeProps { label: string; tone?: "default" | "cyan" | "amber"; }
+const toneMap = { default: "neutral", cyan: "research", amber: "operational" } as const;
 
 export default function TechBadge({ label, tone = "default" }: TechBadgeProps) {
-  return (
-    <span
-      className={`inline-flex items-center rounded border px-2 py-0.5 font-mono text-xs tracking-tight ${toneMap[tone]}`}
-    >
-      {label}
-    </span>
-  );
+  return <Badge tone={toneMap[tone]}>{label}</Badge>;
 }
