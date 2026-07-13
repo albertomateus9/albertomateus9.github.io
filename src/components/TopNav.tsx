@@ -30,6 +30,7 @@ export default function TopNav() {
               <Link
                 key={item.href}
                 href={item.href}
+                aria-current={active ? "page" : undefined}
                 className={`rounded border px-2.5 py-1 font-mono text-xs transition-all duration-200 ${
                   active
                     ? "text-accent-cyan border-accent-cyan/30 bg-accent-cyan/5 glow-cyan-sm"
@@ -45,7 +46,7 @@ export default function TopNav() {
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
-          className="rounded border border-surface-border px-2 py-1 font-mono text-xs text-ink-muted hover:text-ink hover:border-accent-cyan/55 transition-colors lg:hidden"
+          className="min-h-11 min-w-11 rounded border border-surface-border px-2 py-1 font-mono text-xs text-ink-muted hover:text-ink hover:border-accent-cyan/55 transition-colors lg:hidden"
           aria-expanded={open}
           aria-label="Alternar navegação"
         >
@@ -62,13 +63,14 @@ export default function TopNav() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className={`block rounded px-3 py-2 text-sm font-mono transition-all ${
+                aria-current={active ? "page" : undefined}
+                className={`flex min-h-11 items-center rounded px-3 py-2 text-sm font-mono transition-all ${
                   active
                     ? "text-accent-cyan bg-accent-cyan/5 border-l-2 border-accent-cyan"
                     : "text-ink-muted hover:text-ink hover:bg-surface/30"
                 }`}
               >
-                <div className="flex justify-between items-center">
+                <div className="flex w-full justify-between items-center">
                   <span>{item.label}</span>
                   <span className="font-mono text-[9px] text-ink-faint uppercase">{item.hint}</span>
                 </div>
