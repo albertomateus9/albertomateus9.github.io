@@ -118,3 +118,90 @@ export interface Profile {
   education: EducationItem[];
   experience: ExperienceItem[];
 }
+
+export interface HomeLink {
+  label: string;
+  href: string;
+}
+
+export interface HomeHeroContent {
+  eyebrow: string;
+  title: string;
+  description: string;
+  primaryAction: HomeLink;
+  secondaryAction: HomeLink;
+  scope: Array<{ label: string; value: string }>;
+}
+
+export interface HomeCapability {
+  index: string;
+  label: string;
+  detail: string;
+}
+
+export interface HomeFlagship {
+  id: string;
+  name: string;
+  category: string;
+  problem: string;
+  role: string;
+  approach: string;
+  evidence: string;
+  status: ProjectStatus;
+  href: string;
+}
+
+export interface HomeEvidence {
+  id: string;
+  label: string;
+  title: string;
+  description: string;
+  href: string;
+}
+
+export type HomeResearchPhase = "completed" | "current" | "direction";
+
+export interface HomeResearchThread {
+  id: string;
+  phase: HomeResearchPhase;
+  title: string;
+  description: string;
+  evidence: string;
+  href: string;
+}
+
+export interface HomeTeachingArea {
+  id: string;
+  title: string;
+  description: string;
+  evidence: string;
+  status: "practice" | "evolving";
+}
+
+export interface HomeTrajectoryStep {
+  marker: string;
+  title: string;
+  description: string;
+}
+
+export interface HomeGraphNode {
+  id: string;
+  label: string;
+  kind: "core" | "project" | "area";
+  x: number;
+  y: number;
+}
+
+export type HomeGraphEdge = [HomeGraphNode["id"], HomeGraphNode["id"]];
+
+export interface HomeContent {
+  hero: HomeHeroContent;
+  capabilities: HomeCapability[];
+  flagships: HomeFlagship[];
+  evidence: HomeEvidence[];
+  research: HomeResearchThread[];
+  teaching: HomeTeachingArea[];
+  trajectory: HomeTrajectoryStep[];
+  graph: { nodes: HomeGraphNode[]; edges: HomeGraphEdge[] };
+  finalCta: { eyebrow: string; title: string; description: string; actions: [HomeLink, HomeLink] };
+}

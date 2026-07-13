@@ -9,7 +9,7 @@
 | Compose | Parcial | restart policy e bind localhost; falta healthcheck/limits |
 | Endpoint de saúde | Presente | `/api/health` |
 | Dokploy/Traefik | Documentado, não validado nesta sprint | revisar labels, TLS e rede no ambiente de staging |
-| SEO técnico | Parcial | metadata básica; faltam canonical, OG completo, sitemap, robots e JSON-LD |
+| SEO técnico | Base pública pronta | metadataBase, canonical da home, OG/Twitter, robots, sitemap e JSON-LD; revisão por rota continua na P4/P5 |
 | Cache | Parcial | assets Next podem ser imutáveis; política do proxy ainda precisa configuração |
 | Observabilidade | Ausente no app | logs estruturados, uptime e Web Vitals em P9 |
 | Rollback | Ausente | usar imagem imutável por SHA e manter release anterior |
@@ -40,7 +40,7 @@
 - Testar container em arquitetura equivalente à VPS.
 - Headers: CSP ajustada, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`, HSTS no proxy.
 - Não copiar `.env`, `.git`, `.next`, docs privados ou evidências locais para a imagem; manter `.dockerignore`.
-- Gerar sitemap, robots, canonical e Open Graph por rota.
+- Revisar canonical e Open Graph específicos dos cases após a P4; a base global, sitemap e robots já existem.
 - Otimizar imagens com `next/image` e `sizes`; fonte self-hosted somente com subset/preload medido.
 - Testar graceful degradation sem JS não essencial e sem WebGL.
 - Pipeline: lint → typecheck → tests → build → smoke `/api/health` e rotas críticas.

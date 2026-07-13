@@ -12,7 +12,7 @@
 }
 
 body {
-  min-width: 20rem;
+  min-width: 0;
   background-color: var(--color-background-primary);
   color: var(--color-text-primary);
   font-family: var(--family-body);

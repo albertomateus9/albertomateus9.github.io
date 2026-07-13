@@ -17,7 +17,7 @@ Alberto deve ser apresentado como engenheiro e educador que **projeta sistemas a
 
 **Subheadline**
 
-Alberto Mateus projeta, integra e opera soluções que atravessam telecomunicações, infraestrutura, software, dados e IA — com método científico e responsabilidade de produção.
+Alberto Mateus projeta, integra e opera soluções que atravessam telecomunicações, infraestrutura, software, dados e inteligência artificial — com método científico e responsabilidade de produção.
 
 **Manifesto curto**
 
@@ -35,7 +35,7 @@ Alberto Mateus combina telecomunicações, redes, desenvolvimento de sistemas, d
 
 | Mensagem | Evidência | Projeto | Formato visual | CTA |
 |---|---|---|---|---|
-| Integra sistemas completos | Seis camadas e decisões entre elas | IGARIX + Lab 02 | Mapa full-cycle | Ver arquitetura |
+| Integra sistemas completos | Oito camadas e decisões entre elas | IGARIX + Lab 02 | Mapa full-cycle | Ver arquitetura |
 | Constrói IA governável | Gateways, memória, execução e limites | IGARIX OS | Diagrama de módulos | Examinar IGARIX |
 | Organiza conhecimento rastreável | Pipeline, fontes e revisão | OpenLake RAG | Fluxo de ingestão/recuperação | Ver pipeline |
 | Opera infraestrutura real | Métricas, SNMP, alertas e dashboards | Lab 02 | Topologia + painel de evidências | Ver operação |
@@ -43,17 +43,17 @@ Alberto Mateus combina telecomunicações, redes, desenvolvimento de sistemas, d
 | Traduz complexidade | Laboratórios e projetos integradores | Educação tecnológica | Sequência didática | Ver ensino |
 | Une físico e digital | 77 GHz, redes e edge | Pesquisa em micro-ondas | Diagrama científico | Ler pesquisa |
 
-## Títulos de seção
+## Títulos implementados na P3
 
-- Hero: **Entre o mundo físico e a inteligência**
-- Proposição: **Especialização vertical. Visão horizontal.**
-- Full-cycle: **Do sinal à decisão**
-- Flagships: **Projetos que provam amplitude**
-- Evidências: **Decisões que podem ser examinadas**
-- Pesquisa: **Perguntas difíceis, sistemas verificáveis**
-- Trajetória: **Uma carreira construída por camadas**
-- Grafo: **O valor está nas relações**
-- CTA: **Qual sistema precisa existir agora?**
+- Hero: **Entre o mundo físico e a inteligência, eu construo o sistema inteiro.**
+- Full-cycle: **Da primeira restrição física à operação responsável**
+- Flagships: **Três projetos, três pontos do ciclo**
+- Evidências: **O portfólio aponta para o que pode ser examinado**
+- Pesquisa: **Uma agenda com passado, presente e direção**
+- Ensino: **Conhecimento técnico convertido em prática**
+- Trajetória: **Uma formação construída por camadas**
+- Grafo: **Relações, não uma coleção de páginas**
+- CTA: **Projetos complexos exigem visão de sistema — da primeira restrição física à operação responsável.**
 
 ## CTAs
 
@@ -75,6 +75,7 @@ Alberto Mateus combina telecomunicações, redes, desenvolvimento de sistemas, d
 
 - Toda métrica precisa de fonte, data e método.
 - Todo projeto diferencia estado atual, ambição e próximo passo.
+- Pesquisa diferencia explicitamente resultado concluído, investigação em andamento e direção futura.
 - Nenhum cargo, data, publicação ou impacto é publicado sem validação humana.
 - Dados de alunos, notas privadas, IPs, credenciais e detalhes de infraestrutura permanecem fora do site.
 - Atualizar case quando o estado mudar; evitar linguagem de “tempo real” sem telemetria real.

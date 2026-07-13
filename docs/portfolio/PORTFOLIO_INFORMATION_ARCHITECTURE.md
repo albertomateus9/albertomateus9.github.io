@@ -16,24 +16,26 @@ Cada rota deve responder uma pergunta do visitante. A home oferece compreensão 
 | `/about` | Conectar trajetória às capacidades atuais | Recrutador, parceiro | Formação, experiência, princípios e contexto | Baixar resumo / contato | Média | Home, research, teaching |
 | `/lab` | Indexar experimentos públicos seguros | Comunidade técnica | Demos, protótipos, status e avisos | Executar demo / ler método | Média | Projetos e grafo |
 | `/contact` | Converter intenção em conversa qualificada | Cliente, CTO, pesquisador | Tipos de colaboração, disponibilidade, canais | Enviar briefing / LinkedIn | Rápida | Origem preservada no CTA |
+| `/lab/legacy-home` | Preservar referência da migração | Equipe do projeto | Home anterior completa e aviso de arquivo | Comparar localmente | Arquivo | Fora da navegação, `noindex` |
 | `/projects/igarix` | Case flagship de orquestração | CTO, arquiteto | Problema, módulos, governança, operação local/VPS | Examinar arquitetura | Profunda | `/lab/knowledge-graph`, proof |
 | `/projects/openlake-rag` | Case de inteligência documental | Dados/IA, pesquisador | Pipeline, proveniência, avaliação, trade-offs | Ver pipeline / colaborar | Profunda | Research, IGARIX |
 | `/projects/lab02-observability` | Case físico-operacional | Infra, instituição | Topologia, Zabbix/Grafana/SNMP, alertas | Ver diagrama / discutir lab | Profunda | Teaching, proof |
 | `/research/multimodal-video-informatics` | Linha de pesquisa multimodal | Pesquisador | Pergunta, corpus, método, privacidade, revisão humana | Ler publicações / colaborar | Profunda | OpenLake, teaching |
 | `/lab/knowledge-graph` | Explorar relações públicas | Técnico, comunidade | Nós públicos, proveniência e zoom semântico | Abrir entidade / método | Exploratória | Todo o site |
 
-Rotas atuais `/igarix`, `/infrastructure`, `/proof`, `/articles` e `/case-studies` permanecem durante a transição. P3 deve decidir redirects ou incorporação; não duplicar conteúdo indefinidamente.
+Rotas atuais `/igarix`, `/infrastructure`, `/proof`, `/articles` e `/case-studies` permanecem durante a transição. A P3 liga os flagships a `/igarix`, `/projects/openlake-rag` e `/infrastructure`; a P4 decidirá incorporação e redirects quando os cases profundos existirem.
 
 ## Ordem da home
 
 1. **Identidade e proposta:** headline, subheadline, 2 CTAs, um sinal de disponibilidade.
-2. **Áreas de atuação:** mapa full-cycle em seis camadas; não uma nuvem de tecnologias.
+2. **Áreas de atuação:** mapa full-cycle em oito camadas; não uma nuvem de tecnologias.
 3. **Projetos flagship:** IGARIX, OpenLake RAG e Lab 02 com tese e evidência.
 4. **Evidências:** arquitetura, artefatos, publicações, demos e operação.
 5. **Pesquisa e impacto:** Video-LLMs, visão, 77 GHz, privacidade/revisão humana.
-6. **Trajetória:** quatro transições explicativas, com timeline completa em `/about`.
-7. **Ecossistema:** grafo/diagrama que conecte projetos e competências.
-8. **Convite:** CTAs por intenção — produto, pesquisa, instituição.
+6. **Ensino:** três formas de transformar conhecimento em prática controlada.
+7. **Trajetória:** quatro transições explicativas, com formação selecionada em `/about`.
+8. **Ecossistema:** grafo/diagrama que conecte projetos e competências.
+9. **Convite:** CTAs por intenção — colaboração ou revisão de projetos.
 
 ## Jornadas
 
@@ -64,5 +66,5 @@ Rotas atuais `/igarix`, `/infrastructure`, `/proof`, `/articles` e `/case-studie
 - CTA principal contextual; não repetir “saiba mais”.
 - Breadcrumb em cases e laboratórios.
 - Estado ativo deve funcionar por rota ancestral, não apenas igualdade exata.
-- Mobile: menu com alvo mínimo de 44 px, Escape, devolução de foco e bloqueio de scroll quando modal.
+- Mobile: disclosure não modal com alvo mínimo de 44 px, Escape e devolução de foco; o scroll permanece disponível.
 - Grafo nunca será o único caminho até conteúdo; toda entidade terá link textual equivalente.

@@ -4,6 +4,8 @@
 
 Status: aprovado localmente em 13 de julho de 2026. Não houve deploy, push ou alteração de infraestrutura.
 
+Este documento preserva o baseline histórico da P2. A validação da aplicação pública posterior está em `PORTFOLIO_HOME_ACCESSIBILITY_VALIDATION.md` e `PORTFOLIO_HOME_PERFORMANCE_VALIDATION.md`.
+
 ## Checks automatizados
 
 | Check | Resultado |

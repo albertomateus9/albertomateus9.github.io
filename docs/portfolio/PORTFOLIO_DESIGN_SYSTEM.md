@@ -6,7 +6,7 @@ O sistema combina três registros: editorial para argumentos, operacional para e
 
 ## Implementação atual
 
-A P2 está implementada em `src/styles`, `src/components/ui` e `src/components/portfolio`, com documentação viva em `/lab/design-system`. A referência detalhada está em:
+A fundação P2 está implementada em `src/styles`, `src/components/ui` e `src/components/portfolio`, com documentação viva em `/lab/design-system`. A P3 passou a consumi-la na home pública, no shell, em `/about` e em `/lab`; os componentes específicos da narrativa ficam em `src/components/home`. A referência detalhada está em:
 
 - `PORTFOLIO_DESIGN_SYSTEM_FOUNDATION.md`
 - `PORTFOLIO_COMPONENT_API.md`
@@ -48,6 +48,8 @@ O valor só aparece na definição do token. Componentes consomem papéis, e cad
 - Headings separam nível semântico de tamanho visual.
 - Status sempre combina dot e rótulo.
 - Diagramas usam legenda, título, descrição e tokens CSS.
+- A home P3 mantém seu CSS específico em um único módulo, sem criar paleta, tipografia ou primitives paralelas.
+- O hero e o grafo são estáticos no servidor; profundidade visual não adiciona hidratação.
 
 ## Temas
 

@@ -4,7 +4,7 @@
 
 A P2 transformou a direção visual Sol em uma fundação executável. O sistema usa tokens semânticos globais, tema dark funcional, estrutura de alto contraste, primitives acessíveis, composições do domínio de portfólio e documentação viva em `/lab/design-system`.
 
-O trabalho não substitui a home pública e não adiciona dependências. As páginas permanecem Server Components por padrão; `TopNav` continua sendo a pequena ilha client necessária ao menu responsivo.
+Na entrega histórica da P2, o trabalho ainda não substituía a home pública e não adicionava dependências. A P3 passou a usar esta fundação na nova home sem mudar o princípio: páginas permanecem Server Components por padrão e `TopNav` continua sendo a pequena ilha client necessária ao menu responsivo.
 
 ## Arquitetura
 
@@ -40,3 +40,4 @@ O trabalho não substitui a home pública e não adiciona dependências. As pág
 
 - `/lab/design-system`: catálogo vivo da fundação.
 - `/lab/sol-portfolio-concept`: narrativa P1 refatorada para a fundação P2.
+- `/`: aplicação pública da fundação desde a P3.

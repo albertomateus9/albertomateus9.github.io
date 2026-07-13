@@ -1,33 +1,35 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title description">
+  <title id="title">Alberto Mateus — engenharia full-cycle, pesquisa e IA aplicada</title>
+  <desc id="description">Cartão social do Portfolio OS com a narrativa entre o mundo físico e a inteligência.</desc>
   <defs>
-    <linearGradient id="bg" x1="87" y1="46" x2="1048" y2="573" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#06110F"/>
-      <stop offset=".53" stop-color="#0A1D1D"/>
-      <stop offset="1" stop-color="#102523"/>
+    <linearGradient id="background" x1="80" y1="40" x2="1110" y2="590" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0b1a2b"/>
+      <stop offset="1" stop-color="#06101d"/>
     </linearGradient>
-    <linearGradient id="beam" x1="186" y1="206" x2="950" y2="430" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#8DD8DC" stop-opacity=".08"/>
-      <stop offset=".5" stop-color="#A2D36C" stop-opacity=".46"/>
-      <stop offset="1" stop-color="#FF715B" stop-opacity=".22"/>
-    </linearGradient>
+    <radialGradient id="signal" cx="0" cy="0" r="1" gradientTransform="translate(965 160) rotate(135) scale(430)">
+      <stop stop-color="#43ddff" stop-opacity=".22"/>
+      <stop offset="1" stop-color="#43ddff" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0H0v48" fill="none" stroke="#8ab1ca" stroke-opacity=".075"/>
+    </pattern>
   </defs>
-  <rect width="1200" height="630" fill="url(#bg)"/>
-  <path d="M0 503c136-57 220-81 340-80 124 1 220 51 360 48 174-4 280-86 500-146v305H0V503Z" fill="#ECF3EA" fill-opacity=".06"/>
-  <g stroke="#8DD8DC" stroke-opacity=".23">
-    <path d="M86 108h164l54 57h190l83 84h186"/>
-    <path d="M84 157h126l72 76h143l102 102h247"/>
-    <path d="M701 98v85l67 67h201l87 87"/>
-    <circle cx="84" cy="157" r="6"/><circle cx="304" cy="165" r="6"/><circle cx="526" cy="335" r="6"/>
-    <circle cx="763" cy="249" r="6"/><circle cx="1056" cy="337" r="6"/>
+  <rect width="1200" height="630" fill="url(#background)"/>
+  <rect width="1200" height="630" fill="url(#signal)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <path d="M76 65h1048" stroke="#43ddff" stroke-opacity=".4"/>
+  <text x="78" y="112" fill="#43ddff" font-family="Arial, sans-serif" font-size="22" font-weight="700" letter-spacing="3">PORTFOLIO.OS / FULL-CYCLE SYSTEMS</text>
+  <text x="78" y="236" fill="#f0f7fb" font-family="Arial, sans-serif" font-size="64" font-weight="700" letter-spacing="-2">
+    <tspan x="78" dy="0">Entre o mundo físico e a</tspan>
+    <tspan x="78" dy="74">inteligência, eu construo</tspan>
+    <tspan x="78" dy="74">o sistema inteiro.</tspan>
+  </text>
+  <text x="78" y="506" fill="#a7bdcc" font-family="Arial, sans-serif" font-size="24">telecomunicações · infraestrutura · software · dados · inteligência artificial</text>
+  <path d="M78 551h1044" stroke="#294157"/>
+  <text x="78" y="591" fill="#d9e7ef" font-family="Arial, sans-serif" font-size="21" font-weight="700" letter-spacing="1">ALBERTO MATEUS</text>
+  <text x="930" y="591" fill="#a7bdcc" font-family="Arial, sans-serif" font-size="19" letter-spacing="1">BELÉM · BRASIL</text>
+  <g transform="translate(995 150)" fill="none" stroke="#43ddff">
+    <circle r="76" stroke-opacity=".2"/><circle r="49" stroke-opacity=".35"/><circle r="7" fill="#43ddff"/>
+    <path d="M-76 0h-58M76 0h58M0-76v-44M0 76v44" stroke-opacity=".35"/>
   </g>
-  <rect x="718" y="93" width="378" height="415" rx="16" fill="#ECF3EA" fill-opacity=".06" stroke="#A2D36C" stroke-opacity=".35"/>
-  <path d="M754 158h294M754 421h294M802 120v350M1016 120v350" stroke="url(#beam)" stroke-width="2"/>
-  <rect x="754" y="155" width="147" height="190" stroke="#8DD8DC" stroke-width="3"/>
-  <rect x="910" y="219" width="125" height="150" stroke="#FF715B" stroke-width="3"/>
-  <text x="82" y="120" fill="#A2D36C" font-family="Arial, sans-serif" font-size="25">LABORATORIO VIVO</text>
-  <text x="82" y="234" fill="#ECF3EA" font-family="Georgia, serif" font-weight="700" font-size="76">Alberto Mateus</text>
-  <text x="82" y="306" fill="#ECF3EA" font-family="Arial, sans-serif" font-size="33">Telecomunicacoes, Visao Computacional</text>
-  <text x="82" y="353" fill="#ECF3EA" font-family="Arial, sans-serif" font-size="33">e Educacao Tecnologica</text>
-  <rect x="82" y="420" width="294" height="64" rx="8" fill="#FF715B"/>
-  <text x="121" y="461" fill="#06110F" font-family="Arial, sans-serif" font-weight="700" font-size="24">albertomateus9.github.io</text>
 </svg>

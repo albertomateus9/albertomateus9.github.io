@@ -2,6 +2,8 @@
 
 Data da auditoria: 2026-07-13. Escopo: site publicado em `https://albertomateus9.github.io/` e aplicação Next.js no repositório `albertomateus9.github.io`, commit-base `bc9c8f2`.
 
+> Atualização local P3: a nova home resolve a tese full-cycle, prioriza três flagships, elimina percentuais não auditáveis da superfície principal, consolida seis destinos no shell e adiciona SEO básico. Este scorecard continua sendo o baseline P1 do site publicado; nenhum deploy ocorreu.
+
 ## Resumo executivo
 
 O portfólio publicado prova energia e volume de produção, mas exige atenção demais para produzir uma tese profissional clara. Em uma única home há 14 seções, 44 headings, 37 links, painéis HUD, editor simulado, métricas de proficiência e catálogo. O visitante vê muitas modalidades antes de compreender a competência central. A linguagem de “sistema online”, percentuais de habilidade sem metodologia e promessas como redução de `time-to-market` enfraquecem a credibilidade.
