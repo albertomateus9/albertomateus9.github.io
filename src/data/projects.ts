@@ -8,7 +8,7 @@ const PAGES = "https://albertomateus9.github.io";
 // repositories, metrics, or deployments.
 export const projects: Project[] = [
   {
-    slug: "igarix-os",
+    slug: "igarix",
     name: "IGARIX OS",
     tagline: "Ecossistema pessoal de IA e automação - o núcleo do Portfolio OS.",
     description:
@@ -24,7 +24,7 @@ export const projects: Project[] = [
     featured: true,
     disclaimer:
       "Case público de alto nível. Não expõe detalhes internos sensíveis do ambiente.",
-    links: [{ label: "Ver visão do ecossistema", href: "/igarix" }],
+    links: [{ label: "Ver estudo de caso", href: "/projects/igarix" }],
   },
   {
     slug: "openlake-rag",
@@ -41,6 +41,7 @@ export const projects: Project[] = [
       "Execução local-first",
     ],
     disclaimer: "Protótipo de pesquisa.",
+    links: [{ label: "Ver estudo de caso", href: "/projects/openlake-rag" }],
   },
   {
     slug: "tea-pose-analysis",
@@ -91,19 +92,18 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: "campuswatch-snmp",
-    name: "CampusWatch SNMP",
+    slug: "lab02-observability",
+    name: "Lab 02 Observability",
     tagline: "Observabilidade SNMP para infraestrutura de campus.",
     description:
       "Conceito de observabilidade SNMP para infraestrutura de campus, com leitura de ativos, métricas e dashboard demonstrável.",
     category: "infrastructure",
-    status: "active",
-    stack: ["SNMP", "Python", "Webhooks", "Dashboard"],
-    highlights: ["Leitura de ativos de rede", "Métricas operacionais", "Dashboard demonstrável"],
+    status: "prototype",
+    stack: ["SNMP", "Zabbix", "Grafana", "Linux", "Docker"],
+    highlights: ["Monitoramento de ativos legados", "Templates SNMP personalizados", "Dashboards integrados no Grafana"],
     featured: true,
     links: [
-      { label: "Demo", href: `${PAGES}/campuswatch-snmp/` },
-      { label: "Repositório", href: `${GH}/campuswatch-snmp` },
+      { label: "Ver estudo de caso", href: "/projects/lab02-observability" }
     ],
   },
   {

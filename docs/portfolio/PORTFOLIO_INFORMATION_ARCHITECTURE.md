@@ -23,7 +23,11 @@ Cada rota deve responder uma pergunta do visitante. A home oferece compreensão 
 | `/research/multimodal-video-informatics` | Linha de pesquisa multimodal | Pesquisador | Pergunta, corpus, método, privacidade, revisão humana | Ler publicações / colaborar | Profunda | OpenLake, teaching |
 | `/lab/knowledge-graph` | Explorar relações públicas | Técnico, comunidade | Nós públicos, proveniência e zoom semântico | Abrir entidade / método | Exploratória | Todo o site |
 
-Rotas atuais `/igarix`, `/infrastructure`, `/proof`, `/articles` e `/case-studies` permanecem durante a transição. A P3 liga os flagships a `/igarix`, `/projects/openlake-rag` e `/infrastructure`; a P4 decidirá incorporação e redirects quando os cases profundos existirem.
+A P4 consolidou as rotas e ativou redirects permanentes para:
+- `/igarix` &rarr; `/projects/igarix`
+- `/infrastructure` &rarr; `/projects/lab02-observability`
+- `/projects/igarix-os` &rarr; `/projects/igarix`
+- `/projects/campuswatch-snmp` &rarr; `/projects/lab02-observability`
 
 ## Ordem da home
 

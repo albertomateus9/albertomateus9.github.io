@@ -17,6 +17,30 @@ const nextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      {
+        source: "/igarix",
+        destination: "/projects/igarix",
+        permanent: true,
+      },
+      {
+        source: "/infrastructure",
+        destination: "/projects/lab02-observability",
+        permanent: true,
+      },
+      {
+        source: "/projects/igarix-os",
+        destination: "/projects/igarix",
+        permanent: true,
+      },
+      {
+        source: "/projects/campuswatch-snmp",
+        destination: "/projects/lab02-observability",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

@@ -8,7 +8,7 @@
 | P2 | Design System Foundation | Concluída | commit `b7692db` |
 | P3 | Public home and shell migration | Aceita | commit `fba50d0`; home anterior em `/lab/legacy-home` |
 | P3.1 | Personal Presence, Hero Redesign and UI/UX Refinement | Concluída | retrato real integrado; docs `PORTFOLIO_FABLE_UI_UX_REFINEMENT.md`; evidências em `p31-fable-ui-refinement-evidence/` |
-| P4 | Flagship Project Case Studies | Próxima recomendação de produto | evidências sanitizadas e claims revisados |
+| P4 | Flagship Project Case Studies | Concluída | Estudo de caso profundo para os 3 flagships, com dados tipados e diagramas SVG |
 | P5 | Research and Teaching | Pendente | conteúdo acadêmico validado |
 | P6 | Knowledge Graph | Pendente | dataset público e fallback acessível |
 | P7 | Advanced Motion / 3D opcional | Pendente | benefício e budgets aprovados |

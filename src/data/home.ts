@@ -34,7 +34,7 @@ export const homeContent = {
       approach: "Gateways padronizados, memória de projeto, camada de execução e operação local/VPS.",
       evidence: "Arquitetura modular documentada publicamente em alto nível.",
       status: "concept",
-      href: "/igarix",
+      href: "/projects/igarix",
     },
     {
       id: "OLK-02",
@@ -56,7 +56,7 @@ export const homeContent = {
       approach: "Zabbix, Grafana, SNMP, Linux e redes organizados como um sistema observável.",
       evidence: "Topologia pública de alto nível e demonstrações de observabilidade relacionadas.",
       status: "prototype",
-      href: "/infrastructure",
+      href: "/projects/lab02-observability",
     },
   ],
   evidence: [

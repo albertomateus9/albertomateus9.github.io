@@ -67,7 +67,7 @@ describe("design system primitives", () => {
 
 describe("portfolio compositions", () => {
   it("renders a real project through ProjectCard", () => {
-    const project = projects.find(({ slug }) => slug === "igarix-os");
+    const project = projects.find(({ slug }) => slug === "igarix");
     expect(project).toBeDefined();
     const markup = render(createElement(ProjectCard, { project: project! }));
     expect(markup).toContain("IGARIX OS");

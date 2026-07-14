@@ -57,7 +57,7 @@ describe("P8A health and staging isolation", () => {
   });
 
   it("does not include labs in the public sitemap", () => {
-    expect(sitemap().every(({ url }) => !url.includes("/lab"))).toBe(true);
+    expect(sitemap().every(({ url }) => !(url.includes("/lab/") || url.endsWith("/lab")))).toBe(true);
   });
 });
 

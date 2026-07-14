@@ -1,24 +1,53 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import SectionHeader from "@/components/SectionHeader";
+import { getProject, getProjectSlugs } from "@/lib/projects";
+import { projectCaseStudies } from "@/data/project-case-studies";
+import { evidence as allEvidence } from "@/data/evidence";
+import { caseStudies as legacyCaseStudies } from "@/data/case-studies";
 import TechBadge from "@/components/TechBadge";
 import CaseStudyCard from "@/components/CaseStudyCard";
-import { getProject, getProjectSlugs } from "@/lib/projects";
-import { caseStudies } from "@/data/case-studies";
+import {
+  CaseStudyHero,
+  CaseStudySummary,
+  CaseStudySection,
+  DecisionRecord,
+  EvidenceCard,
+  LimitationCallout,
+  SecurityNote,
+  ProjectTimeline,
+} from "@/components/portfolio";
+import { IgarixDiagram, OpenLakeDiagram, ObservabilityDiagram } from "@/components/diagrams";
+import { Container, Card, Heading, Stack, Text, Divider } from "@/components/ui";
 
 interface Params {
   params: { slug: string };
 }
 
-// Statically generate a page for each known project slug.
 export function generateStaticParams() {
   return getProjectSlugs().map((slug) => ({ slug }));
 }
 
 export function generateMetadata({ params }: Params): Metadata {
   const project = getProject(params.slug);
-  return { title: project ? project.name : "Projeto" };
+  if (!project) return { title: "Projeto não encontrado" };
+
+  const detailedCase = projectCaseStudies.find((c) => c.projectSlug === project.slug);
+  return {
+    title: `${project.name} — Estudo de Caso Técnico`,
+    description: detailedCase ? detailedCase.subtitle : project.tagline,
+    alternates: { canonical: `/projects/${project.slug}` },
+    openGraph: {
+      title: `${project.name} — Estudo de Caso Técnico`,
+      description: detailedCase ? detailedCase.subtitle : project.tagline,
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${project.name} — Estudo de Caso Técnico`,
+      description: detailedCase ? detailedCase.subtitle : project.tagline,
+    },
+  };
 }
 
 const statusLabel: Record<string, string> = {
@@ -34,10 +63,217 @@ export default function ProjectDetailPage({ params }: Params) {
   const project = getProject(params.slug);
   if (!project) notFound();
 
-  const relatedCase = caseStudies.find((c) => c.projectSlug === project.slug);
+  // Check if a deep case study exists for this project slug
+  const detailedCase = projectCaseStudies.find((c) => c.projectSlug === project.slug);
+
+  if (detailedCase) {
+    // Collect specific evidence objects for this case
+    const caseEvidence = allEvidence.filter((e) =>
+      detailedCase.evidenceIds.includes(e.id)
+    );
+
+    // Determine Prev/Next project links
+    const caseSlugs = ["igarix", "openlake-rag", "lab02-observability"];
+    const currentIdx = caseSlugs.indexOf(project.slug);
+    const prevSlug = currentIdx > 0 ? caseSlugs[currentIdx - 1] : null;
+    const nextSlug = currentIdx >= 0 && currentIdx < caseSlugs.length - 1 ? caseSlugs[currentIdx + 1] : null;
+
+    const prevProject = prevSlug ? getProject(prevSlug) : null;
+    const nextProject = nextSlug ? getProject(nextSlug) : null;
+
+    return (
+      <Container className="space-y-8">
+        {/* Breadcrumbs Navigation */}
+        <nav aria-label="Breadcrumb" className="font-mono text-xs text-ink-muted">
+          <ol className="flex items-center gap-2">
+            <li>
+              <Link href="/projects" className="hover:text-accent-cyan transition-colors">
+                [projetos]
+              </Link>
+            </li>
+            <li aria-hidden="true" className="text-ink-faint">/</li>
+            <li>
+              <span className="text-ink" aria-current="page">
+                {project.name.toLowerCase()}
+              </span>
+            </li>
+          </ol>
+        </nav>
+
+        {/* Hero Area */}
+        <CaseStudyHero
+          title={project.name}
+          subtitle={detailedCase.subtitle}
+          category={project.category}
+          status={project.status}
+          updateDate={detailedCase.updateDate}
+          year={project.year}
+        />
+
+        {/* Disclaimer if present */}
+        {project.disclaimer && (
+          <div className="rounded border border-accent-amber/20 bg-accent-amber/5 px-4 py-3 font-mono text-xs text-accent-amber glow-amber-sm">
+            <span className="font-bold">[AVISO]</span> {project.disclaimer}
+          </div>
+        )}
+
+        {/* Depth 1: Leitura Rápida (30 Segundos) */}
+        <section aria-label="Resumo executivo de leitura rápida">
+          <CaseStudySummary
+            problem={detailedCase.problem}
+            role={detailedCase.role}
+            outcome={detailedCase.outcomes[0].description}
+          />
+        </section>
+
+        {/* Dynamic Architectural Diagram SVG */}
+        <section aria-label="Diagrama de Arquitetura do Sistema">
+          <Heading level={3} size="heading3" className="font-mono text-xs uppercase tracking-wider text-accent-cyan mb-2">
+            [diagrama_arquitetura]
+          </Heading>
+          {project.slug === "igarix" && <IgarixDiagram />}
+          {project.slug === "openlake-rag" && <OpenLakeDiagram />}
+          {project.slug === "lab02-observability" && <ObservabilityDiagram />}
+        </section>
+
+        {/* Depth 2: Leitura em 3 Minutos (Arquitetura e Decisões) */}
+        <CaseStudySection id="contexto-problema" eyebrow="contexto & objetivo" title="O Contexto Operacional">
+          <div className="grid gap-6 md:grid-cols-2 text-sm leading-relaxed text-ink-secondary">
+            <div>
+              <span className="font-mono text-xs text-accent-cyan uppercase block mb-1">Cenário de Entrada</span>
+              <p>{detailedCase.context}</p>
+            </div>
+            <div>
+              <span className="font-mono text-xs text-accent-cyan uppercase block mb-1">Objetivo Técnico</span>
+              <p>{detailedCase.objective}</p>
+            </div>
+          </div>
+        </CaseStudySection>
+
+        <CaseStudySection id="restricoes" eyebrow="restrições" title="Restrições de Projeto">
+          <ul className="grid gap-4 sm:grid-cols-3 font-sans text-xs">
+            {detailedCase.constraints.map((c) => (
+              <li key={c.label} className="border border-surface-border bg-surface-raised/40 rounded p-4 space-y-1">
+                <strong className="font-mono text-ink uppercase text-[10px] tracking-wider block text-accent-cyan">
+                  {c.label}
+                </strong>
+                <p className="text-ink-muted leading-relaxed">{c.description}</p>
+              </li>
+            ))}
+          </ul>
+        </CaseStudySection>
+
+        <CaseStudySection id="camadas" eyebrow="camadas" title="Estrutura de Sistemas em Camadas">
+          <div className="space-y-4">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {detailedCase.architectureLayers.map((layer, idx) => (
+                <div key={layer.name} className="border border-surface-border bg-surface/30 p-4 rounded text-xs space-y-2">
+                  <span className="font-mono text-[9px] text-ink-faint select-none">
+                    LAYER 0{idx + 1} {"//"}
+                  </span>
+                  <h4 className="font-semibold text-ink">{layer.name}</h4>
+                  <p className="text-ink-faint font-mono text-[10px] uppercase text-accent-cyan">{layer.role}</p>
+                  <p className="text-ink-muted leading-relaxed font-sans">{layer.details}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </CaseStudySection>
+
+        <CaseStudySection id="decisoes" eyebrow="decisões" title="Matriz de Decisão Arquitetural (ADRs)">
+          <DecisionRecord decisions={detailedCase.decisions} />
+        </CaseStudySection>
+
+        {/* Depth 3: Leitura Técnica Profunda */}
+        <CaseStudySection id="implementacao" eyebrow="execução" title="Detalhamento da Implementação">
+          <div className="max-w-prose text-sm text-ink-secondary leading-relaxed space-y-4">
+            <p>{detailedCase.implementationText}</p>
+          </div>
+        </CaseStudySection>
+
+        <CaseStudySection id="evidencias" eyebrow="evidências" title="Evidências Técnicas Registradas">
+          <EvidenceCard items={caseEvidence} />
+        </CaseStudySection>
+
+        <CaseStudySection id="resultados" eyebrow="resultados" title="Resultados Obtidos">
+          <ul className="grid gap-3 sm:grid-cols-3 text-xs">
+            {detailedCase.outcomes.map((outcome, idx) => (
+              <li key={idx} className="border border-surface-border bg-navy-900/50 p-4 rounded space-y-1">
+                <span className="font-mono text-[9px] text-ink-faint">RESULTADO 0{idx + 1}</span>
+                <p className="text-ink-muted leading-relaxed font-sans">{outcome.description}</p>
+              </li>
+            ))}
+          </ul>
+        </CaseStudySection>
+
+        {/* Limitations callout */}
+        <section aria-label="Limitações operacionais e teóricas">
+          <LimitationCallout limitations={detailedCase.limitations} />
+        </section>
+
+        {/* Security and Privacy notes */}
+        <section aria-label="Segurança e conformidade do estudo de caso">
+          <SecurityNote notes={detailedCase.securityNotes} />
+        </section>
+
+        {/* Proximos passos */}
+        <CaseStudySection id="proximos-passos" eyebrow="evolução" title="Próximos Passos e Direções Futuras">
+          <div className="grid gap-4 sm:grid-cols-2">
+            {detailedCase.nextSteps.map((step) => (
+              <div key={step.title} className="border border-surface-border/60 bg-surface/30 p-4 rounded text-xs space-y-2">
+                <div className="flex justify-between items-center">
+                  <h4 className="font-semibold text-ink">{step.title}</h4>
+                  <span className="rounded border border-surface-border bg-surface-raised px-2 py-0.5 font-mono text-[9px] uppercase tracking-wider text-accent-cyan">
+                    {step.status}
+                  </span>
+                </div>
+                <p className="text-ink-muted leading-relaxed font-sans">{step.description}</p>
+              </div>
+            ))}
+          </div>
+        </CaseStudySection>
+
+        <Divider />
+
+        {/* Case Navigation Footer */}
+        <nav aria-label="Navegação entre estudos de caso" className="flex justify-between items-center py-6 font-mono text-xs">
+          <div>
+            {prevProject ? (
+              <Link href={`/projects/${prevProject.slug}`} className="text-ink-muted hover:text-accent-cyan flex flex-col items-start gap-1">
+                <span className="text-[10px] text-ink-faint">&larr; [anterior]</span>
+                <span>{prevProject.name}</span>
+              </Link>
+            ) : (
+              <span className="text-ink-faint opacity-50">&larr; [primeiro_case]</span>
+            )}
+          </div>
+
+          <div>
+            <Link href="/projects" className="text-accent-cyan hover:text-accent-operational">
+              [todos_os_projetos]
+            </Link>
+          </div>
+
+          <div>
+            {nextProject ? (
+              <Link href={`/projects/${nextProject.slug}`} className="text-ink-muted hover:text-accent-cyan flex flex-col items-end gap-1">
+                <span className="text-[10px] text-ink-faint">[próximo] &rarr;</span>
+                <span>{nextProject.name}</span>
+              </Link>
+            ) : (
+              <span className="text-ink-faint opacity-50">[último_case] &rarr;</span>
+            )}
+          </div>
+        </nav>
+      </Container>
+    );
+  }
+
+  // Fallback to standard project detail layout
+  const relatedCase = legacyCaseStudies.find((c) => c.projectSlug === project.slug);
 
   return (
-    <div className="space-y-8">
+    <Container className="space-y-8">
       <div>
         <Link href="/projects" className="font-mono text-xs text-ink-muted hover:text-accent-cyan flex items-center gap-1 w-fit select-none">
           &larr; [voltar_ao_catalogo]
@@ -69,7 +305,9 @@ export default function ProjectDetailPage({ params }: Params) {
           </section>
 
           <section>
-            <SectionHeader eyebrow="destaques" title="Pontos principais" />
+            <Heading level={3} size="heading3" className="font-mono text-xs uppercase tracking-wider text-accent-cyan mb-3">
+              [destaques]
+            </Heading>
             <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {project.highlights.map((h, i) => (
                 <li key={h} className="relative rounded border border-surface-border bg-navy-900/60 p-4 text-xs text-ink-muted flex flex-col justify-between overflow-hidden">
@@ -82,7 +320,9 @@ export default function ProjectDetailPage({ params }: Params) {
 
           {relatedCase ? (
             <section className="border-t border-surface-border/50 pt-8">
-              <SectionHeader eyebrow="estudo de caso" title="Case study relacionado" />
+              <Heading level={3} size="heading3" className="font-mono text-xs uppercase tracking-wider text-accent-cyan mb-3">
+                [estudo_de_caso_relacionado]
+              </Heading>
               <CaseStudyCard item={relatedCase} />
             </section>
           ) : null}
@@ -146,6 +386,6 @@ export default function ProjectDetailPage({ params }: Params) {
           </div>
         </aside>
       </div>
-    </div>
+    </Container>
   );
 }

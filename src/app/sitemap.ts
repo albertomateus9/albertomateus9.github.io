@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { projects } from "@/data/projects";
 import { siteConfig } from "@/lib/site";
 
-const publicRoutes = ["", "/projects", "/research", "/teaching", "/about", "/contact", "/igarix", "/infrastructure", "/proof", "/articles", "/case-studies"];
+const publicRoutes = ["", "/projects", "/research", "/teaching", "/about", "/contact", "/proof", "/articles", "/case-studies"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticEntries = publicRoutes.map((route) => ({

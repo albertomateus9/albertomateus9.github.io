@@ -14,19 +14,19 @@ describe("projects", () => {
   });
 
   it("includes IGARIX as the central platform", () => {
-    const igarix = projects.find((p) => p.slug === "igarix-os");
+    const igarix = projects.find((p) => p.slug === "igarix");
     expect(igarix).toBeDefined();
     expect(igarix?.category).toBe("platform");
   });
 
   it("preserves the required initial projects", () => {
     const required = [
-      "igarix-os",
+      "igarix",
       "openlake-rag",
       "tea-pose-analysis",
       "webcraft-studio",
       "eetepa-vilhena-alves",
-      "campuswatch-snmp",
+      "lab02-observability",
       "netmaster-cli-api",
       "certiflow-api",
       "edumetrics-hub",

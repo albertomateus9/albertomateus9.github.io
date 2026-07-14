@@ -20,8 +20,8 @@ export const caseStudies: CaseStudy[] = [
       "Integrar IA generativa para criação dinâmica de desafios de código customizados para os estudantes.",
   },
   {
-    slug: "campuswatch-snmp",
-    projectSlug: "campuswatch-snmp",
+    slug: "lab02-observability",
+    projectSlug: "lab02-observability",
     title: "CampusWatch & Automação",
     summary:
       "Observabilidade que conecta coletores de telemetria a fluxos de automação e a um dashboard.",

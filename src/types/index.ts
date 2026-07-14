@@ -205,3 +205,72 @@ export interface HomeContent {
   graph: { nodes: HomeGraphNode[]; edges: HomeGraphEdge[] };
   finalCta: { eyebrow: string; title: string; description: string; actions: [HomeLink, HomeLink] };
 }
+
+export interface ProjectArchitectureLayer {
+  name: string;
+  role: string;
+  details: string;
+}
+
+export interface ProjectDecision {
+  id: string;
+  title: string;
+  context: string;
+  decision: string;
+  consequences: string;
+  status: "accepted" | "superseded" | "proposed";
+}
+
+export interface ProjectConstraint {
+  label: string;
+  description: string;
+}
+
+export interface ProjectOutcome {
+  metric?: string;
+  description: string;
+}
+
+export interface ProjectLimitation {
+  title: string;
+  description: string;
+}
+
+export interface ProjectTimelineStage {
+  period: string;
+  title: string;
+  description: string;
+}
+
+export interface ProjectSecurityNote {
+  classification: "public" | "internal" | "restricted";
+  note: string;
+}
+
+export interface ProjectNextStep {
+  title: string;
+  description: string;
+  status: "planned" | "in-progress" | "research";
+}
+
+export interface ProjectCaseStudy {
+  slug: string;
+  projectSlug: string;
+  title: string;
+  subtitle: string;
+  updateDate: string;
+  context: string;
+  problem: string;
+  objective: string;
+  role: string;
+  constraints: ProjectConstraint[];
+  architectureLayers: ProjectArchitectureLayer[];
+  decisions: ProjectDecision[];
+  implementationText: string;
+  evidenceIds: string[];
+  outcomes: ProjectOutcome[];
+  limitations: ProjectLimitation[];
+  securityNotes: ProjectSecurityNote[];
+  nextSteps: ProjectNextStep[];
+}
+
