@@ -47,3 +47,17 @@ Preferência: Basic Auth por middleware do Traefik/Dokploy, com hash criado e gu
 - nenhum serviço alheio reiniciado ou reconfigurado.
 
 Dokploy deve continuar como owner do Traefik e da rede. P8A não altera a stack administrativa.
+
+## Configuração do Serviço de Produção
+
+Crie no painel autenticado:
+
+- projeto: `portfolio` (ou reuse o mesmo do portfólio);
+- ambiente: `production`;
+- serviço Compose: `portfolio-production`;
+- arquivo: `compose.production.yml`;
+- branch fonte do Compose: `main`;
+- imagem: GHCR por hash digest imutável da release;
+- rede: `dokploy-network`;
+- domínio: `portfolio.albertomateus.dev.br` com HTTPS/Let's Encrypt habilitado e redirect de HTTP automático;
+- porta interna do domínio: `3000`.

@@ -33,18 +33,23 @@ docker compose down
 
 ## Staging
 
-Pushes para `agent/sol-portfolio-ux` executam `.github/workflows/staging.yml`: validação completa, build OCI para `linux/amd64`, publicação no GHCR com tags `staging`, `sha-<SHA completo>` e `<SHA completo>`, SBOM/proveniência e acionamento opcional do webhook do Dokploy.
+Pushes para `agent/sol-portfolio-ux` executam `.github/workflows/staging.yml`: validação completa, build OCI para `linux/amd64`, publicação no GHCR com tags `staging`, `sha-<SHA completo>` e `<SHA completo>`, SBOM/proveniência e acionamento do webhook do Dokploy.
 
-- Imagem: `ghcr.io/albertomateus9/albertomateus9.github.io`
-- Healthcheck: `GET /api/health`
-- Host reservado: `portfolio-staging.albertomateus.dev.br`
-- Configuração pública de exemplo: `deploy/staging.env.example`
-- Secret esperado no GitHub: `DOKPLOY_WEBHOOK_URL` (opcional até a aplicação existir)
+- Imagem: `ghcr.io/albertomateus9/albertomateus9.github.io:staging`
+- Host reservado: `https://portfolio-staging.albertomateus.dev.br`
+- Webhook Secret: `DOKPLOY_WEBHOOK_URL`
 
-O staging recebe `X-Robots-Tag: noindex, nofollow, noarchive` e um `robots.txt` com `Disallow: /`. O comportamento público de produção permanece separado.
+## Produção (Release v1.0.0)
 
-Consulte a documentação em `docs/portfolio/PORTFOLIO_STAGING_DEPLOYMENT.md`, `docs/portfolio/PORTFOLIO_DOKPLOY_CONFIGURATION.md` e `docs/portfolio/PORTFOLIO_DEPLOYMENT_ROLLBACK.md`.
+A publicação em produção é executada sob o workflow `.github/workflows/production.yml` por tags `v*` ou manualmente via `workflow_dispatch`.
 
-## Publicação atual
+- Imagem: `ghcr.io/albertomateus9/albertomateus9.github.io:v1.0.0`
+- Host reservado: `https://portfolio.albertomateus.dev.br`
+- Webhook Secret: `DOKPLOY_PRODUCTION_WEBHOOK_URL`
 
-O workflow existente do GitHub Pages permanece preservado. A P8A cria somente staging na VPS; não faz merge, cutover do domínio principal nem deploy definitivo de produção.
+## Documentação do Ciclo de Vida
+
+- **Releases e Histórico**: [PORTFOLIO_V1_RELEASE.md](file:///D:/Users/alber/Organizado/Projetos/portfolio-wt-sol/docs/portfolio/PORTFOLIO_V1_RELEASE.md)
+- **Guias de Deploy**: [PORTFOLIO_PRODUCTION_DEPLOYMENT.md](file:///D:/Users/alber/Organizado/Projetos/portfolio-wt-sol/docs/portfolio/PORTFOLIO_PRODUCTION_DEPLOYMENT.md), [PORTFOLIO_DOKPLOY_CONFIGURATION.md](file:///D:/Users/alber/Organizado/Projetos/portfolio-wt-sol/docs/portfolio/PORTFOLIO_DOKPLOY_CONFIGURATION.md)
+- **Validação e Homologação**: [PORTFOLIO_PRODUCTION_VALIDATION.md](file:///D:/Users/alber/Organizado/Projetos/portfolio-wt-sol/docs/portfolio/PORTFOLIO_PRODUCTION_VALIDATION.md), [PORTFOLIO_STAGING_VALIDATION.md](file:///D:/Users/alber/Organizado/Projetos/portfolio-wt-sol/docs/portfolio/PORTFOLIO_STAGING_VALIDATION.md)
+- **Operação e Manutenção**: [PORTFOLIO_ROLLBACK_RUNBOOK.md](file:///D:/Users/alber/Organizado/Projetos/portfolio-wt-sol/docs/portfolio/PORTFOLIO_ROLLBACK_RUNBOOK.md), [PORTFOLIO_MAINTENANCE_POLICY.md](file:///D:/Users/alber/Organizado/Projetos/portfolio-wt-sol/docs/portfolio/PORTFOLIO_MAINTENANCE_POLICY.md)
