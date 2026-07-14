@@ -1,5 +1,7 @@
 # Relatório da Fase P5 - VPS & Staging Preparation
 
+> Registro histórico, superado pela baseline P8A em `PORTFOLIO_CONTAINER_BASELINE.md` e `PORTFOLIO_STAGING_DEPLOYMENT.md`. As versões, branches, domínios e limitações abaixo não descrevem o procedimento operacional atual.
+
 Este relatório descreve as atividades de infraestrutura e preparação de deploy de homologação (staging) realizadas para o **Portfolio OS** de Alberto Mateus.
 
 ---

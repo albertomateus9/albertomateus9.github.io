@@ -1,14 +1,23 @@
+name: portfolio-local
+
 services:
   portfolio:
     build:
       context: .
       dockerfile: Dockerfile
-    image: albertomateus-portfolio:latest
-    container_name: albertomateus-portfolio
+    image: albertomateus-portfolio:local
     restart: unless-stopped
+    init: true
     ports:
       - "127.0.0.1:3000:3000"
     environment:
-      - NODE_ENV=production
-      - PORT=3000
-      - HOSTNAME=0.0.0.0
+      NODE_ENV: production
+      DEPLOYMENT_ENV: production
+      PORT: "3000"
+      HOSTNAME: 0.0.0.0
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/api/health').then((response)=>{if(!response.ok)process.exit(1)}).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      start_period: 10s
+      retries: 3

@@ -1,5 +1,7 @@
 # Checklist de Homologação em Staging (VPS/Dokploy)
 
+> Checklist histórico. Use `PORTFOLIO_STAGING_VALIDATION.md` para P8A; ele cobre GHCR, Dokploy/Traefik, SEO de staging, hardening, restart e validação externa sem cutover.
+
 Este checklist orienta o processo de validação em ambiente de **Staging** (homologação) antes de qualquer publicação ou cutover público definitivo.
 
 ---

@@ -4,38 +4,39 @@
 
 | Fase | Objetivo | Estado | Gate principal |
 |---|---|---|---|
-| P1 | Estratégia UX e conceito Sol | Concluída | Conceito isolado, narrativa e evidências visuais |
-| P2 | Design System Foundation | Concluída localmente | Tokens, APIs, acessibilidade, testes, build e screenshots |
-| P3 | New Portfolio Shell | Concluída localmente | Shell, home, `/about`, `/lab`, SEO básico, testes, build e evidências |
-| P4 | Flagship Project Cases | Próxima recomendação | Evidências sanitizadas e claims revisados |
-| P5 | Research and Teaching | Pendente | Publicações e conteúdo acadêmico validados |
-| P6 | Knowledge Graph | Pendente | Dataset público, fallback em lista e teclado completo |
-| P7 | Advanced Motion / 3D opcional | Pendente | Benefício narrativo provado e budgets aprovados |
-| P8 | Docker e VPS | Bloqueada por autorização operacional | Staging, healthcheck e rollback ensaiado |
-| P9 | Observability, SEO e melhoria contínua | Pendente | Baseline de CWV e política privacy-first |
+| P1 | Estratégia UX e conceito Sol | Concluída | commit `1b78e1f` |
+| P2 | Design System Foundation | Concluída | commit `b7692db` |
+| P3 | Public home and shell migration | Aceita | commit `fba50d0`; home anterior em `/lab/legacy-home` |
+| P4 | Flagship Project Case Studies | Próxima recomendação de produto | evidências sanitizadas e claims revisados |
+| P5 | Research and Teaching | Pendente | conteúdo acadêmico validado |
+| P6 | Knowledge Graph | Pendente | dataset público e fallback acessível |
+| P7 | Advanced Motion / 3D opcional | Pendente | benefício e budgets aprovados |
+| P8A | Container baseline e VPS staging | Em execução | GHCR, Dokploy, DNS/HTTPS e validação remota ou blockers externos registrados |
+| P8B | Production Domain Cutover | Não iniciado | explicitamente fora desta execução |
+| P9 | Observability, Backup and CD Hardening | Não iniciado | explicitamente fora desta execução |
 
-## P3 — resultado
+## Resultado técnico P8A
 
-A nova shell usa navegação consolidada, footer, home narrativa, `/about`, índice `/lab`, metadata, robots, sitemap e budgets documentados. A home anterior permanece em `/lab/legacy-home` com `noindex`; rotas atuais continuam disponíveis até a P4 mapear conteúdo e redirects. Tema claro, grafo interativo e 3D não foram implementados.
+- Next/React/Node atualizados com regressão completa;
+- imagem standalone multi-stage, base por digest e runner não root;
+- Compose isolado para Dokploy/Traefik sem porta no host;
+- healthcheck, restart, limits, log rotation e rollback por digest;
+- proteção SEO separada por `DEPLOYMENT_ENV`;
+- pipeline GHCR com gates, tags SHA, SBOM e provenance;
+- Docker real e scanner executados localmente;
+- VPS e stack Dokploy auditadas sem mutação.
 
-## P4 — próximo passo recomendado
+## Próximo trabalho recomendado
 
-Aprofundar IGARIX, OpenLake RAG e Lab 02 como cases flagship. Cada case deve registrar contexto, restrições, decisões, arquitetura, trade-offs, evidência sanitizada e próximo passo. A P4 não deve reabrir o shell ou transformar estados de conceito/protótipo em claims de produção.
+P4 pode avançar em outro worktree sem modificar simultaneamente os arquivos de infraestrutura desta branch. Aprofundar IGARIX, OpenLake RAG e Lab 02 com contexto, restrições, decisões, trade-offs e evidências sanitizadas.
+
+P8B só começa com nova autorização, staging remoto integralmente validado e plano explícito de cutover/rollback. P9 deve adicionar monitor externo, alertas, retenção e política contínua de atualização de imagens sem instalar duplicatas na VPS.
 
 ## Gates transversais
 
-- lint, typecheck, testes e build verdes;
-- `git diff --check` limpo;
-- zero segredo, `.next`, log ou `node_modules` versionado;
-- validação visual em 1280, 768, 390 e 320 px;
-- teclado, reduced motion, contraste e semântica revisados;
-- claims profissionais e links confirmados por Alberto;
-- nenhuma publicação, push, deploy, DNS ou operação externa sem autorização explícita.
-
-## Backlog técnico
-
-- Atualizar Next.js em sprint dedicada com regressão completa.
-- Resolver a relação de IA entre `/igarix` e `/projects/igarix-os`.
-- Planejar redirects somente após os cases P4 substituírem o conteúdo legado equivalente.
-- Migrar microcopy legado abaixo da escala P2 conforme cada rota for refatorada.
-- Avaliar tema claro somente quando todos os pares passarem contraste e revisão visual.
+- lint, typecheck, testes, build e `git diff --check` verdes;
+- nenhum secret, `.env`, `.next`, log, `node_modules` ou artefato temporário versionado;
+- imagem identificada por commit, tag e digest;
+- nenhuma publicação fora da branch autorizada;
+- nenhum merge, force push, cutover, remoção do Pages ou alteração de serviço alheio;
+- toda validação externa distingue resultado observado de blocker.

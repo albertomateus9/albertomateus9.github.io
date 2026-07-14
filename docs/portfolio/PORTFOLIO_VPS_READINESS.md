@@ -1,55 +1,48 @@
 # Portfolio VPS Readiness
 
-## Estado atual
+## Estado P8A em 13 de julho de 2026
 
-| Área | Estado | Evidência / ação |
+| Área | Estado | Evidência / pendência |
 |---|---|---|
-| Next.js self-hosted | Pronto na base | `output: "standalone"` |
-| Docker | Base adequada | multi-stage, Node 20 Alpine, usuário `nextjs` não-root |
-| Compose | Parcial | restart policy e bind localhost; falta healthcheck/limits |
-| Endpoint de saúde | Presente | `/api/health` |
-| Dokploy/Traefik | Documentado, não validado nesta sprint | revisar labels, TLS e rede no ambiente de staging |
-| SEO técnico | Base pública pronta | metadataBase, canonical da home, OG/Twitter, robots, sitemap e JSON-LD; revisão por rota continua na P4/P5 |
-| Cache | Parcial | assets Next podem ser imutáveis; política do proxy ainda precisa configuração |
-| Observabilidade | Ausente no app | logs estruturados, uptime e Web Vitals em P9 |
-| Rollback | Ausente | usar imagem imutável por SHA e manter release anterior |
+| Next.js self-hosted | Pronto | Next 16.2.10, `output: "standalone"`, 67 testes e build verde |
+| Imagem OCI | Pronta localmente | Node 22 Alpine 3.23 por digest, runner não root, 77.935.909 bytes |
+| Scanner | Aprovado no snapshot | Docker Scout: 0C/0H/0M/0L em 93 pacotes |
+| Compose staging | Pronto | sem host port, read-only, tmpfs, limits, health, restart e log rotation |
+| Endpoint de saúde | Pronto | `/api/health`, rápido, sem dependência externa ou detalhes internos |
+| CI/GHCR | Pronto para acionar | workflow de branch, tags SHA, digest, SBOM/provenance |
+| Dokploy/Traefik | Infra auditada | Dokploy/Traefik saudáveis; criação do serviço depende da publicação/acesso ao painel |
+| DNS/HTTPS | Pendente externo | `portfolio-staging.albertomateus.dev.br` ainda sem resolução na auditoria inicial |
+| SEO staging | Pronto no app | header `X-Robots-Tag` e robots bloqueando `/`; produção preservada |
+| Rollback | Documentado | digest/tag SHA; ensaio real após existir segunda release |
+| Observabilidade | Mínimo P8A | health, stdout/stderr, status e métricas Docker; monitor externo adiado para P9 |
 
-## Budgets preliminares
+## Inventário não sensível da VPS
 
-| Métrica | Budget |
-|---|---:|
-| JavaScript inicial da home | ≤ 90 kB gzip do app, além do runtime estritamente necessário |
-| JavaScript do conceito P1 | 0 kB de biblioteca nova; hidratação apenas da navegação global |
-| Imagens above-the-fold | ≤ 180 kB total, AVIF/WebP, dimensões declaradas |
-| LCP p75 mobile | ≤ 2,5 s em 4G intermediário |
-| CLS p75 | ≤ 0,05 (limite máximo 0,1) |
-| INP p75 | ≤ 200 ms |
-| TBT em laboratório | ≤ 150 ms |
-| Motion | ≤ 2 loops simultâneos no hero; composited properties |
-| WebGL | 0 kB inicial; lazy, opcional, ≤ 300 kB gzip em chunk dedicado |
+- Ubuntu 24.04, `x86_64`, 2 CPUs e aproximadamente 8,3 GB RAM;
+- aproximadamente 85 GB livres no disco auditado;
+- Docker 29.5.3 e Compose 5.1.4;
+- Swarm ativo com um manager;
+- stack existente: Dokploy v0.29.12, Traefik v3.6.7, Redis 7 e Postgres 16;
+- Traefik já ocupa 80/443 e usa `dokploy-network`;
+- domínio administrativo existente preservado;
+- Uptime Kuma não encontrado; não instalar nesta sprint.
 
-## Arquitetura de produção recomendada
+A auditoria foi read-only. Nenhum serviço, rede, container ou volume remoto foi alterado.
 
-`Internet → Traefik/TLS → container Next.js → healthcheck`. Dokploy gerencia versão e rollback. Assets estáticos recebem cache longo com hash; HTML usa revalidação coerente com a frequência editorial. A aplicação não depende de banco para conteúdo público.
+## Arquitetura autorizada
 
-## Checklist antes de P8
+`GitHub Actions → GHCR → Dokploy Compose → dokploy-network → Traefik/TLS → container Next.js:3000`
 
-- Adicionar `HEALTHCHECK` ao Dockerfile ou Compose usando endpoint local.
-- Pin de imagem base por digest na fase de estabilização e atualização programada.
-- Definir CPU/memória, shutdown grace period e log rotation.
-- Testar container em arquitetura equivalente à VPS.
-- Headers: CSP ajustada, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`, HSTS no proxy.
-- Não copiar `.env`, `.git`, `.next`, docs privados ou evidências locais para a imagem; manter `.dockerignore`.
-- Revisar canonical e Open Graph específicos dos cases após a P4; a base global, sitemap e robots já existem.
-- Otimizar imagens com `next/image` e `sizes`; fonte self-hosted somente com subset/preload medido.
-- Testar graceful degradation sem JS não essencial e sem WebGL.
-- Pipeline: lint → typecheck → tests → build → smoke `/api/health` e rotas críticas.
-- Staging com URL não indexável; validar Traefik, TLS, headers e rollback.
+O serviço não precisa de banco, Redis, storage persistente ou Docker socket. O Traefik é a única entrada pública; `3000` não deve aparecer em bind do host.
 
-## Disponibilidade 24/7
+## Gates restantes para 24/7
 
-- Healthcheck não deve consultar dependência externa; retorna prontidão do processo.
-- Monitor externo a cada 1–5 min e alerta por indisponibilidade sustentada.
-- Logs em stdout/stderr com request ID; não registrar dados sensíveis.
-- Deploy com imagem imutável, readiness antes de troca de tráfego e rollback testado.
-- Conteúdo essencial server-rendered; falhas de grafo, analytics ou motion não derrubam páginas.
+1. publicar a branch e concluir o workflow;
+2. registrar tags e digest GHCR;
+3. criar `portfolio-staging` no Dokploy sem tocar na stack administrativa;
+4. criar o DNS `A` do subdomínio reservado;
+5. ativar HTTPS/redirect pelo Domains nativo;
+6. executar checklist remoto e restart somente do contêiner;
+7. registrar bloqueios externos de autenticação se algum gate não puder ser executado com segurança.
+
+Cutover do domínio principal, remoção do GitHub Pages, HSTS definitivo e observabilidade externa não pertencem a P8A.

@@ -1,5 +1,7 @@
 # Relatório da Fase P5.5 - VPS & Staging Execution
 
+> Registro histórico de uma simulação, superado pela validação Docker real da P8A em `PORTFOLIO_STAGING_VALIDATION.md`. Não use as instruções de cutover deste documento.
+
 Este relatório documenta a simulação de execução de staging e os testes de homologação realizados para o **Portfolio OS** de Alberto Mateus na branch `portfolio-p55-vps-staging-execution`.
 
 ---
