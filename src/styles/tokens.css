@@ -1,0 +1,116 @@
+:root {
+  /* Color roles */
+  --color-background-primary: #070a0e;
+  --color-background-primary-rgb: 7 10 14;
+  --color-background-secondary: #0a0f14;
+  --color-background-secondary-rgb: 10 15 20;
+  --color-surface-primary: #0d1218;
+  --color-surface-primary-rgb: 13 18 24;
+  --color-surface-secondary: #101720;
+  --color-surface-secondary-rgb: 16 23 32;
+  --color-surface-elevated: #121922;
+  --color-surface-elevated-rgb: 18 25 34;
+  --color-surface-interactive: #17212b;
+  --color-surface-interactive-rgb: 23 33 43;
+
+  --color-text-primary: #f2f4ef;
+  --color-text-primary-rgb: 242 244 239;
+  --color-text-secondary: #b2bdc7;
+  --color-text-secondary-rgb: 178 189 199;
+  --color-text-muted: #8997a3;
+  --color-text-muted-rgb: 137 151 163;
+  --color-text-inverse: #03110f;
+  --color-text-inverse-rgb: 3 17 15;
+
+  --color-accent-primary: #5eead4;
+  --color-accent-primary-rgb: 94 234 212;
+  --color-accent-operational: #ffb86b;
+  --color-accent-operational-rgb: 255 184 107;
+  --color-accent-research: #8ba5ff;
+  --color-accent-research-rgb: 139 165 255;
+  --color-accent-education: #d8a6ff;
+  --color-accent-education-rgb: 216 166 255;
+
+  --color-border-subtle: #202b35;
+  --color-border-subtle-rgb: 32 43 53;
+  --color-border-default: #33414d;
+  --color-border-default-rgb: 51 65 77;
+  --color-border-strong: #60717f;
+  --color-border-strong-rgb: 96 113 127;
+
+  --color-status-success: #78d6a3;
+  --color-status-success-rgb: 120 214 163;
+  --color-status-warning: #f2c46d;
+  --color-status-warning-rgb: 242 196 109;
+  --color-status-risk: #f18b8b;
+  --color-status-risk-rgb: 241 139 139;
+  --color-focus-ring: #9ff7e8;
+  --color-focus-ring-rgb: 159 247 232;
+
+  /* Transparent semantic paints */
+  --paint-accent-soft: rgb(var(--color-accent-primary-rgb) / 0.08);
+  --paint-accent-medium: rgb(var(--color-accent-primary-rgb) / 0.18);
+  --paint-operational-soft: rgb(var(--color-accent-operational-rgb) / 0.09);
+  --paint-research-soft: rgb(var(--color-accent-research-rgb) / 0.09);
+  --paint-education-soft: rgb(var(--color-accent-education-rgb) / 0.09);
+  --paint-overlay: rgb(var(--color-background-primary-rgb) / 0.78);
+  --paint-grid: rgb(var(--color-text-primary-rgb) / 0.025);
+
+  /* Typography */
+  --family-display: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --family-body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --family-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  --size-display: clamp(2.75rem, 6.4vw, 6.25rem);
+  --size-heading-1: clamp(2.25rem, 4.8vw, 4.75rem);
+  --size-heading-2: clamp(1.75rem, 3.4vw, 3.5rem);
+  --size-heading-3: clamp(1.25rem, 2vw, 1.75rem);
+  --size-body: 1rem;
+  --size-small: 0.875rem;
+  --size-caption: 0.75rem;
+  --line-height-display: 0.99;
+  --line-height-heading: 1.12;
+  --line-height-body: 1.7;
+  --tracking-display: -0.045em;
+  --tracking-label: 0.12em;
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --section-gap: clamp(3.25rem, 6vw, 5.5rem);
+  --container-padding: clamp(1rem, 3vw, 2rem);
+  --content-gap: clamp(1.5rem, 4vw, 3rem);
+  --card-padding: clamp(1rem, 2.4vw, 1.5rem);
+
+  /* Geometry */
+  --radius-small: 0.25rem;
+  --radius-medium: 0.5rem;
+  --radius-large: 0.75rem;
+  --radius-pill: 999px;
+  --border-width: 1px;
+  --container-max: 80rem;
+  --content-max: 64rem;
+  --reading-max: 44rem;
+
+  /* Motion */
+  --duration-fast: 120ms;
+  --duration-medium: 200ms;
+  --duration-slow: 480ms;
+  --easing-standard: cubic-bezier(0.2, 0, 0, 1);
+  --easing-emphasized: cubic-bezier(0.22, 1, 0.36, 1);
+  --reduced-motion-duration: 0.01ms;
+
+  /* Elevation */
+  --shadow-subtle: 0 1px 0 rgb(var(--color-text-primary-rgb) / 0.035);
+  --shadow-raised: 0 1.5rem 4rem rgb(0 0 0 / 0.28);
+  --shadow-focus: 0 0 0 4px rgb(var(--color-focus-ring-rgb) / 0.2);
+}

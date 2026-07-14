@@ -1,0 +1,15 @@
+.lab { margin: -2.5rem -1rem 0; padding-bottom: var(--space-20); background: var(--color-background-primary); }
+.labNav { position: sticky; z-index: 10; top: 3.5rem; display: flex; gap: var(--space-2); overflow-x: auto; border-block: 1px solid var(--color-border-subtle); background: var(--paint-overlay); padding: var(--space-3) var(--container-padding); backdrop-filter: blur(18px); scrollbar-width: thin; }
+.labNav a { flex: 0 0 auto; min-height: 2.75rem; display: inline-flex; align-items: center; border: 1px solid var(--color-border-subtle); border-radius: var(--radius-pill); padding-inline: var(--space-3); color: var(--color-text-secondary); font-family: var(--family-mono); font-size: var(--size-caption); }
+.labNav a:hover { border-color: var(--color-accent-primary); color: var(--color-accent-primary); }
+.sample { min-height: 100%; }
+.token { display: grid; min-height: 6.5rem; align-content: end; border: 1px solid var(--color-border-subtle); border-radius: var(--radius-small); padding: var(--space-3); background: var(--token-color); }
+.token span { width: fit-content; border-radius: var(--radius-small); background: var(--paint-overlay); padding: var(--space-1) var(--space-2); color: var(--color-text-primary); font-family: var(--family-mono); font-size: var(--size-caption); }
+.interactiveRow { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); }
+.iconGlyph { font-size: 1.1rem; line-height: 1; }
+.diagram { width: 100%; min-height: 15rem; border: 1px solid var(--color-border-subtle); border-radius: var(--radius-medium); background: var(--paint-research-soft); }
+.timelineList { display: grid; gap: var(--space-6); margin: 0; padding: 0; list-style: none; }
+.capabilities { margin: 0; padding: 0; }
+.contrastPanel { border: 1px solid var(--color-border-strong); padding: var(--card-padding); background: var(--color-surface-secondary); }
+
+@media (min-width: 64rem) { .lab { margin-inline: -1.5rem; } }
