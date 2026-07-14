@@ -34,10 +34,11 @@ describe("projects catalog route", () => {
 });
 
 describe("individual project case studies", () => {
-  it("renders a valid H1 and metadata for each case study", () => {
+  it("renders a valid H1 and metadata for each case study", async () => {
     const caseSlugs = ["igarix", "openlake-rag", "lab02-observability"];
     for (const slug of caseSlugs) {
-      const markup = render(createElement(ProjectDetailPage, { params: { slug } }));
+      const element = await ProjectDetailPage({ params: { slug } });
+      const markup = render(element);
       // Unique H1 check (we render a single container page which has one H1)
       expect(markup.match(/<h1(?:\s|>)/g) ?? []).toHaveLength(1);
       // Accessibility check for diagrams
@@ -56,7 +57,7 @@ describe("individual project case studies", () => {
     }
   });
 
-  it("distinguishes implemented from planned features in IGARIX", () => {
+  it("distinguishes implemented from planned features in IGARIX", async () => {
     const igarixCase = projectCaseStudies.find((c) => c.slug === "igarix");
     expect(igarixCase).toBeDefined();
     
@@ -64,15 +65,17 @@ describe("individual project case studies", () => {
     expect(igarixCase?.nextSteps.every((s) => ["planned", "in-progress", "research"].includes(s.status))).toBe(true);
     
     // Check that we explicitly separate them
-    const markup = render(createElement(ProjectDetailPage, { params: { slug: "igarix" } }));
+    const element = await ProjectDetailPage({ params: { slug: "igarix" } });
+    const markup = render(element);
     expect(markup).toContain("Conceito");
     expect(markup).toContain("Próximos Passos");
   });
 
-  it("ensures diagram accessibility (title/desc associated by aria-labelledby)", () => {
+  it("ensures diagram accessibility (title/desc associated by aria-labelledby)", async () => {
     const caseSlugs = ["igarix", "openlake-rag", "lab02-observability"];
     for (const slug of caseSlugs) {
-      const markup = render(createElement(ProjectDetailPage, { params: { slug } }));
+      const element = await ProjectDetailPage({ params: { slug } });
+      const markup = render(element);
       expect(markup).toMatch(/<title\s+id="[^"]+">/);
       expect(markup).toMatch(/<desc\s+id="[^"]+">/);
       expect(markup).toContain("aria-labelledby=");
