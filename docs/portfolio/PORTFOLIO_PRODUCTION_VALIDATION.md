@@ -32,3 +32,15 @@ Este documento fornece as diretrizes para validar a implantação final de produ
 - [ ] Redirecionamento permanente `/projects/igarix-os` → `/projects/igarix` (HTTP 308).
 - [ ] Redirecionamento permanente `/projects/campuswatch-snmp` → `/projects/lab02-observability` (HTTP 308).
 - [ ] Diagramas SVG carregam e se comportam sem animações recorrentes em prefers-reduced-motion.
+
+## 4. Evidência de Release de Produção
+
+```text
+commit: d00c54ad0a0b1c0ba60c5812dced5eab9788bc43
+ghcr_digest: sha256:66c6cd4b59a3d3071e86cc067aab281388d9d580e931573c637c90ab1561593d (v1.0.0 image)
+workflow_run: https://github.com/albertomateus9/albertomateus9.github.io/actions/runs/29303829785
+dokploy_service: portfolio-production
+url: https://portfolio.albertomateus.dev.br
+deployed_at: Pending (DNS portfolio.albertomateus.dev.br nao resolvido e secret DOKPLOY_PRODUCTION_WEBHOOK_URL nao configurado no GitHub)
+dns_https_routes_restart: Pending (Aguardando configuracao de DNS e deploy manual/autenticado no Dokploy)
+```

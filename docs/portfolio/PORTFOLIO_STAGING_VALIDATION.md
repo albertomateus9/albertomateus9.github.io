@@ -53,13 +53,13 @@ Registre o ID do contêiner do portfólio, reinicie somente esse contêiner pelo
 Preencha após o pipeline e o deploy:
 
 ```text
-commit: c94f5a6b615034c12091da0b2f37d3072c2c3528
-ghcr_digest: Pending (O pacote OCI no GHCR e privado e a VPS nao possui credenciais de pull configuradas no Dokploy)
-workflow_run: https://github.com/albertomateus9/albertomateus9.github.io/actions/runs/29302905482
+commit: d00c54ad0a0b1c0ba60c5812dced5eab9788bc43
+ghcr_digest: sha256:66c6cd4b59a3d3071e86cc067aab281388d9d580e931573c637c90ab1561593d
+workflow_run: https://github.com/albertomateus9/albertomateus9.github.io/actions/runs/29303146454
 dokploy_service: portfolio-staging
 url: https://portfolio-staging.albertomateus.dev.br
-deployed_at: Pending (Pendente de login no GHCR pela VPS para pull da imagem atualizada)
-dns_https_routes_restart: Pending (Aguardando pull da imagem com novas rotas estaticas na VPS)
+deployed_at: Pending (O secret DOKPLOY_WEBHOOK_URL nao esta configurado no GitHub, impedindo o deploy automatico na VPS)
+dns_https_routes_restart: Pending (Pendente de acionamento manual do deploy no Dokploy pelo usuario)
 ```
 
 Se acesso externo estiver bloqueado, mantenha os campos pendentes com a causa exata. Não marque como validado o que não foi observado.
