@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { PageHeader, TimelineItem } from "@/components/portfolio";
 import { Badge, Card, Grid, Heading, Stack, Text } from "@/components/ui";
 import { homeContent } from "@/data/home";
 import { profile } from "@/data/profile";
+import portrait from "../../../public/assets/profile/alberto-mateus-about.webp";
 
 export const metadata: Metadata = {
   title: "Sobre Alberto Mateus",
@@ -28,6 +30,14 @@ export default function AboutPage() {
             </Card>
             <Card>
               <Stack gap={4}>
+                <figure className="m-0">
+                  <Image
+                    src={portrait}
+                    alt="Retrato de Alberto Mateus"
+                    sizes="(max-width: 48rem) 92vw, 24rem"
+                    className="block h-auto w-full max-w-80 rounded border border-surface-border"
+                  />
+                </figure>
                 <Text variant="caption">ÁREAS DE FOCO</Text>
                 <div className="flex flex-wrap gap-2">{profile.focusAreas.map((area) => <Badge key={area}>{area}</Badge>)}</div>
                 <Text variant="small">{profile.concept}</Text>

@@ -147,7 +147,48 @@ describe("accessibility and performance constraints", () => {
   it("keeps all home implementation free of WebGL and remote image dependencies", () => {
     const files = ["src/app/page.tsx", "src/components/home/HomeHero.tsx", "src/components/home/HomeKnowledgeGraph.tsx", "src/components/home/home.module.css"];
     const source = files.map((file) => readFileSync(join(process.cwd(), file), "utf8")).join("\n");
-    expect(source).not.toMatch(/WebGL|three(?:\.js)?|<img|next\/image|https?:\/\/.*\.(?:png|jpe?g|webp)/i);
+    expect(source).not.toMatch(/WebGL|three(?:\.js)?|<img\s|https?:\/\/[^\s"']*\.(?:png|jpe?g|webp)/i);
+  });
+
+  it("integrates the real local portrait through next/image without client JavaScript", () => {
+    const hero = readFileSync(join(process.cwd(), "src/components/home/HomeHero.tsx"), "utf8");
+    expect(hero).toContain('from "next/image"');
+    expect(hero).toContain('portrait from "../../../public/assets/profile/alberto-mateus.webp"');
+    expect(hero).toContain('alt="Retrato de Alberto Mateus"');
+    expect(hero).toContain("sizes=");
+    expect(hero).toContain("priority");
+    expect(hero).not.toContain('"use client"');
+    expect(hero).not.toMatch(/https?:\/\//);
+    expect(existsSync(join(process.cwd(), "public/assets/profile/alberto-mateus.webp"))).toBe(true);
+  });
+
+  it("keeps the hero portrait inside a figure with an accessible caption and layer list", () => {
+    const markup = homeMarkup();
+    expect(markup).toContain("<figure");
+    expect(markup).toContain("<figcaption");
+    expect(markup).toContain('alt="Retrato de Alberto Mateus"');
+    expect(markup).toContain('aria-label="Escopo profissional em camadas"');
+  });
+
+  it("renders the about route with the secondary portrait crop", () => {
+    const about = readFileSync(join(process.cwd(), "src/app/about/page.tsx"), "utf8");
+    expect(about).toContain('portrait from "../../../public/assets/profile/alberto-mateus-about.webp"');
+    expect(about).toContain('alt="Retrato de Alberto Mateus"');
+    expect(existsSync(join(process.cwd(), "public/assets/profile/alberto-mateus-about.webp"))).toBe(true);
+  });
+
+  it("keeps the fable ui refinement lab documented and noindex", async () => {
+    const { metadata } = await import("@/app/lab/fable-ui-refinement/page");
+    expect(metadata.robots).toMatchObject({ index: false, follow: false });
+    expect(sitemap().some(({ url }) => url.includes("fable-ui-refinement"))).toBe(false);
+  });
+
+  it("adds no graphics or animation library dependencies", () => {
+    const pkg = JSON.parse(readFileSync(join(process.cwd(), "package.json"), "utf8")) as { dependencies?: Record<string, string>; devDependencies?: Record<string, string> };
+    const all = Object.keys({ ...pkg.dependencies, ...pkg.devDependencies });
+    for (const banned of ["framer-motion", "gsap", "three", "lottie-web", "@react-spring/web"]) {
+      expect(all).not.toContain(banned);
+    }
   });
 
   it("uses semantic landmarks and explicit section identifiers", () => {

@@ -45,6 +45,7 @@ export default function HomePage() {
         "@id": `${siteConfig.url}/#person`,
         name: profile.name,
         url: siteConfig.url,
+        image: `${siteConfig.url}/assets/profile/alberto-mateus.webp`,
         address: { "@type": "PostalAddress", addressLocality: "Belém", addressRegion: "Pará", addressCountry: "BR" },
         sameAs: profile.links.map((link) => link.href),
       },
@@ -170,7 +171,7 @@ export default function HomePage() {
           <div className={styles.finalCta}>
             <Stack gap={6} className={styles.finalCopy}>
               <Text variant="caption" className={styles.sectionEyebrow}>{homeContent.finalCta.eyebrow}</Text>
-              <Heading level={2} size="heading1">{homeContent.finalCta.title}</Heading>
+              <Heading level={2} size="heading2">{homeContent.finalCta.title}</Heading>
               <Text variant="secondary" className={styles.sectionLead}>{homeContent.finalCta.description}</Text>
               <Stack direction="responsive" gap={3} align="start">
                 <LinkButton href={homeContent.finalCta.actions[0].href} size="large">{homeContent.finalCta.actions[0].label}</LinkButton>

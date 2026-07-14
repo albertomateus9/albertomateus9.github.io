@@ -30,9 +30,9 @@ export default function TopNav() {
   return (
     <header onKeyDown={handleHeaderKeyDown} className="sticky top-0 z-20 border-b border-surface-border bg-navy-900/90 backdrop-blur">
       <div className="mx-auto flex h-14 max-w-[1400px] items-center justify-between px-4 lg:px-6">
-        <Link href="/" aria-label="Portfolio OS — início" className="flex min-h-11 items-center gap-2 rounded-sm" onClick={closeMenu}>
-          <span aria-hidden="true" className="font-mono text-sm font-semibold tracking-tight text-accent-cyan">portfolio<span className="text-ink">.os</span></span>
-          <span className="hidden font-mono text-xs text-ink-faint sm:inline">/ {profile.shortName}</span>
+        <Link href="/" aria-label="Alberto Mateus — Portfolio OS, início" className="flex min-h-11 items-center gap-2 rounded-sm" onClick={closeMenu}>
+          <span aria-hidden="true" className="font-mono text-xs font-semibold tracking-tight text-accent-cyan">portfolio<span className="text-ink-faint">.os /</span></span>
+          <span className="font-mono text-sm font-semibold text-ink">{profile.shortName}</span>
         </Link>
 
         <nav aria-label="Navegação principal" className="hidden items-center gap-1 lg:flex">

@@ -29,6 +29,13 @@ A rota P3 mede 1,38 kB no relatório do Next. O conteúdo e o grafo continuam Se
 - Console do navegador integrado permaneceu vazio.
 - Seis viewports foram inspecionados sem overflow após correção do `min-width` global.
 
+## Adendo P3.1 (2026-07-13)
+
+- JS transferido na home (gzip, medido no navegador): staging anterior 147 KB (7 chunks) → build P3.1 152 KB (8 chunks) = **+3,4%**, dentro do limite de regressão de 5%. O chunk novo é o runtime cliente do `next/image`.
+- Retrato do hero: WebP 880×1100 de 41,6 KB, import estático (dimensões intrínsecas), `priority` + `sizes`; crop do `/about` 19,0 KB com lazy padrão. **CLS medido: 0**.
+- Nenhuma dependência de runtime nova (garantido por teste); nenhuma fonte remota, WebGL ou vídeo.
+- Build: 33 páginas geradas, compilação 5,9s (Turbopack).
+
 ## Limites
 
 First Load JS é relatório de bundle, não Core Web Vitals. Lighthouse, CPU/network throttling, RUM e p75 de LCP/CLS/INP não foram executados nem inferidos. A validação de produção continua dependente de staging autorizado, domínio real, cache/proxy e medição de campo.

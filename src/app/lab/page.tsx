@@ -12,6 +12,7 @@ const labEntries = [
   { href: "/lab/design-system", label: "fundação", title: "Design System Lab", description: "Tokens, primitivas, composições e estados acessíveis usados na superfície pública." },
   { href: "/lab/sol-portfolio-concept", label: "conceito", title: "Sol Portfolio Concept", description: "Protótipo narrativo do sistema full-cycle e do grafo público de conhecimento." },
   { href: "/lab/legacy-home", label: "arquivo", title: "Home anterior", description: "Registro preservado da página inicial antes da migração pública P3." },
+  { href: "/lab/fable-ui-refinement", label: "registro", title: "Fable UI Refinement", description: "Decisões antes/depois da sprint P3.1: presença pessoal, hero com retrato e ritmo vertical." },
 ] as const;
 
 export default function LabPage() {

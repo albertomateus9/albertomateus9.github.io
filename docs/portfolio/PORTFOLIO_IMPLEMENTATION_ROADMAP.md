@@ -7,6 +7,7 @@
 | P1 | Estratégia UX e conceito Sol | Concluída | commit `1b78e1f` |
 | P2 | Design System Foundation | Concluída | commit `b7692db` |
 | P3 | Public home and shell migration | Aceita | commit `fba50d0`; home anterior em `/lab/legacy-home` |
+| P3.1 | Personal Presence, Hero Redesign and UI/UX Refinement | Concluída | retrato real integrado; docs `PORTFOLIO_FABLE_UI_UX_REFINEMENT.md`; evidências em `p31-fable-ui-refinement-evidence/` |
 | P4 | Flagship Project Case Studies | Próxima recomendação de produto | evidências sanitizadas e claims revisados |
 | P5 | Research and Teaching | Pendente | conteúdo acadêmico validado |
 | P6 | Knowledge Graph | Pendente | dataset público e fallback acessível |

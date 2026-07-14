@@ -46,6 +46,12 @@ O gutter vertical do navegador explica a diferença entre largura solicitada e `
 
 As capturas estão em `docs/portfolio/p3-public-home-evidence/`, incluindo os seis viewports, menu aberto, hero, flagships, grafo, rodapé e comparação com a home anterior.
 
+## Adendo P3.1 (2026-07-13)
+
+- axe-core 4.10.2 executado contra a home e o `/about` construídos: **zero violações** em ambas. Isso cobre a pendência de axe abaixo; leitor de tela real permanece pendente.
+- Retrato do hero: `<figure>` + `<figcaption>`, alt `Retrato de Alberto Mateus` (sem características sensíveis), lista de camadas com `aria-label`, conteúdo íntegro sem a imagem carregada (Server Component, sem JS).
+- Único H1, landmarks, skip link, `aria-current`, Escape no menu mobile e `prefers-reduced-motion` preservados (cobertos por teste).
+
 ## Pendências
 
 - Executar axe e leitor de tela em uma fase de QA com ferramentas autorizadas.

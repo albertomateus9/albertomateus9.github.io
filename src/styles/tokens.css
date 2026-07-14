@@ -86,7 +86,7 @@
   --space-16: 4rem;
   --space-20: 5rem;
   --space-24: 6rem;
-  --section-gap: clamp(4.5rem, 9vw, 8rem);
+  --section-gap: clamp(3.25rem, 6vw, 5.5rem);
   --container-padding: clamp(1rem, 3vw, 2rem);
   --content-gap: clamp(1.5rem, 4vw, 3rem);
   --card-padding: clamp(1rem, 2.4vw, 1.5rem);
