@@ -61,6 +61,10 @@ Notas 9–10 foram deliberadamente evitadas: conversão real depende de conteúd
 - Overflow horizontal: medido via iframes de mesma origem em 320/360/390/430/768/1024/1280/1440 — zero overflow.
 - Evidências visuais: `docs/portfolio/p31-fable-ui-refinement-evidence/`.
 
+## Bloqueio de deployment registrado
+
+O workflow `Publish and Deploy Portfolio Staging` executou com sucesso (verify ✅, publish ✅): a imagem `ghcr.io/albertomateus9/albertomateus9.github.io` foi publicada com as tags `staging` e `sha-<commit>`. Porém o job `Trigger Dokploy staging` registrou: *"DOKPLOY_WEBHOOK_URL is not configured; image publication completed without remote deployment."* O secret não existe no repositório/environment `staging`, então o container do staging continua servindo a versão anterior (`b9ec924`). Desbloqueio: configurar o secret `DOKPLOY_WEBHOOK_URL` no environment `staging` e reexecutar o workflow (ou acionar o redeploy manualmente no Dokploy puxando a tag `staging`). Nenhuma credencial foi inventada ou exposta.
+
 ## Riscos e limitações
 
 - Validação responsiva feita por iframes + headless Chrome, não em devices físicos.
