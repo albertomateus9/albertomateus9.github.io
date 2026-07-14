@@ -28,8 +28,9 @@ export function generateStaticParams() {
   return getProjectSlugs().map((slug) => ({ slug }));
 }
 
-export function generateMetadata({ params }: Params): Metadata {
-  const project = getProject(params.slug);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> | { slug: string } }): Promise<Metadata> {
+  const resolvedParams = await params;
+  const project = getProject(resolvedParams.slug);
   if (!project) return { title: "Projeto não encontrado" };
 
   const detailedCase = projectCaseStudies.find((c) => c.projectSlug === project.slug);
@@ -59,8 +60,9 @@ const statusLabel: Record<string, string> = {
   archived: "Arquivado",
 };
 
-export default function ProjectDetailPage({ params }: Params) {
-  const project = getProject(params.slug);
+export default async function ProjectDetailPage({ params }: { params: Promise<{ slug: string }> | { slug: string } }) {
+  const resolvedParams = await params;
+  const project = getProject(resolvedParams.slug);
   if (!project) notFound();
 
   // Check if a deep case study exists for this project slug
