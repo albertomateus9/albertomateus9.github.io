@@ -9,8 +9,8 @@ import { featuredProjects, projects } from "@/lib/projects";
 
 export function LegacyHome() {
   const publicCount = projects.filter((project) => project.status === "live" || project.status === "active").length;
-  const igarix = projects.find((project) => project.slug === "igarix-os");
-  const others = featuredProjects.filter((project) => project.slug !== "igarix-os");
+  const igarix = projects.find((project) => project.slug === "igarix");
+  const others = featuredProjects.filter((project) => project.slug !== "igarix");
 
   return (
     <div className="space-y-14">
