@@ -20,15 +20,11 @@ import {
 import { IgarixDiagram, OpenLakeDiagram, ObservabilityDiagram } from "@/components/diagrams";
 import { Container, Card, Heading, Stack, Text, Divider } from "@/components/ui";
 
-interface Params {
-  params: { slug: string };
-}
-
 export function generateStaticParams() {
   return getProjectSlugs().map((slug) => ({ slug }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> | { slug: string } }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const resolvedParams = await params;
   const project = getProject(resolvedParams.slug);
   if (!project) return { title: "Projeto não encontrado" };
@@ -60,7 +56,7 @@ const statusLabel: Record<string, string> = {
   archived: "Arquivado",
 };
 
-export default async function ProjectDetailPage({ params }: { params: Promise<{ slug: string }> | { slug: string } }) {
+export default async function ProjectDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
   const project = getProject(resolvedParams.slug);
   if (!project) notFound();

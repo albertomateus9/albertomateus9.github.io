@@ -1,49 +1,11 @@
 import type { Metadata } from "next";
-import SectionHeader from "@/components/SectionHeader";
-import ProjectCard from "@/components/ProjectCard";
-import { projectsByCategory } from "@/lib/projects";
-import { profile } from "@/data/profile";
-
-export const metadata: Metadata = { title: "Ensino" };
-
+import styles from "@/components/home/personal.module.css";
+export const metadata: Metadata = { title: "Entre aulas e perguntas", description: "Docência nos cursos técnicos de Informática, Redes de Computadores e Ciência de Dados." };
+const courses = [
+  { title: "Informática", description: "Programação, desenvolvimento web e ferramentas digitais. A ideia é compreender o código, testar hipóteses e construir soluções com autonomia." },
+  { title: "Redes de Computadores", description: "Conectividade, administração de redes, monitoramento e segurança. Fundamentos que fazem mais sentido quando a gente observa o que acontece no laboratório." },
+  { title: "Ciência de Dados", description: "Organização, análise e interpretação de dados. Antes de aceitar um resultado, perguntar de onde ele veio, como foi calculado e o que ele realmente permite concluir." },
+];
 export default function TeachingPage() {
-  const educationProjects = projectsByCategory("education");
-  const teaching = profile.experience.filter((e) =>
-    /professor|instrutor/i.test(e.role),
-  );
-
-  return (
-    <div className="space-y-12">
-      <SectionHeader
-        eyebrow="ept / ebtt"
-        title="Ensino"
-        description="Educação profissional e tecnológica: docência técnica, cultura maker e laboratórios digitais."
-      />
-
-      <section className="space-y-4">
-        {teaching.map((e) => (
-          <div key={e.role} className="rounded-lg border border-surface-border bg-surface p-5">
-            <div className="flex flex-wrap items-baseline justify-between gap-2">
-              <h3 className="text-base font-semibold text-ink">{e.role}</h3>
-              <span className="font-mono text-xs text-ink-faint">{e.company} &middot; {e.period}</span>
-            </div>
-            <ul className="mt-2 space-y-1 text-sm text-ink-muted">
-              {e.points.map((p) => (
-                <li key={p}>{p}</li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </section>
-
-      <section>
-        <SectionHeader eyebrow="ferramentas" title="Projetos de educação" />
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {educationProjects.map((project) => (
-            <ProjectCard key={project.slug} project={project} />
-          ))}
-        </div>
-      </section>
-    </div>
-  );
+  return <div className={styles.innerPage}><p className={styles.eyebrow}>do terminal para a sala de aula</p><h1>Entre aulas<br />e boas perguntas.</h1><div className={styles.prose}><p>Sou professor de cursos técnicos na EETEPA Vilhena Alves, em Belém. Gosto de conectar fundamentos a situações que os estudantes possam investigar, testar e explicar.</p><p>Ensinar também me mantém aprendendo. A prática abre espaço para projetos, trabalho em equipe e discussões em que entender o caminho importa tanto quanto chegar ao resultado.</p></div><div className={styles.explorations}>{courses.map((course, index) => <article className={styles.exploration} key={course.title}><span className={styles.number}>0{index + 1}</span><div><h2>{course.title}</h2><p>{course.description}</p></div></article>)}</div><aside className={styles.alphaNote}><span aria-hidden="true">✳</span><p>IA pode ajudar a aprender. A compreensão, a avaliação crítica e a autoria continuam com o estudante.</p></aside></div>;
 }

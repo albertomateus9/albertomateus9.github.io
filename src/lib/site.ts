@@ -6,11 +6,11 @@ const getBaseUrl = () => {
 };
 
 export const siteConfig = {
-  name: "Alberto Mateus — Portfolio OS",
-  shortName: "Portfolio OS",
+  name: "Alberto Mateus — código, aulas e curiosidade",
+  shortName: "Alberto Mateus",
   url: getBaseUrl(),
   locale: "pt_BR",
   language: "pt-BR",
-  title: "Alberto Mateus — Engenharia full-cycle, pesquisa e IA aplicada",
-  description: "Alberto Mateus integra telecomunicações, infraestrutura, software, dados e inteligência artificial em sistemas completos, verificáveis e operáveis.",
+  title: "Alberto Mateus | Dev, professor e eterno aprendiz",
+  description: "Dev em Belém, professor de cursos técnicos e eterno aprendiz no doutorado em Computação Aplicada. Código aberto, automação, IA e boas perguntas.",
 } as const;

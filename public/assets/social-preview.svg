@@ -1,35 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title description">
-  <title id="title">Alberto Mateus — engenharia full-cycle, pesquisa e IA aplicada</title>
-  <desc id="description">Cartão social do Portfolio OS com a narrativa entre o mundo físico e a inteligência.</desc>
-  <defs>
-    <linearGradient id="background" x1="80" y1="40" x2="1110" y2="590" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#0b1a2b"/>
-      <stop offset="1" stop-color="#06101d"/>
-    </linearGradient>
-    <radialGradient id="signal" cx="0" cy="0" r="1" gradientTransform="translate(965 160) rotate(135) scale(430)">
-      <stop stop-color="#43ddff" stop-opacity=".22"/>
-      <stop offset="1" stop-color="#43ddff" stop-opacity="0"/>
-    </radialGradient>
-    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
-      <path d="M48 0H0v48" fill="none" stroke="#8ab1ca" stroke-opacity=".075"/>
-    </pattern>
-  </defs>
-  <rect width="1200" height="630" fill="url(#background)"/>
-  <rect width="1200" height="630" fill="url(#signal)"/>
-  <rect width="1200" height="630" fill="url(#grid)"/>
-  <path d="M76 65h1048" stroke="#43ddff" stroke-opacity=".4"/>
-  <text x="78" y="112" fill="#43ddff" font-family="Arial, sans-serif" font-size="22" font-weight="700" letter-spacing="3">PORTFOLIO.OS / FULL-CYCLE SYSTEMS</text>
-  <text x="78" y="236" fill="#f0f7fb" font-family="Arial, sans-serif" font-size="64" font-weight="700" letter-spacing="-2">
-    <tspan x="78" dy="0">Entre o mundo físico e a</tspan>
-    <tspan x="78" dy="74">inteligência, eu construo</tspan>
-    <tspan x="78" dy="74">o sistema inteiro.</tspan>
-  </text>
-  <text x="78" y="506" fill="#a7bdcc" font-family="Arial, sans-serif" font-size="24">telecomunicações · infraestrutura · software · dados · inteligência artificial</text>
-  <path d="M78 551h1044" stroke="#294157"/>
-  <text x="78" y="591" fill="#d9e7ef" font-family="Arial, sans-serif" font-size="21" font-weight="700" letter-spacing="1">ALBERTO MATEUS</text>
-  <text x="930" y="591" fill="#a7bdcc" font-family="Arial, sans-serif" font-size="19" letter-spacing="1">BELÉM · BRASIL</text>
-  <g transform="translate(995 150)" fill="none" stroke="#43ddff">
-    <circle r="76" stroke-opacity=".2"/><circle r="49" stroke-opacity=".35"/><circle r="7" fill="#43ddff"/>
-    <path d="M-76 0h-58M76 0h58M0-76v-44M0 76v44" stroke-opacity=".35"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<rect width="1200" height="630" fill="#0d1411"/>
+<circle cx="1100" cy="160" r="280" fill="#18251c"/>
+<circle cx="1080" cy="510" r="240" fill="none" stroke="#d7ff83" stroke-opacity=".15"/>
+<g font-family="DejaVu Sans, sans-serif">
+<text x="75" y="100" font-size="22" fill="#b2bdc7">Alberto Mateus · Belém, Pará</text>
+<text x="75" y="230" font-size="83" font-weight="700" fill="#f2f4ef">Código, aulas</text>
+<text x="75" y="325" font-size="83" font-weight="700" fill="#d7ff83">e curiosidade.</text>
+<text x="75" y="430" font-size="27" fill="#c6d3c9">Dev. Professor de cursos técnicos.</text>
+<text x="75" y="474" font-size="27" fill="#c6d3c9">Eterno aprendiz no doutorado.</text>
+<rect x="75" y="538" width="320" height="44" rx="8" fill="#d8c9ff"/>
+<text x="96" y="568" font-size="20" fill="#281f37">albertomateus9.github.io</text>
+<text x="956" y="320" font-size="100" fill="#d7ff83">✳</text>
+</g>
 </svg>

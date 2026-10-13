@@ -1,55 +1,61 @@
-# Portfólio Alberto Mateus
+# Alberto Mateus · código, aulas e curiosidade
 
-Portfólio profissional em Next.js, com narrativa pública, casos técnicos, pesquisa, ensino e laboratórios preservados como conteúdo não indexável.
+Portfólio pessoal de um dev em Belém, professor de cursos técnicos e eterno aprendiz no doutorado em Computação Aplicada.
 
-## Stack e execução local
+A apresentação principal prioriza interesses, ensino, aprendizado e contatos. Os projetos em alpha não aparecem como vitrine na página inicial. As rotas anteriores continuam disponíveis, e os laboratórios permanecem fora da indexação.
 
-- Next.js 16 com App Router e saída `standalone`.
-- React 19, TypeScript e Tailwind CSS.
-- Node.js 22 (consulte `.nvmrc`).
-- Testes automatizados com Vitest.
+## Rodar localmente
+
+Node.js 22 e npm 10 ou superior:
 
 ```bash
 npm ci
-npm run lint
-npm run typecheck
-npm test
-npm run build
 npm run dev
 ```
 
-## Contêiner
-
-O `Dockerfile` multi-stage usa uma base Node por digest, instala dependências pelo lockfile e gera um runner mínimo, sem npm, como UID/GID `1001:1001`. O runtime expõe somente a porta interna `3000` e serve o bundle `.next/standalone`.
+## Verificações
 
 ```bash
-docker build --tag portfolio:local .
-docker compose up --detach --build
-curl --fail http://127.0.0.1:3000/api/health
-docker compose down
+npm test
+npm run typecheck
+npm run lint
 ```
 
-`docker-compose.yml` é apenas para validação local e publica a porta no loopback. O staging usa `compose.staging.yml`, conecta-se à rede externa do Dokploy e não publica porta no host.
+## Publicar no GitHub Pages
 
-## Staging
+```bash
+npm run build:pages
+```
 
-Pushes para `agent/sol-portfolio-ux` executam `.github/workflows/staging.yml`: validação completa, build OCI para `linux/amd64`, publicação no GHCR com tags `staging`, `sha-<SHA completo>` e `<SHA completo>`, SBOM/proveniência e acionamento do webhook do Dokploy.
+O script gera a pasta `out/` a partir de uma cópia temporária do projeto. Nessa cópia, exclui o proxy, a API de health e os testes, torna o arquivo robots estático e configura a exportação HTML do Next.js. A imagem usa arquivos locais e não depende de um servidor de otimização.
 
-- Imagem: `ghcr.io/albertomateus9/albertomateus9.github.io:staging`
-- Host reservado: `https://portfolio-staging.albertomateus.dev.br`
-- Webhook Secret: `DOKPLOY_WEBHOOK_URL`
+O workflow `.github/workflows/pages.yml` verifica testes e tipos, gera a exportação e publica `out/` a cada push em `main`.
 
-## Produção (Release v1.0.0)
+## Build de servidor
 
-A publicação em produção é executada sob o workflow `.github/workflows/production.yml` por tags `v*` ou manualmente via `workflow_dispatch`.
+```bash
+npm run build
+npm run start
+```
 
-- Imagem: `ghcr.io/albertomateus9/albertomateus9.github.io:v1.0.0`
-- Host reservado: `https://portfolio.albertomateus.dev.br`
-- Webhook Secret: `DOKPLOY_PRODUCTION_WEBHOOK_URL`
+O build padrão continua em modo standalone. O proxy de staging, os headers, redirects, a API de health e os arquivos de contêiner permanecem disponíveis para as implantações existentes.
 
-## Documentação do Ciclo de Vida
+## Conteúdo e visual
 
-- **Releases e Histórico**: [PORTFOLIO_V1_RELEASE.md](file:///D:/Users/alber/Organizado/Projetos/portfolio-wt-sol/docs/portfolio/PORTFOLIO_V1_RELEASE.md)
-- **Guias de Deploy**: [PORTFOLIO_PRODUCTION_DEPLOYMENT.md](file:///D:/Users/alber/Organizado/Projetos/portfolio-wt-sol/docs/portfolio/PORTFOLIO_PRODUCTION_DEPLOYMENT.md), [PORTFOLIO_DOKPLOY_CONFIGURATION.md](file:///D:/Users/alber/Organizado/Projetos/portfolio-wt-sol/docs/portfolio/PORTFOLIO_DOKPLOY_CONFIGURATION.md)
-- **Validação e Homologação**: [PORTFOLIO_PRODUCTION_VALIDATION.md](file:///D:/Users/alber/Organizado/Projetos/portfolio-wt-sol/docs/portfolio/PORTFOLIO_PRODUCTION_VALIDATION.md), [PORTFOLIO_STAGING_VALIDATION.md](file:///D:/Users/alber/Organizado/Projetos/portfolio-wt-sol/docs/portfolio/PORTFOLIO_STAGING_VALIDATION.md)
-- **Operação e Manutenção**: [PORTFOLIO_ROLLBACK_RUNBOOK.md](file:///D:/Users/alber/Organizado/Projetos/portfolio-wt-sol/docs/portfolio/PORTFOLIO_ROLLBACK_RUNBOOK.md), [PORTFOLIO_MAINTENANCE_POLICY.md](file:///D:/Users/alber/Organizado/Projetos/portfolio-wt-sol/docs/portfolio/PORTFOLIO_MAINTENANCE_POLICY.md)
+- Página inicial: `src/app/page.tsx`.
+- Visual da apresentação: `src/components/home/personal.module.css`.
+- Sobre, ensino e contato: `src/app/{about,teaching,contact}/page.tsx`.
+- Contatos e perfil: `src/data/profile.ts`.
+- Menu e rodapé: `src/components/{TopNav,Footer}.tsx`.
+- Os três e-mails são os canais públicos informados pelo autor.
+- Animações usam CSS/SVG e respeitam a preferência por movimento reduzido.
+
+## Referências
+
+Referências de direção visual e linguagem, sem copiar código ou assets:
+
+- [Cassidy Williams](https://cassidoo.co/): apresentação pessoal e interesses além do trabalho.
+- [Josh W. Comeau](https://www.joshwcomeau.com/): animações e pequenas interações em interfaces.
+- [Guia de exportação estática do Next.js](https://nextjs.org/docs/app/guides/static-exports).
+
+Documentação anterior em `docs/portfolio/` registra a evolução histórica do projeto.

@@ -37,7 +37,7 @@ describe("individual project case studies", () => {
   it("renders a valid H1 and metadata for each case study", async () => {
     const caseSlugs = ["igarix", "openlake-rag", "lab02-observability"];
     for (const slug of caseSlugs) {
-      const element = await ProjectDetailPage({ params: { slug } });
+      const element = await ProjectDetailPage({ params: Promise.resolve({ slug }) });
       const markup = render(element);
       // Unique H1 check (we render a single container page which has one H1)
       expect(markup.match(/<h1(?:\s|>)/g) ?? []).toHaveLength(1);
@@ -65,7 +65,7 @@ describe("individual project case studies", () => {
     expect(igarixCase?.nextSteps.every((s) => ["planned", "in-progress", "research"].includes(s.status))).toBe(true);
     
     // Check that we explicitly separate them
-    const element = await ProjectDetailPage({ params: { slug: "igarix" } });
+    const element = await ProjectDetailPage({ params: Promise.resolve({ slug: "igarix" }) });
     const markup = render(element);
     expect(markup).toContain("Conceito");
     expect(markup).toContain("Próximos Passos");
@@ -74,7 +74,7 @@ describe("individual project case studies", () => {
   it("ensures diagram accessibility (title/desc associated by aria-labelledby)", async () => {
     const caseSlugs = ["igarix", "openlake-rag", "lab02-observability"];
     for (const slug of caseSlugs) {
-      const element = await ProjectDetailPage({ params: { slug } });
+      const element = await ProjectDetailPage({ params: Promise.resolve({ slug }) });
       const markup = render(element);
       expect(markup).toMatch(/<title\s+id="[^"]+">/);
       expect(markup).toMatch(/<desc\s+id="[^"]+">/);

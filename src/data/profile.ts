@@ -6,19 +6,19 @@ export const profile: Profile = {
   name: "Alberto Mateus Pinheiro da Gama",
   shortName: "Alberto Mateus",
   headline:
-    "Engenheiro de Telecomunicações e professor. Mestre e doutorando em inteligência artificial aplicada.",
+    "Dev em Belém, professor de cursos técnicos e eterno aprendiz no doutorado em Computação Aplicada.",
   roles: [
     "Engenheiro de Telecomunicações",
     "Analista de Redes e Infraestrutura",
     "Professor EPT / EBTT",
     "Pesquisador em Visão Computacional",
-    "Doutorando em IA aplicada",
+    "Doutorando em Computação Aplicada",
   ],
   location: "Belém, Pará, Brasil",
   summary:
-    "Atuo conectando redes, infraestrutura, pesquisa aplicada e produtos digitais. Minha trajetória combina engenharia, docência e desenvolvimento de soluções com React, automações e IA, sempre com foco em clareza técnica e entregas úteis.",
+    "Programo, ensino e sigo aprendendo. Gosto de código aberto, automação, IA e ferramentas que posso rodar na minha própria máquina.",
   concept:
-    "Portfolio OS organiza cada frente de trabalho - produtos, pesquisa, ensino e infraestrutura - como um módulo de um sistema coerente. O IGARIX é o núcleo: a plataforma central à qual os demais módulos se conectam.",
+    "Este espaço é um laboratório pessoal: ideias, aprendizados e experimentos que ainda estão em alpha.",
   focusAreas: [
     "Redes, monitoramento e automação de infraestrutura",
     "Visão computacional aplicada e benchmarking em edge",
@@ -27,8 +27,8 @@ export const profile: Profile = {
     "Prototipagem de produtos e MVPs",
   ],
   contact: {
-    email: "contato@albertomateus.dev",
-    note: "Endereço de exemplo. Substituir por um canal público real antes do deploy oficial.",
+    email: "albertomateus9@gmail.com",
+    note: "Contato pessoal para trocar ideias sobre código, educação e tecnologia.",
   },
   links: [
     { label: "GitHub", href: "https://github.com/albertomateus9" },
@@ -37,9 +37,9 @@ export const profile: Profile = {
   ],
   education: [
     {
-      degree: "Doutorado em Engenharia Elétrica (em andamento)",
-      institution: "UFPA",
-      period: "2025 - Atual",
+      degree: "Doutorado em Computação Aplicada (em andamento)",
+      institution: "",
+      period: "2026 - Atual",
       detail: "Linha de pesquisa em IA aplicada e Visão Computacional.",
     },
     {
@@ -116,3 +116,9 @@ export const profile: Profile = {
     },
   ],
 };
+
+export const contactEmails = [
+  { label: "Pessoal", email: "albertomateus9@gmail.com" },
+  { label: "Institucional · SECTET", email: "alberto.gama@docente.sectet.pa.gov.br" },
+  { label: "Acadêmico · UFPA", email: "alberto.gama@itec.ufpa.br" },
+] as const;

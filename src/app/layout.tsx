@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
     default: siteConfig.title,
-    template: `%s — Portfolio OS`,
+    template: `%s | Alberto Mateus`,
   },
   description: siteConfig.description,
   applicationName: siteConfig.shortName,
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     title: siteConfig.title,
     description: siteConfig.description,
-    images: [{ url: "/assets/social-preview.jpg", width: 1200, height: 630, alt: "Alberto Mateus — engenharia full-cycle, pesquisa e IA aplicada" }],
+    images: [{ url: "/assets/social-preview.jpg", width: 1200, height: 630, alt: "Alberto Mateus — código, aulas e curiosidade" }],
   },
   twitter: {
     card: "summary_large_image",
